@@ -9,6 +9,7 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".edit_data_sparepart_cabang"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +21,7 @@
         <activity android:name=".edit_data_supplier" />
         <activity android:name=".tambah_data_sparepart" />
         <activity android:name=".edit_data_sparepart" />
-        <activity android:name=".tambah_data_sparepart_cabang"></activity>
+        <activity android:name=".tambah_data_sparepart_cabang" />
     </application>
 
 </manifest>

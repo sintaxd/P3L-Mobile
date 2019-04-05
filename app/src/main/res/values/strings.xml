@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">SIMATO_MOBILE</string>
+
+    <string-array name="cabang_sparepartCabang">
+        <item> Babarsari </item>
+        <item> Demangan </item>
+        <item> Seturan </item>
+    </string-array>
+    <string-array name="namasparepart_sparepartCabang">
+        <item> Ban Depan ABC </item>
+        <item> Rem 123 </item>
+        <item> Roda XYZ </item>
+    </string-array>
+    <string-array name="letaksparepart_sparepartCabang">
+        <item> DPN </item>
+        <item> TGH </item>
+        <item> BLK </item>
+    </string-array>
+    <string-array name="ruangpenempatan_sparepartCabang">
+        <item> KACA </item>
+        <item> DUS </item>
+        <item> BAN </item>
+        <item> KAYU </item>
+    </string-array>
 </resources>

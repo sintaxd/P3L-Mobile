@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tambah_data_sparepart_cabang">
+    tools:context=".edit_data_sparepart_cabang">
 
     <TextView
         android:id="@+id/textView_Judul"
