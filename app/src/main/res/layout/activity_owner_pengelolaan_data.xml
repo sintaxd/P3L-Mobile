@@ -66,18 +66,21 @@
                     android:background="@color/colorAccent">
 
                     <ImageView
-                        android:layout_gravity="center"
-                        android:src="@drawable/icon_data_supplier"
+                        android:id="@+id/img_dataSupplier"
                         android:layout_width="80dp"
-                        android:layout_height="80dp" />
-                    <TextView
+                        android:layout_height="80dp"
                         android:layout_gravity="center"
-                        android:textColor="#6f6f6f"
+                        android:src="@drawable/icon_data_supplier" />
+
+                    <TextView
+                        android:id="@+id/txt_dataSupplier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginTop="12dp"
-                        android:textSize="18dp"
                         android:text="Data Supplier"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textColor="#6f6f6f"
+                        android:textSize="18dp" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -99,18 +102,21 @@
                     android:background="@color/colorAccent">
 
                     <ImageView
-                        android:layout_gravity="center"
-                        android:src="@drawable/icon_data_sparepart"
+                        android:id="@+id/img_dataSparepart"
                         android:layout_width="80dp"
-                        android:layout_height="80dp" />
-                    <TextView
+                        android:layout_height="80dp"
                         android:layout_gravity="center"
-                        android:textColor="#6f6f6f"
+                        android:src="@drawable/icon_data_sparepart" />
+
+                    <TextView
+                        android:id="@+id/txt_dataSparepart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginTop="12dp"
-                        android:textSize="18dp"
                         android:text="Data Sparepart"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:textColor="#6f6f6f"
+                        android:textSize="18dp" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -132,18 +138,21 @@
                     android:background="@color/colorAccent">
 
                     <ImageView
-                        android:layout_gravity="center"
-                        android:src="@drawable/icon_data_sparepart_cabang"
+                        android:id="@+id/img_dataSparepartCabang"
                         android:layout_width="80dp"
-                        android:layout_height="80dp" />
-                    <TextView
+                        android:layout_height="80dp"
                         android:layout_gravity="center"
-                        android:textColor="#6f6f6f"
-                        android:layout_marginTop="12dp"
-                        android:textSize="18dp"
-                        android:text="Data Sparepart Cabang"
+                        android:src="@drawable/icon_data_sparepart_cabang" />
+
+                    <TextView
+                        android:id="@+id/txt_dataSparepartCabang"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="12dp"
+                        android:text="Data Sparepart Cabang"
+                        android:textColor="#6f6f6f"
+                        android:textSize="18dp" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

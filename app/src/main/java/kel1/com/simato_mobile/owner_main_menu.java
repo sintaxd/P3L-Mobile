@@ -14,7 +14,6 @@ public class owner_main_menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ImageView pengelolaanData;
         TextView pengelolaanData1;
-        RelativeLayout RL_pengelolaanData;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_main_menu);
         getSupportActionBar().hide();

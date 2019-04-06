@@ -9,17 +9,18 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".tampil_data_supplier"></activity>
+        <activity android:name=".tampil_data_sparepart" />
         <activity
             android:name=".owner_pengelolaan_data"
-            android:parentActivityName=".owner_main_menu">
-
-        </activity>
+            android:parentActivityName=".owner_main_menu" />
         <activity android:name=".owner_main_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter></activity>
+            </intent-filter>
+        </activity>
         <activity android:name=".edit_data_sparepart_cabang" /> <!-- <activity android:name=".MainActivity"> -->
         <!-- <intent-filter> -->
         <!-- <action android:name="android.intent.action.MAIN" /> -->
