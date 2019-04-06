@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/icon_background"
+    tools:context=".owner_pengelolaan_data">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txtSIMATO"
+                android:text="Pengelolaan Data"
+                android:textSize="26sp"
+                android:textColor="#FFFF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_margin="6dp"
+                android:layout_below="@id/txtSIMATO"
+                android:text="Hi, Owner!"
+                android:textColor="#FFFF"
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:src="@drawable/icon_owner"
+                android:layout_alignParentRight="true"
+                android:layout_width="88dp"
+                android:layout_height="88dp"/>
+        </RelativeLayout>
+        <GridLayout
+            android:columnCount="1"
+            android:rowCount="3"
+            android:alignmentMode="alignMargins"
+            android:columnOrderPreserved="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_data_supplier"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp" />
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textColor="#6f6f6f"
+                        android:layout_marginTop="12dp"
+                        android:textSize="18dp"
+                        android:text="Data Supplier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_data_sparepart"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp" />
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textColor="#6f6f6f"
+                        android:layout_marginTop="12dp"
+                        android:textSize="18dp"
+                        android:text="Data Sparepart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                app:cardElevation="6dp"
+                app:cardCornerRadius="12dp"
+                android:layout_margin="12dp"
+                >
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/icon_data_sparepart_cabang"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp" />
+                    <TextView
+                        android:layout_gravity="center"
+                        android:textColor="#6f6f6f"
+                        android:layout_marginTop="12dp"
+                        android:textSize="18dp"
+                        android:text="Data Sparepart Cabang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>
