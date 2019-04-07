@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:background="@color/colorAccent"
+                    android:background="@color/colorBackgroundGridLayout"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -100,7 +100,7 @@
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAccent">
+                    android:background="@color/colorBackgroundGridLayout">
 
                     <ImageView
                         android:id="@+id/img_pengadaanSparepart"
@@ -136,7 +136,7 @@
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAccent">
+                    android:background="@color/colorBackgroundGridLayout">
 
                     <ImageView
                         android:id="@+id/img_laporan"

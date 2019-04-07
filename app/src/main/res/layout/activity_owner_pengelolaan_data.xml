@@ -63,7 +63,7 @@
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAccent">
+                    android:background="@color/colorBackgroundGridLayout">
 
                     <ImageView
                         android:id="@+id/img_dataSupplier"
@@ -99,7 +99,7 @@
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAccent">
+                    android:background="@color/colorBackgroundGridLayout">
 
                     <ImageView
                         android:id="@+id/img_dataSparepart"
@@ -135,7 +135,7 @@
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorAccent">
+                    android:background="@color/colorBackgroundGridLayout">
 
                     <ImageView
                         android:id="@+id/img_dataSparepartCabang"

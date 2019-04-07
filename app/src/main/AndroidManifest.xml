@@ -17,16 +17,13 @@
         <activity android:name=".owner_main_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".edit_data_sparepart_cabang" /> <!-- <activity android:name=".MainActivity"> -->
-        <!-- <intent-filter> -->
-        <!-- <action android:name="android.intent.action.MAIN" /> -->
-        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-        <!-- </intent-filter> -->
-        <!-- </activity> -->
+        <activity android:name=".edit_data_sparepart_cabang" />
+         <activity android:name=".MainActivity">
+
+        </activity>
         <activity android:name=".tambah_data_supplier" />
         <activity android:name=".edit_data_supplier" />
         <activity android:name=".tambah_data_sparepart" />
