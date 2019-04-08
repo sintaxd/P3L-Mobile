@@ -16,7 +16,6 @@ public class owner_main_menu extends AppCompatActivity {
         TextView pengelolaanData1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_main_menu);
-        getSupportActionBar().hide();
 
         pengelolaanData=(ImageView)findViewById(R.id.img_pengelolaanData);
         pengelolaanData.setOnClickListener(new View.OnClickListener() {

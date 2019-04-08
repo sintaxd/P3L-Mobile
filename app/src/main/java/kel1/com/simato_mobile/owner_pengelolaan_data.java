@@ -17,8 +17,8 @@ public class owner_pengelolaan_data extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_pengelolaan_data);
-        getSupportActionBar().setTitle("Menu Utama");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("Menu Utama");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         img_dataSparepart=(ImageView)findViewById(R.id.img_dataSparepart);
         img_dataSparepart.setOnClickListener(new View.OnClickListener() {
