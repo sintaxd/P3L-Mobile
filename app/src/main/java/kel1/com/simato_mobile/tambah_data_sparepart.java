@@ -16,20 +16,20 @@ public class tambah_data_sparepart extends AppCompatActivity {
         setContentView(R.layout.activity_tambah_data_sparepart);
 
         btnBatal = (Button)findViewById(R.id.button_Batal);
-        nama_sparepart = (EditText)findViewById(R.id.editText_namaSparepart);
-        merk_sparepart = (EditText)findViewById(R.id.editText_merkSparepart);
-        tipe_sparepart = (EditText)findViewById(R.id.editText_tipeSparepart);
-        kode_sparepart = (EditText)findViewById(R.id.editText_kodeSparepart);
-
-        btnBatal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                nama_sparepart.getText().clear();
-                merk_sparepart.getText().clear();
-                tipe_sparepart.getText().clear();
-                kode_sparepart.getText().clear();
-            }
-        });
+//        nama_sparepart = (EditText)findViewById(R.id.editText_namaSparepart);
+//        merk_sparepart = (EditText)findViewById(R.id.editText_merkSparepart);
+//        tipe_sparepart = (EditText)findViewById(R.id.editText_tipeSparepart);
+//        kode_sparepart = (EditText)findViewById(R.id.editText_kodeSparepart);
+//
+//        btnBatal.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                nama_sparepart.getText().clear();
+//                merk_sparepart.getText().clear();
+//                tipe_sparepart.getText().clear();
+//                kode_sparepart.getText().clear();
+//            }
+//        });
 
     }
 }

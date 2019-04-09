@@ -16,21 +16,16 @@ public class tambah_data_supplier extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_data_supplier);
-      btnBatal = (Button)findViewById(R.id.button_Batal);
-//        nama_supp = findViewById(R.id.editText_kodeSparepart);
-//        notelp_supp = findViewById(R.id.editText_merkSparepart);
-//        alamat_supp = findViewById(R.id.editText_tipeSparepart);
-//        nama_sales = findViewById(R.id.editText_namaSparepart);
-//        notelp_sales = findViewById(R.id.editText_noTelpSales);
-      btnBatal.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View view) {
-              nama_supp.getText().clear();
-              notelp_supp.getText().clear();
-              alamat_supp.getText().clear();
-              nama_sales.getText().clear();
-              notelp_sales.getText().clear();
-          }
-      });
+        btnBatal = (Button)findViewById(R.id.button_Batal);
+//        nama_supp = findViewById(R.id.text_input_namaSupplier);
+//        notelp_supp = findViewById(R.id.text_input_noTelpSupplier);
+//        alamat_supp = findViewById(R.id.text_input_alamatSupplier);
+//        nama_sales = findViewById(R.id.text_input_namaSales);
+//        notelp_sales = findViewById(R.id.text_input_noTelpSales);
+//      btnBatal.setOnClickListener(new View.OnClickListener() {
+//          @Override
+//          public void onClick(View view) {
+//          }
+//      });
     }
 }
