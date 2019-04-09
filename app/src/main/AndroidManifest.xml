@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="kel1.com.simato_mobile">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo_atma_auto"
@@ -9,7 +11,8 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".tampil_data_supplier"></activity>
+        <activity android:name=".recycle_adapter"></activity>
+        <activity android:name=".tampil_data_supplier" />
         <activity android:name=".tampil_data_sparepart" />
         <activity
             android:name=".owner_pengelolaan_data"
@@ -17,13 +20,12 @@
         <activity android:name=".owner_main_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".edit_data_sparepart_cabang" />
-         <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".tambah_data_supplier" />
         <activity android:name=".edit_data_supplier" />
         <activity android:name=".tambah_data_sparepart" />

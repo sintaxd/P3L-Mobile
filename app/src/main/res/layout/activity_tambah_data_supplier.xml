@@ -19,14 +19,13 @@
         android:textSize="24sp"
         android:layout_marginBottom="20dp"/>
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_namaSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
         app:counterMaxLength="30"
         app:errorEnabled="true">
-
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_namaSupplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Supplier"
@@ -34,7 +33,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_alamatSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -42,6 +40,7 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_alamatSupplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Alamat Supplier"
@@ -49,7 +48,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_noTelpSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -57,6 +55,7 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_noTelpSupplier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="No Telp Supplier"
@@ -64,7 +63,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_namaSales"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -72,6 +70,7 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_namaSales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Sales"
@@ -79,7 +78,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_noTelpSales"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -87,6 +85,7 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_noTelpSales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="No Telp Sales"

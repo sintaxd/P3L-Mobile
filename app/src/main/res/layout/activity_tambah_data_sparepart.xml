@@ -32,7 +32,6 @@
         android:layout_marginTop="5dp"
         android:text="Tambah Gambar" />
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_kodeSpareapart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -40,14 +39,14 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_kode_sparepart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Kode Sparepart"
-            android:inputType="text"/>
+            android:inputType="text" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_tipeSparepart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -55,6 +54,7 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_tipeSparepart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tipe Sparepart"
@@ -62,7 +62,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_merkSparepart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -70,6 +69,7 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_merkSparepart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Merk Sparepart"
@@ -77,7 +77,6 @@
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_namaSparepart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
@@ -85,6 +84,7 @@
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
+            android:id="@+id/text_input_namaSparepart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nama Sparepart"
