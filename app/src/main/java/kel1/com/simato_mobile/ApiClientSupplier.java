@@ -2,6 +2,8 @@ package kel1.com.simato_mobile;
 
 import com.google.gson.JsonObject;
 
+import kel1.com.simato_mobile.model.SupplierModel;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -11,13 +13,13 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface ApiClient {
+public interface ApiClientSupplier {
     //  API CLIENT SUPPLIER //
 
     //  CREATE
     @POST("api/supplier")
     @FormUrlEncoded
-    Call<SupplierDAO> create(
+    Call<SupplierModel> create(
             @Field("nama_supplier")String nama_supplier,
             @Field("noTelp_supplier")String noTelp_supplier,
             @Field("alamat_supplier")String alamat_supplier,
@@ -26,12 +28,12 @@ public interface ApiClient {
 
     //  READ
     @GET("api/supplier")
-    Call<SupplierDAO> show();
+    Call<SupplierModel> show();
 
     //  UPDATE
-    @PUT("api/supplier/{id}")
+    @PUT("api/supplier/{id_supplier}")
     @FormUrlEncoded
-    Call<SupplierDAO> update(
+    Call<ResponseBody>update(
             @Field("nama_supplier")String nama_supplier,
             @Field("noTelp_supplier")String noTelp_supplier,
             @Field("alamat_supplier")String alamat_supplier,
@@ -41,6 +43,6 @@ public interface ApiClient {
 
     //  DELETE
     @DELETE("api/supplier/{id}")
-    Call<SupplierDAO>delete(@Path("id_supplier") Integer id_supplier);
+    Call<ResponseBody>delete(@Path("id") Integer id);
 
 }

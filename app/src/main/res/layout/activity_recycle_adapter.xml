@@ -4,36 +4,44 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="#F5FCFF"
+        android:layout_marginBottom="20dp">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/nama_supplier"
-            android:text="Nama Supplier"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Supplier" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/alamat_supplier"
-            android:text="Alamat Supplier"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Alamat Supplier" />
+
+        <TextView
             android:id="@+id/noTelp_supplier"
-            android:text="No Telp Supplier"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="No Telp Supplier" />
+
+        <TextView
             android:id="@+id/nama_Sales"
-            android:text="Nama Sales"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Nama Sales" />
+
+        <TextView
             android:id="@+id/noTelp_Sales"
-            android:text="No Telp Sales"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Telp Sales" />
+
     </LinearLayout>
+
 
 </LinearLayout>

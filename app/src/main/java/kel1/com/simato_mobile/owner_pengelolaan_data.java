@@ -12,8 +12,8 @@ public class owner_pengelolaan_data extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ImageView img_dataSparepart, img_dataSupplier;
-        TextView txt_dataSparepart, txt_dataSupplier;
+        ImageView img_dataSparepart, img_dataSupplier, img_dataSparepartCabang;
+        TextView txt_dataSparepart, txt_dataSupplier, txt_dataSparepartCabang;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_pengelolaan_data);
@@ -50,6 +50,23 @@ public class owner_pengelolaan_data extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(owner_pengelolaan_data.this, tampil_data_supplier.class);
+                startActivity(i);
+            }
+        });
+
+        img_dataSparepartCabang=(ImageView)findViewById(R.id.img_dataSparepartCabang);
+        img_dataSparepartCabang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(owner_pengelolaan_data.this, tampil_data_sparepart_cabang.class);
+                startActivity(i);
+            }
+        });
+        txt_dataSparepartCabang=(TextView)findViewById(R.id.txt_dataSparepartCabang);
+        txt_dataSparepartCabang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(owner_pengelolaan_data.this, tampil_data_sparepart_cabang.class);
                 startActivity(i);
             }
         });

@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tampil_data_supplier">
+    tools:context=".tampil_data_sparepart_cabang">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,13 +39,12 @@
     </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btn_tambahDataSparepartCabang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
-        android:src="@drawable/icon_tambah"
         android:foregroundGravity="center"
-        app:fabSize="normal"
-        android:id="@+id/btn_tambahDataSupplier"
-        />
+        android:src="@drawable/icon_tambah"
+        app:fabSize="normal" />
 </android.support.design.widget.CoordinatorLayout>

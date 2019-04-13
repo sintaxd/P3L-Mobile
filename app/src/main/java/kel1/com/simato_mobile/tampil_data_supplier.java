@@ -10,13 +10,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
@@ -29,12 +28,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class tampil_data_supplier extends AppCompatActivity {
 
     private static String[] SUGGESTION = new String[]{
             "Apple", "Amazon", "Microsoft", "Alphabet", "Google", "Samsung", "Asus",
             "HP", "Intel", "Qualcom", "AMD", "Oracle", "Facebook", "Spotify"
     };
+
     private List<SupplierDAO> mListSupplier = new ArrayList<>();
     private RecyclerView recyclerView;
     public SupplierAdapter supplierAdapter;
@@ -48,12 +49,12 @@ public class tampil_data_supplier extends AppCompatActivity {
         setContentView(R.layout.activity_tampil_data_supplier);
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_supplier);
-        supplierAdapter = new SupplierAdapter(this,mListSupplier);
+        supplierAdapter = new SupplierAdapter(getApplication(),mListSupplier);
         RecyclerView.LayoutManager mlayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mlayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(supplierAdapter);
-        setRecycleView();
+        setRecycleViewSupplier();
         btn_tambahSupplier = (FloatingActionButton) findViewById(R.id.btn_tambahDataSupplier);
         btn_tambahSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +63,6 @@ public class tampil_data_supplier extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
@@ -113,30 +113,32 @@ public class tampil_data_supplier extends AppCompatActivity {
 //        });
     }
 
-    public void setRecycleView() {
-       // mListSupplier.clear();
+    public void setRecycleViewSupplier() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl("https://simato.jasonfw.com/")
+                .baseUrl("http://simato.jasonfw.com/")  //http://10.53.0.204:8000/
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit=builder.build();
-        ApiClient apiClient=retrofit.create(ApiClient.class);
+        ApiClientSupplier apiClientSupplier =retrofit.create(ApiClientSupplier.class);
 
-        Call<SupplierDAO> supplierDAOCall = apiClient.show();
+        Call<SupplierModel> supplierModelCall = apiClientSupplier.show();
 
-//        supplierDAOCall.enqueue(new Callback<SupplierModel>() {
-//            @Override
-//            public void onResponse (Call<SupplierModel> call, Response<SupplierModel> response) {
-//                supplierAdapter.notifyDataSetChanged();
-//                supplierAdapter = new SupplierAdapter(tampil_data_supplier.this,response.body().getData());
-//                recyclerView.setAdapter(supplierAdapter);
-//                Toast.makeText(tampil_data_supplier.this,"Welcome", Toast.LENGTH_SHORT).show();
-//            }
-//            @Override
-//            public void onFailure(Call<SupplierModel> call, Throwable t) {
-//                Toast.makeText(tampil_data_supplier.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        supplierModelCall.enqueue(new Callback<SupplierModel>() {
+            @Override
+            public void onResponse (Call<SupplierModel> call, Response<SupplierModel> response) {
+                supplierAdapter.notifyDataSetChanged();
+                supplierAdapter = new SupplierAdapter(tampil_data_supplier.this,response.body().getData());
+                recyclerView.setAdapter(supplierAdapter);
+                Toast.makeText(tampil_data_supplier.this,"Welcome", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<SupplierModel> call, Throwable t) {
+                Toast.makeText(tampil_data_supplier.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -146,5 +148,6 @@ public class tampil_data_supplier extends AppCompatActivity {
         materialSearchView.setMenuItem(menuItem);
         return super.onCreateOptionsMenu(menu);
     }
+
 
 }

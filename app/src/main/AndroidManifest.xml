@@ -11,7 +11,12 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".recycle_adapter"></activity>
+        <activity android:name=".tampil_data_sparepart_cabang"></activity>
+        <activity android:name=".edit_data_konsumen" />
+        <activity android:name=".tambah_data_konsumen" />
+        <activity android:name=".edit_data_motor" />
+        <activity android:name=".tambah_data_motor" />
+        <activity android:name=".recycle_adapter" />
         <activity android:name=".tampil_data_supplier" />
         <activity android:name=".tampil_data_sparepart" />
         <activity
@@ -25,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".edit_data_sparepart_cabang" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".tambah_data_supplier" />
         <activity android:name=".edit_data_supplier" />
         <activity android:name=".tambah_data_sparepart" />

@@ -29,83 +29,110 @@
     android:id="@+id/spinner_cabang"
     android:layout_width="170dp"
     android:layout_height="27dp"
-    android:layout_marginEnd="32dp"
+    android:layout_marginEnd="37dp"
     android:entries="@array/cabang_sparepartCabang"
     android:spinnerMode="dropdown"/>
 
+    <TextView
+        android:id="@+id/textView_namaSparepart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Sparepart" />
+
+    <Spinner
+        android:id="@+id/spinner_namaSparepart"
+        android:layout_width="170dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="37dp"
+        android:entries="@array/namasparepart_sparepartCabang"
+        android:spinnerMode="dropdown"/>
+
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_namaSupplier"
+        android:id="@+id/text_input_hargaBeli"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
-        app:counterMaxLength="30"
+        app:counterMaxLength="9"
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama Supplier"
-            android:inputType="text"/>
+            android:hint="Harga Beli"
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_alamatSupplier"
+        android:id="@+id/text_input_hargaJual"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
-        app:counterMaxLength="150"
+        app:counterMaxLength="7"
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Alamat Supplier"
-            android:inputType="text"/>
+            android:hint="Harga Jual"
+            android:inputType="number" />
+    </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView_letakPenempatan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Letak Penempatan" />
+
+    <Spinner
+        android:id="@+id/spinner_letakPenempatan"
+        android:layout_width="170dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="37dp"
+        android:entries="@array/letaksparepart_sparepartCabang"
+        android:spinnerMode="dropdown"/>
+
+    <TextView
+        android:id="@+id/textView_ruangPenempatan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ruang Penempatan" />
+
+    <Spinner
+        android:id="@+id/spinner_ruangPenempatan"
+        android:layout_width="170dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="37dp"
+        android:entries="@array/ruangpenempatan_sparepartCabang"
+        android:spinnerMode="dropdown"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/text_input_stokMinimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:counterEnabled="true"
+        app:counterMaxLength="4"
+        app:errorEnabled="true">
+
+        <android.support.design.widget.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Stok Minimal"
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_noTelpSupplier"
+        android:id="@+id/text_input_stokSisa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:counterEnabled="true"
-        app:counterMaxLength="15"
+        app:counterMaxLength="4"
         app:errorEnabled="true">
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="No Telp Supplier"
-            android:inputType="number"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_namaSales"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="50"
-        app:errorEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama Sales"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/text_input_noTelpSales"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="15"
-        app:errorEnabled="true">
-
-        <android.support.design.widget.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="No Telp Sales"
-            android:inputType="number"/>
+            android:hint="Stok Sisa"
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -125,278 +152,3 @@
         android:textSize="12sp" />
 
 </LinearLayout>
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-<!--<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--tools:context=".tambah_data_sparepart_cabang">-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_Judul"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="36dp"-->
-        <!--android:text="Tambah Sparepart Cabang"-->
-        <!--android:textAlignment="center"-->
-        <!--android:textSize="24sp"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.502"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_idSparepartCabang2"-->
-        <!--android:layout_width="85dp"-->
-        <!--android:layout_height="27dp"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="96dp"-->
-        <!--android:layout_marginEnd="71dp"-->
-        <!--android:text="ID"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/textView_data_id_sc"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_data_id_sc"-->
-        <!--android:layout_width="139dp"-->
-        <!--android:layout_height="27dp"-->
-        <!--android:layout_marginTop="96dp"-->
-        <!--android:layout_marginEnd="64dp"-->
-        <!--android:text="ID Sparepart Cabang"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-    <!--<Spinner-->
-        <!--android:id="@+id/spinner_cabang"-->
-        <!--android:layout_width="170dp"-->
-        <!--android:layout_height="27dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="32dp"-->
-        <!--android:entries="@array/cabang_sparepartCabang"-->
-        <!--android:spinnerMode="dropdown"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_data_id_sc" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_namaSparepart"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="29dp"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="71dp"-->
-        <!--android:text="Nama Sparepart"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/spinner_namaSparepart"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_cabang" />-->
-
-    <!--<Spinner-->
-        <!--android:id="@+id/spinner_namaSparepart"-->
-        <!--android:layout_width="170dp"-->
-        <!--android:layout_height="27dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginEnd="32dp"-->
-        <!--android:entries="@array/namasparepart_sparepartCabang"-->
-        <!--android:spinnerMode="dropdown"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/spinner_cabang" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_hargaBeli"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:text="Harga Beli"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/editText_hargaBeli"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_namaSparepart" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/editText_hargaBeli"-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="60dp"-->
-        <!--android:autofillHints=""-->
-        <!--android:ems="10"-->
-        <!--android:inputType="numberSigned"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/spinner_namaSparepart" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_hargaJual"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="48dp"-->
-        <!--android:layout_marginEnd="83dp"-->
-        <!--android:text="Harga Jual"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/editText_hargaJual"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_hargaBeli" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/editText_hargaJual"-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="60dp"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="numberSigned"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/editText_hargaBeli" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_letakPenempatan"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:layout_marginEnd="54dp"-->
-        <!--android:text="Letak Penempatan"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/spinner_letakPenempatan"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_hargaJual" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_ruangPenempatan"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="32dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:text="Ruang Penempatan"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/spinner_ruangPenempatan"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_letakPenempatan" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_noUrut"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="113dp"-->
-        <!--android:text="No Urut"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/textView_data_noUrut"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_ruangPenempatan" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_stokMinimal"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="78dp"-->
-        <!--android:text="Stok Minimal"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/editText_stokMinimal"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_noUrut" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_stokSisa"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="38dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="89dp"-->
-        <!--android:layout_marginBottom="96dp"-->
-        <!--android:text="Stok Sisa"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/editText_stokSisa"-->
-        <!--app:layout_constraintHorizontal_bias="0.0"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_stokMinimal" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/button_batal"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:text="BATAL"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/button_simpan"-->
-        <!--app:layout_constraintHorizontal_bias="0.638"-->
-        <!--app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--<Button-->
-        <!--android:id="@+id/button_simpan"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="100dp"-->
-        <!--android:layout_marginBottom="16dp"-->
-        <!--android:text="SIMPAN"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent" />-->
-
-    <!--<Spinner-->
-        <!--android:id="@+id/spinner_letakPenempatan"-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="27dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginEnd="60dp"-->
-        <!--android:entries="@array/letaksparepart_sparepartCabang"-->
-        <!--android:spinnerMode="dropdown"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/editText_hargaJual" />-->
-
-    <!--<Spinner-->
-        <!--android:id="@+id/spinner_ruangPenempatan"-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="27dp"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="60dp"-->
-        <!--android:entries="@array/ruangpenempatan_sparepartCabang"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/spinner_letakPenempatan" />-->
-
-    <!--<TextView-->
-        <!--android:id="@+id/textView_data_noUrut"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="22dp"-->
-        <!--android:layout_marginEnd="184dp"-->
-        <!--android:text="01"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/spinner_ruangPenempatan" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/editText_stokMinimal"-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginEnd="72dp"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="numberSigned"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/textView_data_noUrut" />-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/editText_stokSisa"-->
-        <!--android:layout_width="140dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:layout_marginEnd="72dp"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="numberSigned"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/editText_stokMinimal" />-->
-
-<!--</android.support.constraint.ConstraintLayout>-->

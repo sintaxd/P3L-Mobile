@@ -1,14 +1,24 @@
 package kel1.com.simato_mobile;
 
 public class SupplierDAO {
+    private Integer id_supplier;
     String nama_supplier, alamat_supplier, noTelp_supplier, nama_sales, noTelp_sales;
 
-    public SupplierDAO(String nama_supplier, String alamat_supplier, String noTelp_supplier, String nama_sales, String noTelp_sales) {
+    public SupplierDAO(Integer id_supplier, String nama_supplier, String alamat_supplier, String noTelp_supplier, String nama_sales, String noTelp_sales) {
+        this.id_supplier = id_supplier;
         this.nama_supplier = nama_supplier;
         this.alamat_supplier = alamat_supplier;
         this.noTelp_supplier = noTelp_supplier;
         this.nama_sales = nama_sales;
         this.noTelp_sales = noTelp_sales;
+    }
+
+    public Integer getId_supplier() {
+        return id_supplier;
+    }
+
+    public void setId_supplier(Integer id_supplier) {
+        this.id_supplier = id_supplier;
     }
 
     public String getNama_supplier() {
