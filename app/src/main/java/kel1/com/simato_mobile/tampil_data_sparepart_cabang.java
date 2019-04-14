@@ -17,7 +17,7 @@ public class tampil_data_sparepart_cabang extends AppCompatActivity {
         btn_tambahSparepartCabang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(tampil_data_sparepart_cabang.this, MainActivity.class);
+                Intent i = new Intent(tampil_data_sparepart_cabang.this, tambah_data_sparepart_cabang.class);
                 startActivity(i);
             }
         });

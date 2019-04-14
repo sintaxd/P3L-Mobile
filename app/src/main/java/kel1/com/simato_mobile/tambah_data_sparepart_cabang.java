@@ -27,7 +27,7 @@ public class tambah_data_sparepart_cabang extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tambah_data_supplier);
+        setContentView(R.layout.activity_tambah_data_sparepart_cabang);
 
 //        nama_supp = findViewById(R.id.text_input_namaSupplier);
 //        notelp_supp = findViewById(R.id.text_input_noTelpSupplier);
