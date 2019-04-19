@@ -87,4 +87,11 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
             Toast.makeText(context,"Hey You Clicked On Me", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void updateSupplierList(List<SupplierDAO> newList)
+    {
+        result = new ArrayList<>();
+        result.addAll(newList);
+        notifyDataSetChanged();
+    }
 }

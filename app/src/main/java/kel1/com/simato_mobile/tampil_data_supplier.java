@@ -12,13 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import kel1.com.simato_mobile.model.SupplierModel;
@@ -31,10 +34,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tampil_data_supplier extends AppCompatActivity {
 
-    private static String[] SUGGESTION = new String[]{
-            "Apple", "Amazon", "Microsoft", "Alphabet", "Google", "Samsung", "Asus",
-            "HP", "Intel", "Qualcom", "AMD", "Oracle", "Facebook", "Spotify"
-    };
 
     private List<SupplierDAO> mListSupplier = new ArrayList<>();
     private RecyclerView recyclerView;
@@ -55,6 +54,8 @@ public class tampil_data_supplier extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(supplierAdapter);
         setRecycleViewSupplier();
+
+
         btn_tambahSupplier = (FloatingActionButton) findViewById(R.id.btn_tambahDataSupplier);
         btn_tambahSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +69,6 @@ public class tampil_data_supplier extends AppCompatActivity {
         toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
 
         materialSearchView = findViewById(R.id.searchView);
-        materialSearchView.setSuggestions(SUGGESTION);
 
         final RecyclerView recyclerView = findViewById(R.id.recycler_view_supplier);
 
@@ -144,10 +144,24 @@ public class tampil_data_supplier extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_supplier, menu);
+
         MenuItem menuItem = menu.findItem(R.id.searchMenu);
         materialSearchView.setMenuItem(menuItem);
         return super.onCreateOptionsMenu(menu);
     }
-
-
+//
+//
+//    @Override
+//    public boolean onQueryTextSubmit(String s) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String s) {
+//
+//        String userInput = s.toLowerCase();
+//        List<SupplierDAO> newList = new ArrayList<>();
+//
+//        return false;
+//    }
 }
