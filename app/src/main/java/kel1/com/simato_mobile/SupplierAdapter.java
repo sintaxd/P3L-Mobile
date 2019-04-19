@@ -45,12 +45,12 @@ public class SupplierAdapter extends RecyclerView.Adapter<SupplierAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull SupplierAdapter.MyViewHolder myViewHolder, int i) {
         final SupplierDAO sup = result.get(i);
-        myViewHolder.nama_supplier.setText("Nama Supplier : "+ sup.getNama_supplier());
-        myViewHolder.alamat_supplier.setText("Alamat Supplier : "+ sup.getAlamat_supplier());
-        myViewHolder.noTelp_supplier.setText("No Telp Supplier : "+ sup.getNoTelp_supplier());
-        myViewHolder.nama_sales.setText("Nama Sales : "+ sup.getNama_sales());
-        myViewHolder.noTelp_sales.setText("No Telp Sales : "+ sup.getNoTelp_sales());
-
+        RecyclerView recycler_view_supplier;
+        myViewHolder.nama_supplier.setText  ("  Nama Supplier     : "+ sup.getNama_supplier());
+        myViewHolder.alamat_supplier.setText("  Alamat Supplier   : "+ sup.getAlamat_supplier());
+        myViewHolder.noTelp_supplier.setText("  No Telp Supplier  : "+ sup.getNoTelp_supplier());
+        myViewHolder.nama_sales.setText     ("  Nama Sales          : "+ sup.getNama_sales());
+        myViewHolder.noTelp_sales.setText   ("  No Telp Sales       : "+ sup.getNoTelp_sales());
         myViewHolder.nama_supplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

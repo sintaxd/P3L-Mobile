@@ -24,9 +24,7 @@ public class edit_data_supplier extends AppCompatActivity {
 
     private Button btnBatal, btnSimpan, btnDelete;
     private TextInputEditText nama_supp, notelp_supp, alamat_supp, nama_sales, notelp_sales;
-    private String id_supplier;
-    private Integer temp_id_supp;
-    private TextView aw;
+    private Integer id_supplier;
     private Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +39,11 @@ public class edit_data_supplier extends AppCompatActivity {
         nama_sales = findViewById(R.id.text_input_namaSales);
         notelp_sales = findViewById(R.id.text_input_noTelpSales);
         btnSimpan = findViewById(R.id.button_simpan);
-        aw = findViewById(R.id.textView_test);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UpdateSupplier();
-               // startIntent();
+                startIntent();
             }
         });
         btnDelete = findViewById(R.id.button_Hapus);
@@ -63,9 +60,7 @@ public class edit_data_supplier extends AppCompatActivity {
         alamat_supp.setText(i.getStringExtra("alamat_supplier"));
         nama_sales.setText(i.getStringExtra("nama_sales"));
         notelp_sales.setText(i.getStringExtra("noTelp_sales"));
-        id_supplier=i.getStringExtra("id_supplier");
-        temp_id_supp = Integer.getInteger(id_supplier);
-        aw.setText(id_supplier);
+        id_supplier=i.getIntExtra("id_supplier",-1);
         btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,7 +77,9 @@ public class edit_data_supplier extends AppCompatActivity {
     }
     private void UpdateSupplier()
     {
-        if(nama_supp.getText().toString().isEmpty())
+        if(nama_supp.getText().toString().isEmpty() || alamat_supp.getText().toString().isEmpty() ||
+                notelp_supp.getText().toString().isEmpty()|| nama_sales.getText().toString().isEmpty() ||
+                notelp_sales.getText().toString().isEmpty())
         {
             Toast.makeText(this, "Field can't be empty", Toast.LENGTH_SHORT).show();
         }
@@ -102,7 +99,7 @@ public class edit_data_supplier extends AppCompatActivity {
                                                                             alamat_supp.getText().toString(),
                                                                             nama_sales.getText().toString(),
                                                                             notelp_sales.getText().toString(),
-                                                                            temp_id_supp);
+                                                                            id_supplier);
             supplierDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -132,7 +129,7 @@ public class edit_data_supplier extends AppCompatActivity {
         Retrofit retrofit=builder.build();
         ApiClientSupplier apiClientSupplier =retrofit.create(ApiClientSupplier.class);
 
-        Call<ResponseBody> supplierDAOCall = apiClientSupplier.delete(temp_id_supp);
+        Call<ResponseBody> supplierDAOCall = apiClientSupplier.delete(id_supplier);
         supplierDAOCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
