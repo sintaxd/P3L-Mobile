@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".tambah_data_konsumen">
+    tools:context=".View.CustomerService.Konsumen.tambah_data_konsumen">
 
     <TextView
         android:id="@+id/textView_Judul"

@@ -11,37 +11,39 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".tampil_data_motor"></activity>
-        <activity android:name=".tampil_data_konsumen" />
-        <activity android:name=".cs_pengelolaan_transaksi_penjualan" />
-        <activity android:name=".cs_pengelolaan_data" />
-        <activity android:name=".cs_main_menu">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".View.CustomerService.Motor.tampil_data_motor"></activity>
+        <activity android:name=".View.CustomerService.Konsumen.tampil_data_konsumen" />
+        <activity android:name=".View.CustomerService.cs_pengelolaan_transaksi_penjualan" />
+        <activity android:name=".View.CustomerService.cs_pengelolaan_data" />
+        <activity android:name=".View.CustomerService.cs_main_menu">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-        <activity android:name=".tampil_data_sparepart_cabang" />
-        <activity android:name=".edit_data_konsumen" />
-        <activity android:name=".tambah_data_konsumen" />
-        <activity android:name=".edit_data_motor" />
-        <activity android:name=".tambah_data_motor" />
+        <activity android:name=".View.Owner.SparepartCabang.tampil_data_sparepart_cabang" />
+        <activity android:name=".View.CustomerService.Konsumen.edit_data_konsumen" />
+        <activity android:name=".View.CustomerService.Konsumen.tambah_data_konsumen" />
+        <activity android:name=".View.CustomerService.Motor.edit_data_motor" />
+        <activity android:name=".View.CustomerService.Motor.tambah_data_motor" />
         <activity android:name=".recycle_adapter" />
-        <activity android:name=".tampil_data_supplier" />
-        <activity android:name=".tampil_data_sparepart" />
+        <activity android:name=".View.Owner.Supplier.tampil_data_supplier" />
+        <activity android:name=".View.Owner.Sparepart.tampil_data_sparepart" />
         <activity
-            android:name=".owner_pengelolaan_data"
-            android:parentActivityName=".owner_main_menu" />
-        <activity android:name=".owner_main_menu" />
-        <activity android:name=".edit_data_sparepart_cabang" />
+            android:name=".View.Owner.owner_pengelolaan_data"
+            android:parentActivityName=".View.Owner.owner_main_menu" />
+        <activity android:name=".View.Owner.owner_main_menu">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity android:name=".View.Owner.SparepartCabang.edit_data_sparepart_cabang" />
         <activity android:name=".MainActivity">
    </activity>
-        <activity android:name=".tambah_data_supplier" />
-        <activity android:name=".edit_data_supplier" />
-        <activity android:name=".tambah_data_sparepart" />
-        <activity android:name=".edit_data_sparepart" />
-        <activity android:name=".tambah_data_sparepart_cabang" />
+        <activity android:name=".View.Owner.Supplier.tambah_data_supplier" />
+        <activity android:name=".View.Owner.Supplier.edit_data_supplier" />
+        <activity android:name=".View.Owner.Sparepart.tambah_data_sparepart" />
+        <activity android:name=".View.Owner.Sparepart.edit_data_sparepart" />
+        <activity android:name=".View.Owner.SparepartCabang.tambah_data_sparepart_cabang" />
     </application>
 
 </manifest>

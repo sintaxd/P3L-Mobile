@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".tambah_data_sparepart_cabang">
+    tools:context=".View.Owner.SparepartCabang.tambah_data_sparepart_cabang">
 
     <TextView
         android:id="@+id/textView_Judul"

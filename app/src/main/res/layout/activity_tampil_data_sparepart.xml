@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tampil_data_sparepart">
+    tools:context=".View.Owner.Sparepart.tampil_data_sparepart">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -5,7 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tampil_data_konsumen">
+    tools:context=".View.CustomerService.Konsumen.tampil_data_konsumen">
 
     <RelativeLayout
         android:layout_width="match_parent"

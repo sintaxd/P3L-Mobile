@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/icon_background"
-    tools:context=".cs_pengelolaan_data">
+    tools:context=".View.CustomerService.cs_pengelolaan_data">
 
     <LinearLayout
         android:orientation="vertical"
