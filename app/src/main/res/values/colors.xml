@@ -2,10 +2,10 @@
 <resources>
     <color name="colorPrimary">#202F65</color>
     <color name="colorPrimaryDark">#202F65</color>
-    <color name="colorAccent">#A1045A</color>
+    <color name="colorAccent">#8b9cda</color>
     <color name="colorBackgroundGridLayout">#F5FCFF</color>
-    <color name="colorCS">#F7EFE2</color>#
-
+    <color name="colorCS">#F7EFE2</color>
+    <color name="menus">#647bce</color>
 
 
 </resources>

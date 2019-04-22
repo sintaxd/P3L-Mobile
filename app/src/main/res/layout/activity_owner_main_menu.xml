@@ -59,6 +59,8 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/layout_pengelolaan_data"
+                    android:onClick="pengelolaan_data"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
@@ -94,13 +96,15 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/layout_pengadaan_sparepart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorBackgroundGridLayout">
+                    android:layout_gravity="center"
+                    android:background="@color/colorBackgroundGridLayout"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_pengadaanSparepart"
@@ -130,13 +134,15 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/layout_history_pengadaan_sparepart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorBackgroundGridLayout">
+                    android:layout_gravity="center"
+                    android:background="@color/colorBackgroundGridLayout"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_laporan"

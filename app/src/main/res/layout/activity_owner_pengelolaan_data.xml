@@ -57,13 +57,16 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/layout_data_supplier"
+                    android:onClick="data_supplier"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorBackgroundGridLayout">
+                    android:layout_gravity="center"
+                    android:background="@color/colorBackgroundGridLayout"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_dataSupplier"
@@ -93,13 +96,16 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/layout_data_sparepart"
+                    android:onClick="data_sparepart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorBackgroundGridLayout">
+                    android:layout_gravity="center"
+                    android:background="@color/colorBackgroundGridLayout"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_dataSparepart"
@@ -129,13 +135,16 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/layout_sparepart_cabang"
+                    android:onClick="data_sparepart_cabang"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorBackgroundGridLayout">
+                    android:layout_gravity="center"
+                    android:background="@color/colorBackgroundGridLayout"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_dataSparepartCabang"

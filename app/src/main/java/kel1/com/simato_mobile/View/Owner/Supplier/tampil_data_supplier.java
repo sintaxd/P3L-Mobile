@@ -1,5 +1,7 @@
 package kel1.com.simato_mobile.View.Owner.Supplier;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
@@ -8,7 +10,9 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,7 +20,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ import kel1.com.simato_mobile.Adapter.Adapter_Supplier;
 import kel1.com.simato_mobile.ListData.LD_Supplier;
 import kel1.com.simato_mobile.Model.Model_Supplier;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.Owner.owner_main_menu;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,27 +40,41 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class tampil_data_supplier extends AppCompatActivity {
 
 
-    private List<Model_Supplier> mListSupplier = new ArrayList<>();
     private RecyclerView recyclerView;
-    public Adapter_Supplier adapterSupplier;
     private RecyclerView.LayoutManager layoutManager;
-    private MaterialSearchView materialSearchView;
+    public Adapter_Supplier adapterSupplier;
+    private List<Model_Supplier> mListSupplier = new ArrayList<>();
+    Adapter_Supplier.RecyclerViewClickListener listener;
+    FloatingActionButton btn_tambahSupplier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        FloatingActionButton btn_tambahSupplier;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tampil_data_supplier);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_supplier);
-        adapterSupplier = new Adapter_Supplier(getApplication(),mListSupplier);
-        RecyclerView.LayoutManager mlayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mlayoutManager);
+        recyclerView = findViewById(R.id.recycler_view_supplier);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterSupplier);
-        adapterSupplier.updateSupplierList(mListSupplier);
-        setRecycleViewSupplier();
-        btn_tambahSupplier = (FloatingActionButton) findViewById(R.id.btn_tambahDataSupplier);
+
+        listener = new Adapter_Supplier.RecyclerViewClickListener() {
+            @Override
+            public void onRowClick(View view, final int position) {
+                Intent intent = new Intent(getApplicationContext(), edit_data_supplier.class);
+                intent.putExtra("id_supplier", mListSupplier.get(position).getId_supplier());
+                intent.putExtra("nama_supplier", mListSupplier.get(position).getNama_supplier());
+                intent.putExtra("alamat_supplier", mListSupplier.get(position).getAlamat_supplier());
+                intent.putExtra("noTelp_supplier", mListSupplier.get(position).getNoTelp_supplier());
+                intent.putExtra("nama_sales", mListSupplier.get(position).getNama_sales());
+                intent.putExtra("noTelp_sales", mListSupplier.get(position).getNoTelp_sales());
+                startActivity(intent);
+
+            }
+        };
+        btn_tambahSupplier = findViewById(R.id.btn_tambahDataSupplier);
         btn_tambahSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,55 +82,54 @@ public class tampil_data_supplier extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
-
-        materialSearchView = findViewById(R.id.searchView);
-
-        final RecyclerView recyclerView = findViewById(R.id.recycler_view_supplier);
-
-//        materialSearchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
-//            @Override
-//            public void onSearchViewShown() {
-//
-//            }
-//
-//            @Override
-//            public void onSearchViewClosed() {
-//                final ArrayAdapter arrayAdapter = new ArrayAdapter(tampil_data_supplier.this, android.R.layout.simple_list_item_1, SUGGESTION);
-//                recyclerView.setAdapter(arrayAdapter);
-//            }
-//        });
-
-//        materialSearchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                final ArrayAdapter arrayAdapter = new ArrayAdapter(tampil_data_supplier.this, android.R.layout.simple_list_item_1, SUGGESTION);
-//
-//                if(arrayAdapter.getCount() >0)
-//                arrayAdapter.clear();
-//
-//                if (newText != null && !newText.isEmpty()) {
-//                    for (String s : SUGGESTION) {
-//                        if (s.toLowerCase().contains(newText))
-//                            arrayAdapter.add(s);
-//                    }
-//                } else {
-//                    arrayAdapter.addAll(SUGGESTION);
-//                }
-//
-//                listView.setAdapter(arrayAdapter);
-//                return false;
-//            }
-//        });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_supplier, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) menu.findItem(R.id.searchMenu).getActionView();
+        MenuItem searchMenuItem = menu.findItem(R.id.searchMenu);
+
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName())
+        );
+        searchView.setQueryHint("Search Supplier");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+
+                adapterSupplier.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                adapterSupplier.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        searchMenuItem.getIcon().setVisible(false, false);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent i = new Intent(tampil_data_supplier.this, owner_main_menu.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     public void setRecycleViewSupplier() {
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -129,9 +146,11 @@ public class tampil_data_supplier extends AppCompatActivity {
         supplierModelCall.enqueue(new Callback<LD_Supplier>() {
             @Override
             public void onResponse (Call<LD_Supplier> call, Response<LD_Supplier> response) {
-                adapterSupplier.notifyDataSetChanged();
-                adapterSupplier = new Adapter_Supplier(tampil_data_supplier.this,response.body().getData());
+                mListSupplier = response.body().getData();
+                Log.i(tampil_data_supplier.class.getSimpleName(), response.body().toString());
+                adapterSupplier = new Adapter_Supplier(mListSupplier,tampil_data_supplier.this,listener);
                 recyclerView.setAdapter(adapterSupplier);
+                adapterSupplier.notifyDataSetChanged();
                 Toast.makeText(tampil_data_supplier.this,"Welcome", Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -141,27 +160,8 @@ public class tampil_data_supplier extends AppCompatActivity {
         });
     }
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_supplier, menu);
-
-        MenuItem menuItem = menu.findItem(R.id.searchMenu);
-        materialSearchView.setMenuItem(menuItem);
-        return super.onCreateOptionsMenu(menu);
+    protected void onResume() {
+        super.onResume();
+        setRecycleViewSupplier();
     }
-//
-//
-//    @Override
-//    public boolean onQueryTextSubmit(String s) {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean onQueryTextChange(String s) {
-//
-//        String userInput = s.toLowerCase();
-//        List<Model_Supplier> newList = new ArrayList<>();
-//
-//        return false;
-//    }
 }

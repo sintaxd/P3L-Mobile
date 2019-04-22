@@ -7,32 +7,19 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import kel1.com.simato_mobile.MainActivity;
 import kel1.com.simato_mobile.R;
 
 public class owner_main_menu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ImageView pengelolaanData;
-        TextView pengelolaanData1;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_main_menu);
+    }
 
-        pengelolaanData=(ImageView)findViewById(R.id.img_pengelolaanData);
-        pengelolaanData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(owner_main_menu.this, owner_pengelolaan_data.class);
-                startActivity(i);
-            }
-        });
-        pengelolaanData1=(TextView)findViewById(R.id.textView_pengelolaanData);
-        pengelolaanData1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(owner_main_menu.this, owner_pengelolaan_data.class);
-                startActivity(i);
-            }
-        });
+    public void pengelolaan_data(View view) {
+        Intent i= new Intent(owner_main_menu.this,owner_pengelolaan_data.class);
+        startActivity(i);
     }
 }
