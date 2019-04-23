@@ -71,7 +71,6 @@ public class tampil_data_supplier extends AppCompatActivity {
                 intent.putExtra("nama_sales", mListSupplier.get(position).getNama_sales());
                 intent.putExtra("noTelp_sales", mListSupplier.get(position).getNoTelp_sales());
                 startActivity(intent);
-
             }
         };
         btn_tambahSupplier = findViewById(R.id.btn_tambahDataSupplier);

@@ -7,9 +7,21 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    <style name="EditorTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="OwnerTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/menus</item>
         <item name="colorPrimaryDark">@color/menus</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CSViewTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/menusCS</item>
+        <item name="colorPrimaryDark">@color/menusCS</item>
+        <item name="colorAccent">@color/menusCS2</item>
+    </style>
+
+    <style name="CSTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/menusCS</item>
+        <item name="colorPrimaryDark">@color/menusCS</item>
+        <item name="colorAccent">@color/menusCS2</item>
     </style>
 </resources>

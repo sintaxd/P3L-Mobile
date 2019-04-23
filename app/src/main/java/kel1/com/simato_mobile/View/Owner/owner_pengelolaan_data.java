@@ -16,12 +16,8 @@ public class owner_pengelolaan_data extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_owner_pengelolaan_data);
-//        getSupportActionBar().setTitle("Menu Utama");
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
     }
     public void data_supplier(View view) {
         Intent i= new Intent(owner_pengelolaan_data.this,tampil_data_supplier.class);

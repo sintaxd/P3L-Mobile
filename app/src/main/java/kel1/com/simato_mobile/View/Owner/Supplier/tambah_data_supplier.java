@@ -109,7 +109,7 @@ public class tambah_data_supplier extends AppCompatActivity {
                 nama_sales.getText().toString().isEmpty() ||
                 notelp_sales.getText().toString().isEmpty())
         {
-            Toast.makeText(this, "Field can't be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Semua field harus diisi!", Toast.LENGTH_SHORT).show();
         } else {
             Gson gson = new GsonBuilder()
                     .setLenient()
@@ -128,7 +128,7 @@ public class tambah_data_supplier extends AppCompatActivity {
             supplierDAOCall.enqueue(new Callback<Model_Supplier>() {
                 @Override
                 public void onResponse(Call<Model_Supplier> call, Response<Model_Supplier> response) {
-                    Toast.makeText(tambah_data_supplier.this, "Success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(tambah_data_supplier.this, "Tambah Supplier berhasil!", Toast.LENGTH_SHORT).show();
                     startIntent();
                 }
                 @Override

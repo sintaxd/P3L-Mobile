@@ -64,7 +64,9 @@
                 >
 
                 <LinearLayout
+                    android:id="@+id/layout_pengelolaan_data"
                     android:layout_width="match_parent"
+                    android:onClick="pengelolaan_data"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@color/colorCS"
@@ -99,13 +101,16 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/layout_transaksi_penjualaan"
+                    android:onClick="transaksi_penjualan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorCS">
+                    android:layout_gravity="center"
+                    android:background="@color/colorCS"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_pengelolaanTransaksiPenjualan"
@@ -135,13 +140,16 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/layout_history_transaksi_penjualan"
+                    android:onClick="history_transaksi_penjualan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorCS">
+                    android:layout_gravity="center"
+                    android:background="@color/colorCS"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_history_transaksi_penjualan"

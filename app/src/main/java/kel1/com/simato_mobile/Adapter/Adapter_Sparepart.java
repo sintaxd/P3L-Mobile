@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import kel1.com.simato_mobile.Model.Model_Sparepart;
-import kel1.com.simato_mobile.recycle_adapter;
+import kel1.com.simato_mobile.recycle_adapter_supplier;
 
 public class Adapter_Sparepart extends RecyclerView.Adapter<Adapter_Sparepart.MyViewHolder> {
     private Context context;
@@ -41,7 +41,7 @@ public class Adapter_Sparepart extends RecyclerView.Adapter<Adapter_Sparepart.My
         myViewHolder.nama_sparepart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(context, recycle_adapter.class);
+                Intent i = new Intent(context, recycle_adapter_supplier.class);
                 i.putExtra("Nama Sparepart : ", spare.getNama_sparepart());
                 i.putExtra("Kode Sparepart : ", spare.getKode_sparepart());
                 i.putExtra("Merk Sparepart : ", spare.getMerk_sparepart());

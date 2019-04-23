@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#202F65</color>
+    <color name="colorPrimary">#202f65</color>
     <color name="colorPrimaryDark">#202F65</color>
+    <color name="menus">#647bce</color>
     <color name="colorAccent">#8b9cda</color>
     <color name="colorBackgroundGridLayout">#F5FCFF</color>
+
+
     <color name="colorCS">#F7EFE2</color>
-    <color name="menus">#647bce</color>
+    <color name="menusCS">#c3a742</color>
+    <color name="menusCS2">#ceb764</color>
+
 
 
 </resources>

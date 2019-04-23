@@ -1,16 +1,13 @@
 package kel1.com.simato_mobile.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import android.widget.Filter;
 import android.widget.Filterable;
@@ -21,7 +18,6 @@ import java.util.List;
 import kel1.com.simato_mobile.API.CustomFilter_Supplier;
 import kel1.com.simato_mobile.Model.Model_Supplier;
 import kel1.com.simato_mobile.R;
-import kel1.com.simato_mobile.View.Owner.Supplier.edit_data_supplier;
 
 public class Adapter_Supplier extends RecyclerView.Adapter<Adapter_Supplier.MyViewHolder> implements Filterable{
 
@@ -41,7 +37,7 @@ public class Adapter_Supplier extends RecyclerView.Adapter<Adapter_Supplier.MyVi
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(context).inflate(R.layout.activity_recycle_adapter, viewGroup, false);
+        View v = LayoutInflater.from(context).inflate(R.layout.activity_recycle_adapter_supplier, viewGroup, false);
         return new MyViewHolder(v, mListener);
     }
 
