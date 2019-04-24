@@ -1,15 +1,14 @@
 package kel1.com.simato_mobile.Model;
 
 public class Model_Sparepart {
-    String nama_sparepart, merk_sparepart, tipe_sparepart, kode_sparepart;
-    Integer id_sparepart;
+    String nama_sparepart, merk_sparepart, tipe_sparepart, kode_sparepart, gambar_sparepart;
 
-    public Model_Sparepart(String nama_sparepart, String merk_sparepart, String tipe_sparepart, String kode_sparepart, Integer id_sparepart) {
+    public Model_Sparepart(String nama_sparepart, String merk_sparepart, String tipe_sparepart, String kode_sparepart, String gambar_sparepart) {
         this.nama_sparepart = nama_sparepart;
         this.merk_sparepart = merk_sparepart;
         this.tipe_sparepart = tipe_sparepart;
         this.kode_sparepart = kode_sparepart;
-        this.id_sparepart = id_sparepart;
+        this.gambar_sparepart = gambar_sparepart;
     }
 
     public String getNama_sparepart() {
@@ -44,11 +43,11 @@ public class Model_Sparepart {
         this.kode_sparepart = kode_sparepart;
     }
 
-    public Integer getId_sparepart() {
-        return id_sparepart;
+    public String getGambar_sparepart() {
+        return gambar_sparepart;
     }
 
-    public void setId_sparepart(Integer id_sparepart) {
-        this.id_sparepart = id_sparepart;
+    public void setGambar_sparepart(String gambar_sparepart) {
+        this.gambar_sparepart = gambar_sparepart;
     }
 }

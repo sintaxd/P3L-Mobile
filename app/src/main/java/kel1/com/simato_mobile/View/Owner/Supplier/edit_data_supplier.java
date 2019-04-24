@@ -38,6 +38,7 @@ public class edit_data_supplier extends AppCompatActivity {
         alamat_supp = findViewById(R.id.text_input_alamatSupplier);
         nama_sales = findViewById(R.id.text_input_namaSales);
         notelp_sales = findViewById(R.id.text_input_noTelpSales);
+
         btnSimpan = findViewById(R.id.button_simpan);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override

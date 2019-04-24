@@ -54,6 +54,7 @@ public class tambah_data_supplier extends AppCompatActivity {
               notelp_sales.getText().clear();
           }
       });
+
     }
 //    private boolean validateNamaSupplier() {
 //        String namaSupplierInput = TIL_nama_supplier.getEditText().getText().toString().trim();
