@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import kel1.com.simato_mobile.API.ApiClient_Konsumen;
+import kel1.com.simato_mobile.API.ApiClient_Supplier;
 import kel1.com.simato_mobile.R;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -82,7 +83,7 @@ public class edit_data_konsumen extends AppCompatActivity {
         {
             Retrofit.Builder builder=new Retrofit
                     .Builder()
-                    .baseUrl("http://simato.jasonfw.com/") //http://10.53.0.204:8000/ local
+                    .baseUrl(ApiClient_Konsumen.baseURL)
                     .addConverterFactory(GsonConverterFactory.create());
 
             Retrofit retrofit=builder.build();
@@ -116,7 +117,7 @@ public class edit_data_konsumen extends AppCompatActivity {
                 .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl("http://simato.jasonfw.com/")  //http://10.53.0.204:8000/
+                .baseUrl(ApiClient_Konsumen.baseURL)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit=builder.build();
         ApiClient_Konsumen apiClientKonsumen =retrofit.create(ApiClient_Konsumen.class);

@@ -133,7 +133,7 @@ public class tampil_data_sparepart extends AppCompatActivity {
                 .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl("http://10.53.0.225:8000/")  //http://simato.jasonfw.com/
+                .baseUrl(ApiClient_Sparepart.baseURL)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit=builder.build();
         ApiClient_Sparepart apiClientSparepart =retrofit.create(ApiClient_Sparepart.class);

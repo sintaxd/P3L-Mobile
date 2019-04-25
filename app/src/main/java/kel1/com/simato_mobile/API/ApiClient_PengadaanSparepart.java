@@ -7,6 +7,9 @@ import retrofit2.http.GET;
 
 public interface ApiClient_PengadaanSparepart {
 
+    String baseURL = "http://simato.jasonfw.com/";
+
+
     // ----------------------- R E A D ----------------------- //
 
     @GET("api/pengadaanSparepart")
@@ -14,3 +17,4 @@ public interface ApiClient_PengadaanSparepart {
 
     // ----------------------- R E A D ----------------------- //
 }
+

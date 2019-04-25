@@ -14,6 +14,8 @@ import retrofit2.http.Path;
 
 public interface ApiClient_Supplier {
 
+        String baseURL = "http://simato.jasonfw.com/";
+
     // --------------------- C R E A T E --------------------- //
 
         @POST("api/supplier")

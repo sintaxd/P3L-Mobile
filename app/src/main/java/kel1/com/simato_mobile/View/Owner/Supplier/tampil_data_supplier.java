@@ -135,7 +135,7 @@ public class tampil_data_supplier extends AppCompatActivity {
                 .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl("http://10.53.0.225:8000")  //http://simato.jasonfw.com/
+                .baseUrl(ApiClient_Supplier.baseURL)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit=builder.build();
         ApiClient_Supplier apiClientSupplier =retrofit.create(ApiClient_Supplier.class);

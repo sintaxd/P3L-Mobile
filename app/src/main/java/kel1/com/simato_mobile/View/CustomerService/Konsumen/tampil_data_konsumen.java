@@ -132,7 +132,7 @@ public class tampil_data_konsumen extends AppCompatActivity {
                 .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl("http://simato.jasonfw.com/")  //http://10.53.0.204:8000/
+                .baseUrl(ApiClient_Konsumen.baseURL)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit=builder.build();
         ApiClient_Konsumen apiclientKonsumen =retrofit.create(ApiClient_Konsumen.class);

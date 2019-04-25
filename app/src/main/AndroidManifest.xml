@@ -11,8 +11,8 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Owner.owner_history_sparepart"></activity>
-        <activity android:name=".View.Owner.owner_history_pengadaan_sparepart" />
+        <activity android:name=".recycle_adapter_motor"></activity>
+        <activity android:name=".View.Owner.owner_history_sparepart" />
         <activity android:name=".recycle_adapter_pengadaan_sparepart" />
         <activity android:name=".recycle_adapter_sparepart_cabang" />
         <activity android:name=".View.Owner.PengadaanSparepart.tampil_pengadaan_sparepart" />
@@ -30,7 +30,13 @@
             android:theme="@style/CSViewTheme" />
         <activity android:name=".View.CustomerService.cs_pengelolaan_transaksi_penjualan" />
         <activity android:name=".View.CustomerService.cs_pengelolaan_data" />
-        <activity android:name=".View.CustomerService.cs_main_menu"></activity>
+        <activity android:name=".View.CustomerService.cs_main_menu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".View.Owner.SparepartCabang.tampil_data_sparepart_cabang"
             android:label="Kelola Sparepart Cabang"
@@ -56,14 +62,8 @@
             android:name=".View.Owner.Sparepart.tampil_data_sparepart"
             android:label="Kelola Sparepart"
             android:theme="@style/OwnerTheme" />
-        <activity android:name=".View.Owner.owner_pengelolaan_data"></activity>
-        <activity android:name=".View.Owner.owner_main_menu">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".View.Owner.owner_pengelolaan_data" />
+        <activity android:name=".View.Owner.owner_main_menu"></activity>
         <activity android:name=".View.Owner.SparepartCabang.edit_data_sparepart_cabang" />
         <activity android:name=".MainActivity" />
         <activity android:name=".View.Owner.Supplier.tambah_data_supplier" />
