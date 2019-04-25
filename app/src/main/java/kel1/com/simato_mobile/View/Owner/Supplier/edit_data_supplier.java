@@ -89,7 +89,7 @@ public class edit_data_supplier extends AppCompatActivity {
         {
             Retrofit.Builder builder=new Retrofit
                     .Builder()
-                    .baseUrl("http://simato.jasonfw.com/") //http://10.53.0.204:8000/ local
+                    .baseUrl("http://10.53.0.225:8000") //http://10.53.0.204:8000/ local
                     .addConverterFactory(GsonConverterFactory.create());
 
             Retrofit retrofit=builder.build();
@@ -125,7 +125,7 @@ public class edit_data_supplier extends AppCompatActivity {
                 .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl("http://simato.jasonfw.com/")  //http://10.53.0.204:8000/
+                .baseUrl("http://10.53.0.225:8000/")  //http://simato.jasonfw.com/
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit=builder.build();
         ApiClient_Supplier apiClientSupplier =retrofit.create(ApiClient_Supplier.class);

@@ -136,11 +136,12 @@
                 >
 
                 <LinearLayout
-                    android:id="@+id/layout_history_pengadaan_sparepart"
+                    android:id="@+id/layout_history_sparepart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@color/colorBackgroundGridLayout"
+                    android:onClick="history_sparepart"
                     android:orientation="vertical"
                     android:padding="16dp">
 
@@ -152,12 +153,12 @@
                         android:src="@drawable/icon_laporan" />
 
                     <TextView
-                        android:id="@+id/textView_historyPengadaanSparepart"
+                        android:id="@+id/textView_historySparepart"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="12dp"
-                        android:text="History Pengadaan Sparepart"
+                        android:text="History Sparepart"
                         android:textColor="#6f6f6f"
                         android:textSize="18dp" />
                 </LinearLayout>

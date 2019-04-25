@@ -117,7 +117,7 @@ public class tambah_data_supplier extends AppCompatActivity {
                     .create();
             Retrofit.Builder builder = new Retrofit
                     .Builder()
-                    .baseUrl("http://simato.jasonfw.com/")  //http://10.53.0.204:8000/
+                    .baseUrl("http://10.53.0.225:8000")  //http://simato.jasonfw.com/
                     .addConverterFactory(GsonConverterFactory.create(gson));
             Retrofit retrofit = builder.build();
             ApiClient_Supplier apiClientSupplier = retrofit.create(ApiClient_Supplier.class);
