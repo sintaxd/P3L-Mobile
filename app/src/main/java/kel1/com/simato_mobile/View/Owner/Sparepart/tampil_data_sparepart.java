@@ -3,6 +3,7 @@ package kel1.com.simato_mobile.View.Owner.Sparepart;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class tampil_data_sparepart extends AppCompatActivity {
     private List<Model_Sparepart> mListSparepart = new ArrayList<>();
     Adapter_Sparepart.RecyclerViewClickListener listener;
     FloatingActionButton btn_tambahSparepart;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

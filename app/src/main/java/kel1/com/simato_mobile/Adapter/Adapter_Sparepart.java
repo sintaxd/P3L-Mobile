@@ -2,6 +2,9 @@ package kel1.com.simato_mobile.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.squareup.picasso.NetworkPolicy;
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +37,7 @@ public class Adapter_Sparepart extends RecyclerView.Adapter<Adapter_Sparepart.My
     private Context context;
     private RecyclerViewClickListener mListener;
     CustomFilter_Sparepart filter_sparepart;
+    private Bitmap bitmap;
 
     public Adapter_Sparepart(List<Model_Sparepart> sparepart, Context context, RecyclerViewClickListener mListener) {
         this.sparepFilter = sparepart;
@@ -44,10 +56,14 @@ public class Adapter_Sparepart extends RecyclerView.Adapter<Adapter_Sparepart.My
     @Override
     public void onBindViewHolder(@NonNull Adapter_Sparepart.MyViewHolder myViewHolder, int i) {
         final Model_Sparepart spare = sparepart.get(i);
+        String img;
+
         myViewHolder.nama_sparepart.setText("   Nama Sparepart : "+ spare.getNama_sparepart());
         myViewHolder.kode_sparepart.setText("   Kode Sparepart : "+ spare.getKode_sparepart());
         myViewHolder.merk_sparepart.setText("   Merk Sparepart : "+ spare.getMerk_sparepart());
         myViewHolder.tipe_sparepart.setText("   Tipe Sparepart : "+ spare.getTipe_sparepart());
+        img=spare.getGambar_sparepart();
+        Picasso.get().load("http://simato.jasonfw.com/images/"+img).fit().into(myViewHolder.gambar_sparepart);
     }
 
 
@@ -70,13 +86,15 @@ public class Adapter_Sparepart extends RecyclerView.Adapter<Adapter_Sparepart.My
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Adapter_Sparepart.RecyclerViewClickListener mListener;
         protected TextView nama_sparepart, kode_sparepart, merk_sparepart, tipe_sparepart;
+        protected ImageView gambar_sparepart;
         private RelativeLayout mRowContainer;
         public MyViewHolder(@NonNull View itemView, Adapter_Sparepart.RecyclerViewClickListener listener) {
             super(itemView);
-            nama_sparepart = (TextView) itemView.findViewById(R.id.nama_sparepart);
-            kode_sparepart = (TextView) itemView.findViewById(R.id.kode_sparepart);
-            merk_sparepart = (TextView) itemView.findViewById(R.id.merk_sparepart);
-            tipe_sparepart = (TextView) itemView.findViewById(R.id.tipe_sparepart);
+            nama_sparepart = itemView.findViewById(R.id.nama_sparepart);
+            kode_sparepart = itemView.findViewById(R.id.kode_sparepart);
+            merk_sparepart = itemView.findViewById(R.id.merk_sparepart);
+            tipe_sparepart = itemView.findViewById(R.id.tipe_sparepart);
+            gambar_sparepart = itemView.findViewById(R.id.gambar_sparepart);
             mRowContainer = itemView.findViewById(R.id.row_container);
             mListener = listener;
             mRowContainer.setOnClickListener(this);

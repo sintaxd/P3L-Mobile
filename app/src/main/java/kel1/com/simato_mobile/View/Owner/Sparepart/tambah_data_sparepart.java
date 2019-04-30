@@ -8,15 +8,16 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -35,72 +36,47 @@ public class tambah_data_sparepart extends AppCompatActivity {
 
     private Button btnBatal,btnSimpan;
     private FloatingActionButton mFabChoosePic;
-   // private CircleImageView mPicture;
-    private ImageView mPicture2;
-    private String picture;
-    private Bitmap bitmap;
-    private TextInputEditText nama_sparepart, merk_sparepart, kode_sparepart, tipe_sparepart;
+    private ImageView gambar_sparepart;
+    private Bitmap bitmap, ImageBitmap;
+    int Image_Request_Code = 1;
+
+    private TextInputEditText nama_spp,kode_spp,merk_spp,tipe_spp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_data_sparepart);
-        nama_sparepart = findViewById(R.id.text_input_namaSparepart);
-        merk_sparepart = findViewById(R.id.text_input_merkSparepart);
-        tipe_sparepart = findViewById(R.id.text_input_tipeSparepart);
-        kode_sparepart = findViewById(R.id.text_input_kode_sparepart);
-
-    //    mPicture = findViewById(R.id.picture);
-        mPicture2 = findViewById(R.id.testImageView);
-        mFabChoosePic = findViewById(R.id.fabChoosePic);
+        nama_spp = findViewById(R.id.text_input_namaSparepart);
+        merk_spp = findViewById(R.id.text_input_merkSparepart);
+        tipe_spp = findViewById(R.id.text_input_tipeSparepart);
+        kode_spp = findViewById(R.id.text_input_kodeSparepart);
+        gambar_sparepart = findViewById(R.id.imageView_gambarSparepart);
 
         btnSimpan = findViewById(R.id.button_Simpan);
-        btnBatal = findViewById(R.id.button_Batal);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onClickRegister();
             }
         });
+
+        btnBatal = findViewById(R.id.button_Batal);
         btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                nama_sparepart.getText().clear();
-                merk_sparepart.getText().clear();
-                tipe_sparepart.getText().clear();
-                kode_sparepart.getText().clear();
+                nama_spp.getText().clear();
+                merk_spp.getText().clear();
+                tipe_spp.getText().clear();
+                kode_spp.getText().clear();
             }
         });
 
+        mFabChoosePic = findViewById(R.id.fabChoosePic);
         mFabChoosePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 chooseFile();
             }
         });
-
-        Intent intent = getIntent();
-        picture = intent.getStringExtra("picture");
-        //setDataFromIntentExtra();
-    }
-    private void setDataFromIntentExtra() {
-
-            RequestOptions requestOptions = new RequestOptions();
-            requestOptions.skipMemoryCache(true);
-            requestOptions.diskCacheStrategy(DiskCacheStrategy.NONE);
-            requestOptions.placeholder(R.drawable.add);
-            requestOptions.error(R.drawable.add);
-
-            Glide.with(tambah_data_sparepart.this)
-                    .load(picture)
-                    .apply(requestOptions)
-                    .into(mPicture2);
-    }
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
     }
     private void chooseFile() {
         Intent intent = new Intent();
@@ -112,14 +88,14 @@ public class tambah_data_sparepart extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
+
+        if (requestCode == Image_Request_Code && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri filePath = data.getData();
             try {
 
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                mPicture2.setImageBitmap(bitmap);
-
-
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), filePath);
+                ImageBitmap=bitmap;
+                gambar_sparepart.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -130,45 +106,54 @@ public class tambah_data_sparepart extends AppCompatActivity {
         startActivity(intent);
     }
     private void onClickRegister() {
-        if (nama_sparepart.getText().toString().isEmpty() ||
-            merk_sparepart.getText().toString().isEmpty() ||
-            tipe_sparepart.getText().toString().isEmpty() ||
-            kode_sparepart.getText().toString().isEmpty())
+        if (nama_spp.getText().toString().isEmpty() ||
+            merk_spp.getText().toString().isEmpty() ||
+            tipe_spp.getText().toString().isEmpty() ||
+            kode_spp.getText().toString().isEmpty() || ImageBitmap==null)
         {
             Toast.makeText(this, "Field can't be empty", Toast.LENGTH_SHORT).show();
-        } else {
+        } else
+            {
+                Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_Sparepart.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+                Retrofit retrofit = builder.build();
+                ApiClient_Sparepart apiClient = retrofit.create(ApiClient_Sparepart.class);
 
-            String picture = null;
-            if (bitmap == null) {
-                picture = "";
-            } else {
-                picture = getStringImage(bitmap);
-            }
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] data = baos.toByteArray();
 
-            Retrofit.Builder builder = new Retrofit
-                    .Builder()
-                    .baseUrl(ApiClient_Sparepart.baseURL)
-                    .addConverterFactory(GsonConverterFactory.create());
-            Retrofit retrofit = builder.build();
-            ApiClient_Sparepart apiClient = retrofit.create(ApiClient_Sparepart.class);
-            Call<LD_Sparepart> sparepartDAOCall = apiClient.create(nama_sparepart.getText().toString(),
-                    merk_sparepart.getText().toString(),
-                    tipe_sparepart.getText().toString(),
-                    kode_sparepart.getText().toString(),
-                    picture);
-            sparepartDAOCall.enqueue(new Callback<LD_Sparepart>() {
+                RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
+                MultipartBody.Part body = MultipartBody.Part.createFormData("gambar_sparepart", "image.jpg", requestFile);
+
+                RequestBody kode_sparepart = RequestBody.create(MediaType.parse("multipart/form-data"), kode_spp.getText().toString());
+                RequestBody nama_sparepart = RequestBody.create(MediaType.parse("multipart/form-data"), nama_spp.getText().toString());
+                RequestBody merk_sparepart = RequestBody.create(MediaType.parse("multipart/form-data"), merk_spp.getText().toString());
+                RequestBody tipe_sparepart = RequestBody.create(MediaType.parse("multipart/form-data"), tipe_spp.getText().toString());
+
+                Log.d("Kode Sparepart : ",kode_spp.getText().toString());
+                Log.d("Nama Sparepart : ",nama_spp.getText().toString());
+                Log.d("Merk Sparepart : ",merk_spp.getText().toString());
+                Log.d("Tipe Sparepart : ",tipe_spp.getText().toString());
+
+                Call<ResponseBody> sparepartDAOCall = apiClient.create(body, kode_sparepart, nama_sparepart, merk_sparepart, tipe_sparepart);
+            sparepartDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
-                public void onResponse(Call<LD_Sparepart> call, Response<LD_Sparepart> response) {
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.code() == 201) {
                         Toast.makeText(tambah_data_sparepart.this, "Tambah Sparepart berhasil!", Toast.LENGTH_SHORT).show();
                         startIntent();
                     } else {
                         Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
                     }
+                    Log.d("on respon : ",String.valueOf(response.code()));
                 }
                 @Override
-                public void onFailure(Call<LD_Sparepart> call, Throwable t) {
-                    Toast.makeText(tambah_data_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(tambah_data_sparepart.this, "ea gagal ea", Toast.LENGTH_SHORT).show();
+                    Log.d("on respon gagal : ",String.valueOf(t.getLocalizedMessage()));
                 }
             });
         }

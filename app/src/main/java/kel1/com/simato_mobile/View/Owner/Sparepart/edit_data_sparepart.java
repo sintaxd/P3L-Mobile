@@ -20,6 +20,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -42,8 +43,7 @@ public class edit_data_sparepart extends AppCompatActivity {
     private Button btnBatal,btnSimpan,btnDelete;
     private TextInputEditText nama_sparepart, merk_sparepart, kode_sparepart, tipe_sparepart;
     private FloatingActionButton mFabChoosePic;
-    //private CircleImageView mPicture;
-    private ImageView mPicture2;
+    private ImageView gambar_sparepart;
     private String kode,picture;
     private Bitmap bitmap;
     private Intent i;
@@ -54,13 +54,12 @@ public class edit_data_sparepart extends AppCompatActivity {
 
         btnBatal = findViewById(R.id.button_Batal);
 
-        mPicture2 = findViewById(R.id.testImageView);
+        gambar_sparepart = findViewById(R.id.imageView_gambarSparepart);
         nama_sparepart = findViewById(R.id.text_input_namaSparepart);
         merk_sparepart = findViewById(R.id.text_input_merkSparepart);
         kode_sparepart = findViewById(R.id.text_input_kodeSparepart);
         tipe_sparepart = findViewById(R.id.text_input_tipeSparepart);
 
-       // mPicture = findViewById(R.id.picture);
         mFabChoosePic = findViewById(R.id.fabChoosePic);
 
         btnSimpan = findViewById(R.id.button_simpan);
@@ -84,6 +83,10 @@ public class edit_data_sparepart extends AppCompatActivity {
         merk_sparepart.setText(i.getStringExtra("merk_sparepart"));
         kode_sparepart.setText(i.getStringExtra("kode_sparepart"));
         tipe_sparepart.setText(i.getStringExtra("tipe_sparepart"));
+        picture = i.getStringExtra("gambar_sparepart");
+
+        Picasso.get().load("http://simato.jasonfw.com/images/"+picture).fit().into(gambar_sparepart);
+
 
         //kode sparepart belum
         btnBatal.setOnClickListener(new View.OnClickListener() {
@@ -101,24 +104,8 @@ public class edit_data_sparepart extends AppCompatActivity {
             }
         });
 
-        Intent intent = getIntent();
-        picture = intent.getStringExtra("picture");
-        //setDataFromIntentExtra();
     }
-    private void setDataFromIntentExtra() {
 
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.skipMemoryCache(true);
-        requestOptions.diskCacheStrategy(DiskCacheStrategy.NONE);
-        requestOptions.placeholder(R.drawable.add);
-        requestOptions.error(R.drawable.add);
-
-        Glide.with(edit_data_sparepart.this)
-                .load(picture)
-                .apply(requestOptions)
-                .into(mPicture2);
-
-    }
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -141,7 +128,7 @@ public class edit_data_sparepart extends AppCompatActivity {
 
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
 
-                mPicture2.setImageBitmap(bitmap);
+                gambar_sparepart.setImageBitmap(bitmap);
 
             } catch (IOException e) {
                 e.printStackTrace();
