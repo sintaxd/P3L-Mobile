@@ -43,15 +43,20 @@ public interface ApiClient_Sparepart {
 
     // --------------------- U P D A T E --------------------- //
 
-    @PUT("api/sparepart/{kode}")
+    @POST("api/sparepart/{kode}")
     @FormUrlEncoded
     Call<ResponseBody>update(
+            @Field("gambar_sparepart") String gambar_sparepart,
             @Field("nama_sparepart")String nama_sparepart,
             @Field("merk_sparepart")String merk_sparepart,
-            @Field("kode_sparepart")String kode_sparepart,
             @Field("tipe_sparepart")String tipe_sparepart,
-            @Field("gambar_sparepart")String gambar_sparepart,
-            @Field("kode_sparepart")String kode);
+            @Path("kode")String kode);
+
+    @POST("sparepart/updateImageMobile/{kode}")
+    @Multipart
+    Call<ResponseBody> updateImageMobile(
+            @Part MultipartBody.Part gambar_sparepart,
+            @Path("kode")String kode);
 
     // --------------------- U P D A T E --------------------- //
 
