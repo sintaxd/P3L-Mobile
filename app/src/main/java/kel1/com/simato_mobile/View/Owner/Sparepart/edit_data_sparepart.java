@@ -152,25 +152,6 @@ public class edit_data_sparepart extends AppCompatActivity {
 
             if(ImageBitmap!=null)
             {
-                Call<ResponseBody> sparepartDAOCall = apiClientSparepart.update("",nama_spp.getText().toString(),
-                        merk_spp.getText().toString(),
-                        tipe_spp.getText().toString(),kode);
-                sparepartDAOCall.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        if (response.code() == 201) {
-                            Toast.makeText(getApplicationContext(), "Success Update", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
-                        }
-                        Log.d("on respon update : ",String.valueOf(response.code()));
-                    }
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-                        Log.d("on respon gagal up: ",String.valueOf(t.getLocalizedMessage()));
-                    }
-                });
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 ImageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 byte[] data = baos.toByteArray();
@@ -194,6 +175,28 @@ public class edit_data_sparepart extends AppCompatActivity {
                         Log.d("on respon gagal : ",String.valueOf(t.getLocalizedMessage()));
                     }
                 });
+                if(!nama_spp.getText().toString().equals(nama_sparepart) || !merk_spp.getText().toString().equals(merk_sparepart) || !tipe_spp.getText().toString().equals(tipe_sparepart))
+                {
+                    Call<ResponseBody> sparepartDAOCall = apiClientSparepart.update("",nama_spp.getText().toString(),
+                            merk_spp.getText().toString(),
+                            tipe_spp.getText().toString(),kode);
+                    sparepartDAOCall.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            if (response.code() == 201) {
+                                Toast.makeText(getApplicationContext(), "Success Update", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                            }
+                            Log.d("on respon update : ",String.valueOf(response.code()));
+                        }
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                            Log.d("on respon gagal up: ",String.valueOf(t.getLocalizedMessage()));
+                        }
+                    });
+                }
             }
             else
             {

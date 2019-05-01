@@ -52,7 +52,7 @@ public interface ApiClient_Sparepart {
             @Field("tipe_sparepart")String tipe_sparepart,
             @Path("kode")String kode);
 
-    @POST("sparepart/updateImageMobile/{kode}")
+    @POST("api/sparepart/updateImageMobile/{kode}")
     @Multipart
     Call<ResponseBody> updateImageMobile(
             @Part MultipartBody.Part gambar_sparepart,
