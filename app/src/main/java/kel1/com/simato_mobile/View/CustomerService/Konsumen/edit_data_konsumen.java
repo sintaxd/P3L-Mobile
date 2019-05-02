@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder;
 import kel1.com.simato_mobile.API.ApiClient_Konsumen;
 import kel1.com.simato_mobile.API.ApiClient_Supplier;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.CustomerService.MotorKonsumen.tampil_data_motor_konsumen;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class edit_data_konsumen extends AppCompatActivity {
 
-    private Button btnBatal, btnSimpan, btnDelete;
+    private Button btnBatal, btnSimpan, btnDelete, btnKelolaMotorKonsumen;
     private TextInputEditText nama_konsumen, noTelp_konsumen, alamat_konsumen;
     private Integer id_konsumen;
     private Intent i;
@@ -60,6 +61,14 @@ public class edit_data_konsumen extends AppCompatActivity {
                 startIntent();
             }
         });
+//        btnKelolaMotorKonsumen = findViewById(R.id.button_KelolaMotorKonsumen);
+//        btnKelolaMotorKonsumen.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(edit_data_konsumen.this, tampil_data_motor_konsumen.class);
+//                startActivity(i);
+//            }
+//        });
         i = getIntent();
         nama_konsumen.setText(i.getStringExtra("nama_konsumen"));
         noTelp_konsumen.setText(i.getStringExtra("noTelp_konsumen"));

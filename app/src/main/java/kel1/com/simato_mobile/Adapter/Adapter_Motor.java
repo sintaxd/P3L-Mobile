@@ -3,6 +3,7 @@ package kel1.com.simato_mobile.Adapter;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,9 @@ public class Adapter_Motor extends RecyclerView.Adapter<Adapter_Motor.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull Adapter_Motor.MyViewHolder myViewHolder, int i) {
         final Model_Motor mtr = motor.get(i);
+        Log.d("ID Motor : ",mtr.getId_motor().toString());
+        Log.d("Merk Motor : ",mtr.getMerk_motor());
+        Log.d("Tipe Motor : ",mtr.getTipe_motor());
         myViewHolder.merk_motor.setText  ("  Merk Motor     : "+ mtr.getMerk_motor());
         myViewHolder.tipe_motor.setText  ("  Tipe Motor      : "+ mtr.getTipe_motor());
 

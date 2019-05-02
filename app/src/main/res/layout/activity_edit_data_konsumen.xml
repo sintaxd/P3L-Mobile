@@ -60,12 +60,18 @@
             android:hint="Alamat Konsumen"
             android:inputType="text"/>
     </android.support.design.widget.TextInputLayout>
-
+    <!--<Button-->
+        <!--android:id="@+id/button_KelolaMotorKonsumen"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:text="Kelola Motor Konsumen"-->
+        <!--android:textSize="12sp" />-->
     <Button
         android:id="@+id/button_Simpan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:text="SIMPAN"
         android:textSize="12sp" />

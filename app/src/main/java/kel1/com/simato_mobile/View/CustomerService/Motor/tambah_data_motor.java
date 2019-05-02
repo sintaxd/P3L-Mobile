@@ -51,7 +51,8 @@ public class tambah_data_motor extends AppCompatActivity {
                 onClickRegister();
             }
         });
-    }private void startIntent() {
+    }
+    private void startIntent() {
         Intent intent = new Intent(getApplicationContext(), tampil_data_motor.class);
         startActivity(intent);
     }
