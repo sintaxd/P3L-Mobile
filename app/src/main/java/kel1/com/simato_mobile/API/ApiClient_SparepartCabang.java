@@ -1,6 +1,7 @@
 package kel1.com.simato_mobile.API;
 
 import kel1.com.simato_mobile.ListData.LD_SparepartCabang;
+import kel1.com.simato_mobile.Model.Model_SparepartCabang;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
@@ -19,9 +20,11 @@ public interface ApiClient_SparepartCabang {
 
     @POST("api/sparepartCabang")
     @FormUrlEncoded
-    Call<LD_SparepartCabang> create(
-            @Field("hargaBeli_sparepart")Integer hargaBeli_sparepart,
-            @Field("hargaJual_sparepart")Integer hargaJual_sparepart,
+    Call<Model_SparepartCabang> create(
+            @Field("id_cabang_fk")Integer id_cabang_fk,
+            @Field("kode_sparepart_fk")String kode_sparepart_fk,
+            @Field("hargaBeli_sparepart")Double hargaBeli_sparepart,
+            @Field("hargaJual_sparepart")Double hargaJual_sparepart,
             @Field("letak_sparepart")String letak_sparepart,
             @Field("stokMin_sparepart")Integer stokMin_sparepart,
             @Field("stokSisa_sparepart")Integer stokSisa_sparepart);
@@ -40,8 +43,10 @@ public interface ApiClient_SparepartCabang {
     @PUT("api/sparepartCabang/{id}")
     @FormUrlEncoded
     Call<ResponseBody>update(
-            @Field("hargaBeli_sparepart")Integer hargaBeli_sparepart,
-            @Field("hargaJual_sparepart")Integer hargaJual_sparepart,
+            @Field("id_cabang_fk")Integer id_cabang_fk,
+            @Field("kode_sparepart_fk")String kode_sparepart_fk,
+            @Field("hargaBeli_sparepart")Double hargaBeli_sparepart,
+            @Field("hargaJual_sparepart")Double hargaJual_sparepart,
             @Field("letak_sparepart")String letak_sparepart,
             @Field("stokMin_sparepart")Integer stokMin_sparepart,
             @Field("stokSisa_sparepart")Integer stokSisa_sparepart,
@@ -52,7 +57,7 @@ public interface ApiClient_SparepartCabang {
     // --------------------- D E L E T E --------------------- //
 
     @DELETE("api/sparepartCabang/{id}")
-    Call<ResponseBody>delete(@Path("id") String id);
+    Call<ResponseBody>delete(@Path("id") Integer id);
 
     // --------------------- D E L E T E --------------------- //
 

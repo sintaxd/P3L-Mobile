@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#202f65</color>
     <color name="colorPrimaryDark">#202F65</color>
-    <color name="menus">#647bce</color>
+    <color name="menus">#647BCE</color>
     <color name="colorAccent">#8B9CDA</color>
     <color name="colorBackgroundGridLayout">#F5FCFF</color>
 

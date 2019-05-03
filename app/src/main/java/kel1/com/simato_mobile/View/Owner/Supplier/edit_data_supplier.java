@@ -31,7 +31,7 @@ public class edit_data_supplier extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_data_supplier);
 
-        btnBatal = (Button)findViewById(R.id.button_Batal);
+
 
         nama_supp = findViewById(R.id.text_input_namaSupplier);
         notelp_supp = findViewById(R.id.text_input_noTelpSupplier);
@@ -62,6 +62,7 @@ public class edit_data_supplier extends AppCompatActivity {
         nama_sales.setText(i.getStringExtra("nama_sales"));
         notelp_sales.setText(i.getStringExtra("noTelp_sales"));
         id_supplier=i.getIntExtra("id_supplier",-1);
+        btnBatal = (Button)findViewById(R.id.button_Batal);
         btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,7 +146,5 @@ public class edit_data_supplier extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 }
