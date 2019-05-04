@@ -18,34 +18,35 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:layout_marginBottom="20dp"/>
-    <android.support.design.widget.TextInputLayout
+    <TextView
+        android:id="@+id/textView_sales"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="15"
-        app:errorEnabled="true">
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_input_namaSupplier"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama Supplier"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
+        android:text="Nama Sales"
+        android:textColor="@color/colorAccent" />
 
-    <android.support.design.widget.TextInputLayout
+    <Spinner
+        android:id="@+id/spinner_sales"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:counterEnabled="true"
-        app:counterMaxLength="30"
-        app:errorEnabled="true">
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="20dp"/>
+    <TextView
+        android:id="@+id/textView_sparepart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nama Sparepart"
+        android:textColor="@color/colorAccent" />
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/text_input_namaSparepart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nama Sparepart"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
+    <Spinner
+        android:id="@+id/spinner_sparepart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/namasparepart_sparepartCabang"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="20dp"/>
+
+
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
