@@ -51,8 +51,8 @@ public class Adapter_SparepartCabang  extends RecyclerView.Adapter<Adapter_Spare
     public void onBindViewHolder(@NonNull Adapter_SparepartCabang.MyViewHolder myViewHolder, int i) {
         final Model_SparepartCabang sparebang = sparepartcabang.get(i);
 
-        myViewHolder.nama_cabang.setText        ("  Nama Cabang          : "+ String.valueOf(sparebang.getId_cabang_fk()));
-        myViewHolder.nama_sparepart.setText     ("  Kode Sparepart        : "+ String.valueOf(sparebang.getKode_sparepart_fk()));
+        myViewHolder.nama_cabang.setText        ("  Nama Cabang          : "+ sparebang.getNama_cabang());
+        myViewHolder.nama_sparepart.setText     ("  Nama Sparepart        : "+ sparebang.getNama_sparepart());
         myViewHolder.harga_beli.setText         ("  Harga Beli                  : "+ String.valueOf(sparebang.getHargaBeli_sparepart()));
         myViewHolder.harga_jual.setText         ("  Harga Jual                 : "+ String.valueOf(sparebang.getHargaJual_sparepart()));
         myViewHolder.letak_penempatan.setText   ("  Letak Penempatan  : "+ sparebang.getLetak_sparepart());

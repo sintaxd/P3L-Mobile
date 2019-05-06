@@ -206,14 +206,15 @@ public class edit_data_sparepart_cabang extends AppCompatActivity {
                             Double.parseDouble(harga_jual.getText().toString()),
                             letak_sparepart_fix,
                             Integer.parseInt(stok_minimal.getText().toString()),
-                            Integer.parseInt(stok_sisa.getText().toString()),id_sparepartCabang);
+                            Integer.parseInt(stok_sisa.getText().toString()), id_sparepartCabang);
             sparepartCabangDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.code() == 201) {
                         Toast.makeText(getApplicationContext(), "Success Update", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getApplicationContext(), "Failed Update", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                        Log.d("Update gagal bcs: ",response.message());
                     }
                 }
 

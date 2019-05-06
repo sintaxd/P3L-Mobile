@@ -5,7 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import kel1.com.simato_mobile.MainActivity;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.CustomerService.cs_main_menu;
+import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tampil_pengadaan_sparepart;
+import kel1.com.simato_mobile.tampil_sparepart_stok_kurang;
 
 public class owner_main_menu extends AppCompatActivity {
 
@@ -21,6 +25,14 @@ public class owner_main_menu extends AppCompatActivity {
     }
     public void history_sparepart(View view) {
         Intent i= new Intent(owner_main_menu.this, owner_history_sparepart.class);
+        startActivity(i);
+    }
+    public void pengadaan_sparepart(View view) {
+        Intent i= new Intent(owner_main_menu.this, tampil_sparepart_stok_kurang.class);
+        startActivity(i);
+    }
+    public void logout(View view) {
+        Intent i = new Intent(owner_main_menu.this, MainActivity.class);
         startActivity(i);
     }
 }

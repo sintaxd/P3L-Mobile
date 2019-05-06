@@ -11,42 +11,47 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".View.Owner.owner_main_menu">
+        <activity android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_service_sparepart"></activity>
+        <activity android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_service" />
+        <activity android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_sparepart" />
+        <activity
+            android:name=".tampil_sparepart_stok_kurang"
+            android:label="Sparepart Dengan Stok Kurang"
+            android:theme="@style/OwnerTheme" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".View.Owner.owner_main_menu" />
+        <activity android:name=".View.CustomerService.cs_main_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".View.CustomerService.cs_main_menu">
-
-        </activity>
-        <activity android:name=".recycle_adapter_konsumen"/>
-        <activity android:name=".recycle_adapter_motor"/>
-        <activity android:name=".recycle_adapter_motor_konsumen"/>
-        <activity android:name=".recycle_adapter_pengadaan_sparepart"/>
+        <activity android:name=".recycle_adapter_konsumen" />
+        <activity android:name=".recycle_adapter_motor" />
+        <activity android:name=".recycle_adapter_motor_konsumen" />
+        <activity android:name=".recycle_adapter_pengadaan_sparepart" />
         <activity android:name=".recycle_adapter_sparepart_cabang" />
         <activity android:name=".recycle_adapter_sparepart" />
-
-
-
-        <activity android:name=".View.CustomerService.MotorKonsumen.tampil_data_motor_konsumen"
+        <activity
+            android:name=".View.CustomerService.MotorKonsumen.tampil_data_motor_konsumen"
             android:label="Kelola Motor Konsumen"
-            android:theme="@style/CSViewTheme"/>
-        <activity android:name=".View.CustomerService.MotorKonsumen.tambah_data_motor_konsumen"
-            android:theme="@style/CSTheme2"/>
-        <activity android:name=".View.CustomerService.MotorKonsumen.edit_data_motor_konsumen"
-            android:theme="@style/CSTheme2"/>
-
+            android:theme="@style/CSViewTheme" />
+        <activity
+            android:name=".View.CustomerService.MotorKonsumen.tambah_data_motor_konsumen"
+            android:theme="@style/CSTheme2" />
+        <activity
+            android:name=".View.CustomerService.MotorKonsumen.edit_data_motor_konsumen"
+            android:theme="@style/CSTheme2" />
         <activity android:name=".View.Owner.owner_history_sparepart" />
-
-        <activity android:name=".View.Owner.PengadaanSparepart.tampil_pengadaan_sparepart" />
+        <activity
+            android:name=".View.Owner.PengadaanSparepart.tampil_pengadaan_sparepart"
+            android:label="Kelola Pengadaan Sparepart"
+            android:theme="@style/OwnerTheme" />
         <activity android:name=".View.Owner.PengadaanSparepart.edit_pengadaan_sparepart" />
         <activity android:name=".View.Owner.PengadaanSparepart.tambah_pengadaan_sparepart" />
-
-        <activity android:name=".View.CustomerService.Motor.tampil_data_motor"
+        <activity
+            android:name=".View.CustomerService.Motor.tampil_data_motor"
             android:label="Kelola Motor"
             android:theme="@style/CSViewTheme" />
         <activity
@@ -55,7 +60,6 @@
             android:theme="@style/CSViewTheme" />
         <activity android:name=".View.CustomerService.cs_pengelolaan_transaksi_penjualan" />
         <activity android:name=".View.CustomerService.cs_pengelolaan_data" />
-
         <activity
             android:name=".View.Owner.SparepartCabang.tampil_data_sparepart_cabang"
             android:label="Kelola Sparepart Cabang"
@@ -82,9 +86,7 @@
             android:label="Kelola Sparepart"
             android:theme="@style/OwnerTheme" />
         <activity android:name=".View.Owner.owner_pengelolaan_data" />
-
         <activity android:name=".View.Owner.SparepartCabang.edit_data_sparepart_cabang" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".View.Owner.Supplier.tambah_data_supplier" />
         <activity android:name=".View.Owner.Supplier.edit_data_supplier" />
         <activity android:name=".View.Owner.Sparepart.tambah_data_sparepart" />

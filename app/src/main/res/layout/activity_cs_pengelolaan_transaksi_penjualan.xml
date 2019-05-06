@@ -58,20 +58,23 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/transaksi_jasa_service"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorCS">
+                    android:layout_gravity="center"
+                    android:onClick="transaksi_service"
+                    android:background="@color/colorCS"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_transaksi_service"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/icon_service"/>
+                        android:src="@drawable/icon_service" />
 
                     <TextView
                         android:id="@+id/txt_transaksi_service"
@@ -94,13 +97,16 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/transaksi_sparepart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorCS">
+                    android:layout_gravity="center"
+                    android:onClick="transaksi_sparepart"
+                    android:background="@color/colorCS"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_transaksi_sparepart"
@@ -131,13 +137,16 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
                 >
+
                 <LinearLayout
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:layout_gravity="center"
+                    android:id="@+id/transaksi_jasa_service_sparepart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/colorCS">
+                    android:layout_gravity="center"
+                    android:onClick="transaksi_service_sparepart"
+                    android:background="@color/colorCS"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <ImageView
                         android:id="@+id/img_transaksi_servicesparepart"

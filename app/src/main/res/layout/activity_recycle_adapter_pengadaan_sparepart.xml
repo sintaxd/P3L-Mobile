@@ -1,9 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".recycle_adapter_pengadaan_sparepart">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginBottom="20dp"
+android:background="#F5FCFF"
+android:orientation="vertical"
+android:id="@+id/row_container">
 
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nama_supplier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Supplier" />
+
+    <TextView
+        android:id="@+id/nama_sparepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Sparepart" />
+
+    <!--sampai sini-->
+    <TextView
+        android:id="@+id/harga_beli"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harga Beli" />
+
+    <TextView
+        android:id="@+id/harga_jual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Harga Jual" />
+
+    <TextView
+        android:id="@+id/letak_penempatan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Letak Penempatan" />
+
+    <TextView
+        android:id="@+id/stok_minimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Stok Minimal" />
+
+
+</LinearLayout>
+
+
+</RelativeLayout>

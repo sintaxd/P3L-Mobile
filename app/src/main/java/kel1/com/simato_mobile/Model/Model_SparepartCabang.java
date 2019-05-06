@@ -3,9 +3,9 @@ package kel1.com.simato_mobile.Model;
 public class Model_SparepartCabang {
     Integer id_cabang_fk,stokMin_sparepart,stokSisa_sparepart,id_sparepartCabang;
     Double hargaBeli_sparepart,hargaJual_sparepart;
-    String kode_sparepart_fk,letak_sparepart;
+    String kode_sparepart_fk,letak_sparepart, nama_sparepart,nama_cabang;
 
-    public Model_SparepartCabang(Integer id_cabang_fk, Integer stokMin_sparepart, Integer stokSisa_sparepart, Integer id_sparepartCabang, Double hargaBeli_sparepart, Double hargaJual_sparepart, String kode_sparepart_fk, String letak_sparepart) {
+    public Model_SparepartCabang(Integer id_cabang_fk, Integer stokMin_sparepart, Integer stokSisa_sparepart, Integer id_sparepartCabang, Double hargaBeli_sparepart, Double hargaJual_sparepart, String kode_sparepart_fk, String letak_sparepart, String nama_sparepart, String nama_cabang) {
         this.id_cabang_fk = id_cabang_fk;
         this.stokMin_sparepart = stokMin_sparepart;
         this.stokSisa_sparepart = stokSisa_sparepart;
@@ -14,6 +14,24 @@ public class Model_SparepartCabang {
         this.hargaJual_sparepart = hargaJual_sparepart;
         this.kode_sparepart_fk = kode_sparepart_fk;
         this.letak_sparepart = letak_sparepart;
+        this.nama_sparepart = nama_sparepart;
+        this.nama_cabang = nama_cabang;
+    }
+
+    public String getNama_cabang() {
+        return nama_cabang;
+    }
+
+    public void setNama_cabang(String nama_cabang) {
+        this.nama_cabang = nama_cabang;
+    }
+
+    public String getNama_sparepart() {
+        return nama_sparepart;
+    }
+
+    public void setNama_sparepart(String nama_sparepart) {
+        this.nama_sparepart = nama_sparepart;
     }
 
     public Integer getId_sparepartCabang() {

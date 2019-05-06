@@ -42,12 +42,12 @@ public class Adapter_MotorKonsumen extends RecyclerView.Adapter<Adapter_MotorKon
     @Override
         public void onBindViewHolder(@NonNull Adapter_MotorKonsumen.MyViewHolder myViewHolder, int i) {
             final Model_MotorKonsumen mtr = motorkonsumen.get(i);
-            Log.d("ID Motor : ",mtr.getId_motor_fk().toString());
-            Log.d("ID Konsumen : ",mtr.getId_konsumen_fk().toString());
+            Log.d("Tipe Motor : ",mtr.getTipe_motor());
+            Log.d("Nama Konsumen : ",mtr.getNama_konsumen());
             Log.d("Plat Motor : ",mtr.getPlat_motorKonsumen());
 
-            myViewHolder.nama_konsumen.setText  ("  ID Konsumen     : "+ String.valueOf(mtr.getId_konsumen_fk()));
-            myViewHolder.tipe_motor.setText     ("  ID Motor        :  "+ String.valueOf(mtr.getId_motor_fk()));
+            myViewHolder.nama_konsumen.setText  ("  Nama Konsumen   : "+ mtr.getNama_konsumen());
+            myViewHolder.tipe_motor.setText     ("  Tipe Motor      :  "+ mtr.getTipe_motor());
             myViewHolder.plat_motor.setText     ("  Plat Motor      : "+ mtr.getPlat_motorKonsumen());
         }
 
