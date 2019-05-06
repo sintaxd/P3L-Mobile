@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface ApiClient_Supplier {
 
-        String baseURL = "http://10.54.8.79:8000";
+        String baseURL = "http://192.168.1.25:8000";
         //String baseURL = "http://simato.jasonfw.com/";
 
     // --------------------- C R E A T E --------------------- //

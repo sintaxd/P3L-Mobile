@@ -11,9 +11,21 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_service_sparepart"></activity>
+        <activity android:name=".View.Konsumen.konsumen_main_menu"
+            android:theme="@style/KonsumenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".View.Konsumen.tampil_sparepart_bengkel" />
+        <activity android:name=".View.Konsumen.tampil_informasi_bengkel" />
+        <activity android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_service_sparepart" />
         <activity android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_service" />
-        <activity android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_sparepart" />
+        <activity
+            android:name=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjualan_sparepart"
+            android:theme="@style/CSViewTheme" />
         <activity
             android:name=".tampil_sparepart_stok_kurang"
             android:label="Sparepart Dengan Stok Kurang"
@@ -21,11 +33,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".View.Owner.owner_main_menu" />
         <activity android:name=".View.CustomerService.cs_main_menu">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".recycle_adapter_konsumen" />
         <activity android:name=".recycle_adapter_motor" />

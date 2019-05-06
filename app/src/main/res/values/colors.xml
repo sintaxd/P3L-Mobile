@@ -11,6 +11,8 @@
     <color name="menusCS">#C3A742</color>
     <color name="menusCS2">#ceb764</color>
 
-
+    <color name="colorKonsumen">#b3b3ff</color>
+    <color name="menusKonsumen">#ccccff</color>
+    <color name="menusKonsumen2">#e6e6ff</color>
 
 </resources>

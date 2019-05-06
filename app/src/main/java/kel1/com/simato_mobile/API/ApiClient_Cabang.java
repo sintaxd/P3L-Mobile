@@ -6,7 +6,7 @@ import retrofit2.http.GET;
 
 public interface ApiClient_Cabang {
 
-    String baseURL = "http://10.54.8.79:8000";
+    String baseURL = "http://192.168.1.25:8000";
     //String baseURL = "http://simato.jasonfw.com/";
     // ----------------------- R E A D ----------------------- //
 

@@ -9,7 +9,7 @@ import retrofit2.http.POST;
 public interface ApiClient_Login {
 
 
-    String baseURL = "http://10.54.8.79:8000";
+    String baseURL = "http://192.168.1.25:8000";
     //String baseURL = "http://simato.jasonfw.com/";
     // ----------------------- L O G I N ----------------------- //
     @POST("api/pegawai/mobileauthenticate")

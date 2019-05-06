@@ -24,4 +24,9 @@
         <item name="colorPrimaryDark">@color/menusCS</item>
         <item name="colorAccent">@color/menusCS2</item>
     </style>
+    <style name="KonsumenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorKonsumen</item>
+        <item name="colorPrimaryDark">@color/menusKonsumen</item>
+        <item name="colorAccent">@color/menusKonsumen2</item>
+    </style>
 </resources>

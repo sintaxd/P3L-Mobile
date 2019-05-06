@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 
 public interface ApiClient_SparepartCabang {
 
-    String baseURL = "http://10.54.8.79:8000";
+    String baseURL = "http://192.168.1.25:8000";
     //String baseURL = "http://simato.jasonfw.com/";
 
     // --------------------- C R E A T E --------------------- //
@@ -37,7 +37,9 @@ public interface ApiClient_SparepartCabang {
     @GET("api/sparepartCabang")
     Call<LD_SparepartCabang> show();
 
-
+    @GET("api/sparepartCabang/showByCabang/{id}")
+    Call<LD_SparepartCabang> showByCabang(
+            @Path("id") Integer id);
 
     // ----------------------- R E A D ----------------------- //
 
