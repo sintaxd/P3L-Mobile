@@ -2,6 +2,7 @@ package kel1.com.simato_mobile.API;
 
 import kel1.com.simato_mobile.ListData.LD_Sparepart;
 
+import kel1.com.simato_mobile.ListData.LD_SparepartCabang;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -19,7 +20,7 @@ import retrofit2.http.Path;
 
 public interface ApiClient_Sparepart {
 
-    String baseURL = "http://192.168.1.25:8000";
+    String baseURL = "http://192.168.94.52:8000";
     //String baseURL = "http://simato.jasonfw.com/";
 
     // --------------------- C R E A T E --------------------- //

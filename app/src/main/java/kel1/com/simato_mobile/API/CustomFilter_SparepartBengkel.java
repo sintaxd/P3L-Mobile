@@ -5,19 +5,21 @@ import android.widget.Filter;
 import java.util.ArrayList;
 
 import kel1.com.simato_mobile.Adapter.Adapter_Sparepart;
-import kel1.com.simato_mobile.Adapter.Adapter_SparepartCabang;
+import kel1.com.simato_mobile.Adapter.Adapter_SparepartBengkel;
 import kel1.com.simato_mobile.Model.Model_Sparepart;
-import kel1.com.simato_mobile.Model.Model_SparepartCabang;
+import kel1.com.simato_mobile.Model.Model_SparepartBengkel;
 
-public class CustomFilter_SparepartCabang extends Filter {
-    Adapter_SparepartCabang adapterSparepartCabang;
-    ArrayList<Model_SparepartCabang> filterList;
+public class CustomFilter_SparepartBengkel extends Filter{
+    Adapter_SparepartBengkel adapter_sparepartBengkel;
+    ArrayList<Model_SparepartBengkel> filterList;
 
-    public CustomFilter_SparepartCabang(ArrayList<Model_SparepartCabang> filterList, Adapter_SparepartCabang adapterSparepartCabang)
+    public CustomFilter_SparepartBengkel(ArrayList<Model_SparepartBengkel> filterList, Adapter_SparepartBengkel adapter_sparepartBengkel)
     {
-        this.adapterSparepartCabang = adapterSparepartCabang;
+        this.adapter_sparepartBengkel = adapter_sparepartBengkel;
         this.filterList=filterList;
-    }//FILTERING OCCURS
+    }
+
+    //FILTERING OCCURS
     @Override
     protected Filter.FilterResults performFiltering(CharSequence constraint) {
         Filter.FilterResults results=new Filter.FilterResults();
@@ -27,7 +29,7 @@ public class CustomFilter_SparepartCabang extends Filter {
             //CHANGE TO UPPER
             constraint=constraint.toString().toUpperCase();
             //STORE OUR FILTERED PLAYERS
-            ArrayList<Model_SparepartCabang> filteredSpare=new ArrayList<>();
+            ArrayList<Model_SparepartBengkel> filteredSpare=new ArrayList<>();
 
             for (int i=0;i<filterList.size();i++)
             {
@@ -54,10 +56,10 @@ public class CustomFilter_SparepartCabang extends Filter {
     @Override
     protected void publishResults(CharSequence constraint, Filter.FilterResults results) {
 
-        adapterSparepartCabang.sparepartcabang= (ArrayList<Model_SparepartCabang>) results.values;
+        adapter_sparepartBengkel.sparepartbengkel= (ArrayList<Model_SparepartBengkel>) results.values;
 
         //REFRESH
-        adapterSparepartCabang.notifyDataSetChanged();
+        adapter_sparepartBengkel.notifyDataSetChanged();
 
     }
 }

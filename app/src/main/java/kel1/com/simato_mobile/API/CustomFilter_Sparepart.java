@@ -58,6 +58,5 @@ public class CustomFilter_Sparepart extends Filter {
 
         //REFRESH
         adapterSparepart.notifyDataSetChanged();
-
     }
 }

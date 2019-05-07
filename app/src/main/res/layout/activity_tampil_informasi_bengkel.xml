@@ -1,9 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.Konsumen.tampil_informasi_bengkel">
+<ScrollView
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/icon_background"
+tools:context=".View.Konsumen.tampil_informasi_bengkel">
 
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/txtSIMATO"
+            android:text="S I M A T O"
+            android:textSize="28sp"
+            android:textColor="#FFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtSIMATO"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:text="Solusi Keperluan Motor Anda"
+            android:textColor="#FFFF"
+            android:textSize="16sp" />
+        <ImageView
+            android:src="@drawable/icon_konsumen_2"
+            android:layout_alignParentRight="true"
+            android:layout_width="88dp"
+            android:layout_height="88dp"/>
+    </RelativeLayout>
+    <GridLayout
+        android:columnCount="1"
+        android:rowCount="2"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/layout_tampil_informasi_bengkel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/menusKonsumen2"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/img_tampilInformasiBengkel"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/logo_atma_auto"/>
+
+                <TextView
+                    android:id="@+id/textView_tampilInformasiBengkel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Buka Setiap Hari, Pukul 08:00 - 18:00 WIB"
+                    android:textColor="#6f6f6f"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/layout_tampil_sparepart_bengkel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/menusKonsumen2"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+
+                <TextView
+                    android:id="@+id/textView_tampilSparepartBengkel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bengkel Atma Auto adalah bengkel yang melayani Pembelian Sparepart dan Service Motor yang berdiri sejak tahun 2019 di Yogyakarta.
+Ditunjang dengan lokasi yang strategis, staff yang kompeten, sparepart yang berkualitas, serta peralatan yang canggih maka kualitas pekerjaan Bengkel Atma Auto lebih optimal"
+                    android:textColor="#6f6f6f"
+                    android:textSize="18dp" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            app:cardElevation="6dp"
+            app:cardCornerRadius="12dp"
+            android:layout_margin="12dp"
+            >
+
+            <LinearLayout
+                android:id="@+id/layout_layanan_konsumen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/menusKonsumen2"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/img_layanan_konsumen"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_layanan_konsumen"/>
+
+                <TextView
+                    android:id="@+id/textView_layanan_konsumen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="Layanan Konsumen Tersedia 24 jam, hubungi 0274-8786571"
+                    android:textColor="#6f6f6f"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </GridLayout>
+</LinearLayout>
+</ScrollView>

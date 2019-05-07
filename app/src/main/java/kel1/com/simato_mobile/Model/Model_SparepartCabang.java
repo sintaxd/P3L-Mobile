@@ -18,30 +18,6 @@ public class Model_SparepartCabang {
         this.nama_cabang = nama_cabang;
     }
 
-    public String getNama_cabang() {
-        return nama_cabang;
-    }
-
-    public void setNama_cabang(String nama_cabang) {
-        this.nama_cabang = nama_cabang;
-    }
-
-    public String getNama_sparepart() {
-        return nama_sparepart;
-    }
-
-    public void setNama_sparepart(String nama_sparepart) {
-        this.nama_sparepart = nama_sparepart;
-    }
-
-    public Integer getId_sparepartCabang() {
-        return id_sparepartCabang;
-    }
-
-    public void setId_sparepartCabang(Integer id_sparepartCabang) {
-        this.id_sparepartCabang = id_sparepartCabang;
-    }
-
     public Integer getId_cabang_fk() {
         return id_cabang_fk;
     }
@@ -64,6 +40,14 @@ public class Model_SparepartCabang {
 
     public void setStokSisa_sparepart(Integer stokSisa_sparepart) {
         this.stokSisa_sparepart = stokSisa_sparepart;
+    }
+
+    public Integer getId_sparepartCabang() {
+        return id_sparepartCabang;
+    }
+
+    public void setId_sparepartCabang(Integer id_sparepartCabang) {
+        this.id_sparepartCabang = id_sparepartCabang;
     }
 
     public Double getHargaBeli_sparepart() {
@@ -96,5 +80,21 @@ public class Model_SparepartCabang {
 
     public void setLetak_sparepart(String letak_sparepart) {
         this.letak_sparepart = letak_sparepart;
+    }
+
+    public String getNama_sparepart() {
+        return nama_sparepart;
+    }
+
+    public void setNama_sparepart(String nama_sparepart) {
+        this.nama_sparepart = nama_sparepart;
+    }
+
+    public String getNama_cabang() {
+        return nama_cabang;
+    }
+
+    public void setNama_cabang(String nama_cabang) {
+        this.nama_cabang = nama_cabang;
     }
 }
