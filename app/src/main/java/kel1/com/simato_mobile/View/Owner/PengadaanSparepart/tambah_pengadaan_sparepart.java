@@ -2,6 +2,8 @@ package kel1.com.simato_mobile.View.Owner.PengadaanSparepart;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -37,8 +39,11 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
     List<Model_Supplier> spinnerSupplierArray =  new ArrayList<>();
     List<Model_Sparepart> spinnerSparepartArray = new ArrayList<>();
     List<String> spinner_namaCabang = new ArrayList<>();
+    List<String> spinner_IDCabang = new ArrayList<>();
     List<String> spinner_namaSparepart = new ArrayList<>();
     List<String> spinner_namaSupplier = new ArrayList<>();
+    Integer selectedIDCabang;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +51,28 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
         spinner_supplier = findViewById(R.id.spinner_supplier);
         spinner_sparepart = findViewById(R.id.spinner_sparepart);
         spinner_cabang = findViewById(R.id.spinner_cabang);
+        loadSpinnerNamaCabang();
+        spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedIDCabang = Integer.parseInt(spinner_IDCabang.get(position)); //Mendapatkan id dari dropdown yang dipilih
+                loadSpinnerNamaSparepartCabang();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedIDCabang=1;
+                loadSpinnerNamaSparepartCabang();
+            }
+        });
+        loadSpinnerNamaSupplier();
+    }
+    void loadSpinnerNamaSupplier(){
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl(ApiClient_SparepartCabang.baseURL)
+                .baseUrl(ApiClient_Supplier.baseURL)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit=builder.build();
         //ngeload nama supplier dari database kedalam spinner
@@ -73,6 +94,48 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
                 Toast.makeText(tambah_pengadaan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    void loadSpinnerNamaCabang(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_Supplier.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
+        //ngeload nama cabang dari database kedalam spinner
+        ApiClient_Cabang apiClientCabang =retrofit.create(ApiClient_Cabang.class);
+        Call<LD_Cabang> callTipeCabang = apiClientCabang.show();
+        callTipeCabang.enqueue(new Callback<LD_Cabang>() {
+            @Override
+            public void onResponse(Call<LD_Cabang> callTipeCabang, Response<LD_Cabang> response) {
+
+                spinnerCabangArray=response.body().getData();
+                for(int i=0; i<spinnerCabangArray.size();i++){
+
+                    spinner_namaCabang.add(spinnerCabangArray.get(i).getNama_cabang());
+                }
+                ArrayAdapter<String> adapterNamaCabang = new ArrayAdapter<>(tambah_pengadaan_sparepart.this, R.layout.spinner_cabang_layout,R.id.txtNamaCabang , spinner_namaCabang);
+                spinner_cabang.setAdapter(adapterNamaCabang);
+            }
+
+            @Override
+            public void onFailure(Call<LD_Cabang> call, Throwable t) {
+                Toast.makeText(tambah_pengadaan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    void loadSpinnerNamaSparepartCabang(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_Supplier.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
         //ngeload nama sparepart dari database kedalam spinner
         ApiClient_Sparepart apiclientSparepart =retrofit.create(ApiClient_Sparepart.class);
         Call<LD_Sparepart> callSparepart = apiclientSparepart.show();
@@ -92,25 +155,6 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
                 Toast.makeText(tambah_pengadaan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-        //ngeload nama cabang dari database kedalam spinner
-        ApiClient_Cabang apiClientCabang =retrofit.create(ApiClient_Cabang.class);
-        Call<LD_Cabang> callTipeCabang = apiClientCabang.show();
-        callTipeCabang.enqueue(new Callback<LD_Cabang>() {
-            @Override
-            public void onResponse(Call<LD_Cabang> callTipeCabang, Response<LD_Cabang> response) {
-
-                spinnerCabangArray=response.body().getData();
-                for(int i=0; i<spinnerCabangArray.size();i++){
-                    spinner_namaCabang.add(spinnerCabangArray.get(i).getNama_cabang());
-                }
-                ArrayAdapter<String> adapterNamaCabang = new ArrayAdapter<>(tambah_pengadaan_sparepart.this, R.layout.spinner_cabang_layout,R.id.txtNamaCabang , spinner_namaCabang);
-                spinner_cabang.setAdapter(adapterNamaCabang);
-            }
-
-            @Override
-            public void onFailure(Call<LD_Cabang> call, Throwable t) {
-                Toast.makeText(tambah_pengadaan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
+
 }

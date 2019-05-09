@@ -75,7 +75,6 @@ public class Adapter_Motor extends RecyclerView.Adapter<Adapter_Motor.MyViewHold
             mRowContainer = itemView.findViewById(R.id.row_container);
             mListener = listener;
             mRowContainer.setOnClickListener(this);
-
         }
 
         @Override

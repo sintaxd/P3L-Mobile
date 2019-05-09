@@ -6,8 +6,7 @@ import retrofit2.http.GET;
 
 public interface ApiClient_SparepartBengkel {
 
-
-    String baseURL = "http://10.53.9.232:8000";
+    String baseURL = "http://192.168.0.183:8000";
     //String baseURL = "http://simato.jasonfw.com/";
 
 

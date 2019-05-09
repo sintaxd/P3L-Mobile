@@ -50,8 +50,8 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
     List<String> spinner_IDCabang = new ArrayList<>();
     List<String> spinner_IDSparepartCabang = new ArrayList<>();
     List<String> spinner_namaKonsumen = new ArrayList<>();
-    String selectedIDCabang,selectedIDSparepartCabang;
-    Integer tempID;
+    String selectedIDSparepartCabang;
+    Integer tempID,selectedIDCabang;
     TextView setTanggal;
 
     @Override
@@ -72,57 +72,15 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                selectedIDCabang = spinner_IDCabang.get(position); //Mendapatkan id dari dropdown yang dipilih
-                Log.d("ID Cabang : ", selectedIDCabang);
-                tempID = Integer.valueOf(selectedIDCabang);
-
-                Gson gson = new GsonBuilder()
-                        .setLenient()
-                        .create();
-                Retrofit.Builder builder = new Retrofit
-                        .Builder()
-                        .baseUrl(ApiClient_SparepartCabang.baseURL)
-                        .addConverterFactory(GsonConverterFactory.create());
-                Retrofit retrofit = builder.build();
-                //ngeload nama sparepart cabang dari database kedalam spinner
-                ApiClient_SparepartCabang apiClientSparepartCabang = retrofit.create(ApiClient_SparepartCabang.class);
-                //Log.d("loadSprepartCabang: ",selectedIDCabang);
-                Call<LD_SparepartCabang> callSparepartCabang = apiClientSparepartCabang.showByCabang(Integer.parseInt(selectedIDCabang));
-
-                callSparepartCabang.enqueue(new Callback<LD_SparepartCabang>() {
-                    @Override
-                    public void onResponse(Call<LD_SparepartCabang> callSparepartCabang, Response<LD_SparepartCabang> response) {
-
-                        spinnerNamaSparepartCabangArray = response.body().getData();
-                        for (int i = 0; i < spinnerNamaSparepartCabangArray.size(); i++) {
-                            spinner_namaSparepartCabang.add(spinnerNamaSparepartCabangArray.get(i).getNama_sparepart());
-                            spinner_IDSparepartCabang.add(spinnerNamaSparepartCabangArray.get(i).getId_sparepartCabang().toString());
-                        }
-                        ArrayAdapter<String> adapterNamaSparepartCabang = new ArrayAdapter<>(tambah_transaksi_penjualan_sparepart.this, R.layout.spinner_sparepart_layout, R.id.txtNamaSparepart, spinner_namaSparepartCabang);
-                        spinner_sparepartcabang.setAdapter(adapterNamaSparepartCabang);
-                    }
-                    @Override
-                    public void onFailure(Call<LD_SparepartCabang> call, Throwable t) {
-                        Toast.makeText(tambah_transaksi_penjualan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-                spinner_sparepartcabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown tipe sparepart saat dipilih
-                    @Override
-                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                        selectedIDSparepartCabang = spinner_IDSparepartCabang.get(position); //Mendapatkan id dari dropdown yang dipilih
-                        Log.d("ID SparepartCabang : ", selectedIDSparepartCabang);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parentView) {
-                    }
-                });
+                selectedIDCabang = Integer.parseInt(spinner_IDCabang.get(position)); //Mendapatkan id dari dropdown yang dipilih
+                loadSpinnerNamaSparepart();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
+                selectedIDCabang=1;
+                loadSpinnerNamaSparepart();
             }
         });
-
     }
     void loadSpinnerCabang()
     {
@@ -131,7 +89,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
                 .create();
         Retrofit.Builder builder = new Retrofit
                 .Builder()
-                .baseUrl(ApiClient_SparepartCabang.baseURL)
+                .baseUrl(ApiClient_Cabang.baseURL)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 
@@ -154,6 +112,51 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
             @Override
             public void onFailure(Call<LD_Cabang> call, Throwable t) {
                 Toast.makeText(tambah_transaksi_penjualan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("onFailure: ",t.getLocalizedMessage());
+            }
+        });
+    }
+    void loadSpinnerNamaSparepart()
+    {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_SparepartCabang.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        //ngeload nama sparepart cabang dari database kedalam spinner
+        ApiClient_SparepartCabang apiClientSparepartCabang = retrofit.create(ApiClient_SparepartCabang.class);
+        Call<LD_SparepartCabang> callSparepartCabang = apiClientSparepartCabang.showByCabang(selectedIDCabang);
+
+        callSparepartCabang.enqueue(new Callback<LD_SparepartCabang>() {
+            @Override
+            public void onResponse(Call<LD_SparepartCabang> callSparepartCabang, Response<LD_SparepartCabang> response) {
+                spinner_namaSparepartCabang.clear();
+                spinnerNamaSparepartCabangArray =response.body().getData();
+                for (int i = 0; i < spinnerNamaSparepartCabangArray.size(); i++) {
+                    spinner_namaSparepartCabang.add(spinnerNamaSparepartCabangArray.get(i).getNama_sparepart());
+                    spinner_IDSparepartCabang.add(spinnerNamaSparepartCabangArray.get(i).getId_sparepartCabang().toString());
+                }
+                ArrayAdapter<String> adapterNamaSparepartCabang = new ArrayAdapter<>(tambah_transaksi_penjualan_sparepart.this, R.layout.spinner_sparepart_layout, R.id.txtNamaSparepart, spinner_namaSparepartCabang);
+                spinner_sparepartcabang.setAdapter(adapterNamaSparepartCabang);
+                Toast.makeText(tambah_transaksi_penjualan_sparepart.this, response.message(), Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LD_SparepartCabang> call, Throwable t) {
+                Toast.makeText(tambah_transaksi_penjualan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        spinner_sparepartcabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown tipe sparepart saat dipilih
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedIDSparepartCabang = spinner_IDSparepartCabang.get(position); //Mendapatkan id dari dropdown yang dipilih
+                Log.d("ID SparepartCabang : ", selectedIDSparepartCabang);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
             }
         });
     }

@@ -74,7 +74,8 @@ public class tampil_data_motor_konsumen extends AppCompatActivity {
                 startActivity(i);
             }
         });
-    }@Override
+    }
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu_motor_konsumen, menu);

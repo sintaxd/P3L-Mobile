@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginBottom="20dp"
+android:background="@color/colorCS"
+android:orientation="vertical"
+android:id="@+id/row_container">
+tools:context=".recycle_adapter_transaksi_penjualan">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nama_cabang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nama Cabang" />
+    <TextView
+        android:id="@+id/kode_transaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kode Transaksi" />
+
+    <TextView
+        android:id="@+id/tanggal_transaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tanggal Transaksi" />
+    <TextView
+        android:id="@+id/diskon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diskon" />
+    <TextView
+        android:id="@+id/total_transaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Transaksi" />
+    <TextView
+        android:id="@+id/status_transaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status Transaksi"/>
+
+</LinearLayout>
+
+
+</RelativeLayout>

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import kel1.com.simato_mobile.MainActivity;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.CustomerService.TransaksiPenjualan.tampil_transaksi_penjualan;
 
 public class cs_main_menu extends AppCompatActivity {
 
@@ -26,8 +27,8 @@ public class cs_main_menu extends AppCompatActivity {
         startActivity(i);
     }
     public void history_transaksi_penjualan(View view) {
-//        Intent i= new Intent(cs_main_menu.this, cs_pengelolaan_transaksi_penjualan.class);
-//        startActivity(i);
+        Intent i= new Intent(cs_main_menu.this, tampil_transaksi_penjualan.class);
+        startActivity(i);
     }
     public void logout(View view) {
         Intent i = new Intent(cs_main_menu.this, MainActivity.class);
