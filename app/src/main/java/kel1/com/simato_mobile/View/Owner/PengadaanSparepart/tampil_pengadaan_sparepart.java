@@ -39,6 +39,7 @@ import kel1.com.simato_mobile.Model.Model_Sparepart;
 import kel1.com.simato_mobile.Model.Model_SparepartCabang;
 import kel1.com.simato_mobile.Model.Model_Supplier;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.Owner.Sparepart.tampil_data_sparepart;
 import kel1.com.simato_mobile.View.Owner.SparepartCabang.tambah_data_sparepart_cabang;
 import kel1.com.simato_mobile.View.Owner.SparepartCabang.tampil_data_sparepart_cabang;
 import kel1.com.simato_mobile.View.Owner.Supplier.edit_data_supplier;
@@ -85,5 +86,51 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_sparepart, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final SearchView searchView = (SearchView) menu.findItem(R.id.searchMenu).getActionView();
+        MenuItem searchMenuItem = menu.findItem(R.id.searchMenu);
+
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName())
+        );
+        searchView.setQueryHint("Search Pengadaan Sprepart");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String query) {
+
+                //adapterPengadaanSparepart.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+               // adapterPengadaanSparepart.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        searchMenuItem.getIcon().setVisible(false, false);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_settings) {
+            Intent i = new Intent(tampil_pengadaan_sparepart.this, owner_main_menu.class);
+            startActivity(i);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

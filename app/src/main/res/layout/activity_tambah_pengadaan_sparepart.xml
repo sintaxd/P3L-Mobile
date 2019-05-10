@@ -52,12 +52,12 @@
         android:textColor="@color/colorAccent" />
 
     <Spinner
-        android:id="@+id/spinner_sparepart"
+        android:id="@+id/spinner_sparepartcabang"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:entries="@array/namasparepart_sparepartCabang"
-        android:spinnerMode="dropdown"
-        android:layout_marginBottom="20dp"/>
+        android:spinnerMode="dropdown" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

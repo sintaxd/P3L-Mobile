@@ -73,12 +73,12 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedIDCabang = Integer.parseInt(spinner_IDCabang.get(position)); //Mendapatkan id dari dropdown yang dipilih
-                loadSpinnerNamaSparepart();
+                loadSpinnerNamaSparepartCabang();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 selectedIDCabang=1;
-                loadSpinnerNamaSparepart();
+                loadSpinnerNamaSparepartCabang();
             }
         });
     }
@@ -116,7 +116,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
             }
         });
     }
-    void loadSpinnerNamaSparepart()
+    void loadSpinnerNamaSparepartCabang()
     {
         Gson gson = new GsonBuilder()
                 .setLenient()
