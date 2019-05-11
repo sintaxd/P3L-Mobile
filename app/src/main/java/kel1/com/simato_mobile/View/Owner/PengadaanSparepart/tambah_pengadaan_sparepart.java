@@ -7,13 +7,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import kel1.com.simato_mobile.API.ApiClient_Cabang;
 import kel1.com.simato_mobile.API.ApiClient_Sparepart;
@@ -50,6 +54,7 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
     List<String> spinner_namaSupplier = new ArrayList<>();
     Integer selectedIDCabang;
     String selectedIDSparepartCabang;
+    TextView setTanggal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +63,11 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
         spinner_supplier = findViewById(R.id.spinner_supplier);
         spinner_sparepartcabang = findViewById(R.id.spinner_sparepartcabang);
         spinner_cabang = findViewById(R.id.spinner_cabang);
+        setTanggal = findViewById(R.id.textView_tanggalFix);
+        //create a date string.
+        String date_now = new SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault()).format(new Date());
+        //set it as current date.
+        setTanggal.setText(date_now);
         loadSpinnerNamaCabang();
         spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
             @Override

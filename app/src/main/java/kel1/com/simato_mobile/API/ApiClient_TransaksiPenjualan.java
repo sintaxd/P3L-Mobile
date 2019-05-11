@@ -10,7 +10,8 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiClient_TransaksiPenjualan {
-    String baseURL = "http://10.53.11.236:8000";
+
+    String baseURL = "http://192.168.94.52:8000";
     //String baseURL = "http://simato.jasonfw.com/";
 
 

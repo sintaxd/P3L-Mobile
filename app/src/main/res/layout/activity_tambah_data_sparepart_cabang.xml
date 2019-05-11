@@ -165,7 +165,13 @@
                 android:inputType="number" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_detil_pengadaan"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="5dp"
+        android:scrollbars="vertical">
+    </android.support.v7.widget.RecyclerView>
 
     <Button
         android:id="@+id/button_Simpan"
@@ -182,7 +188,6 @@
             android:layout_height="wrap_content"
             android:text="BATAL"
             android:textSize="12sp"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_marginBottom="10dp" />
 
     </LinearLayout>

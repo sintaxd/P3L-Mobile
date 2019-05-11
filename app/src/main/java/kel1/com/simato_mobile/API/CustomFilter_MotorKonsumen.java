@@ -4,9 +4,7 @@ import android.widget.Filter;
 
 import java.util.ArrayList;
 
-import kel1.com.simato_mobile.Adapter.Adapter_Motor;
 import kel1.com.simato_mobile.Adapter.Adapter_MotorKonsumen;
-import kel1.com.simato_mobile.Model.Model_Motor;
 import kel1.com.simato_mobile.Model.Model_MotorKonsumen;
 
 public class CustomFilter_MotorKonsumen extends Filter{
