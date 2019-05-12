@@ -57,7 +57,6 @@ public class Adapter_Motor extends RecyclerView.Adapter<Adapter_Motor.MyViewHold
 
     @Override
     public Filter getFilter() {
-
         if (filter_motor==null) {
             filter_motor=new CustomFilter_Motor((ArrayList<Model_Motor>) motFilter, this);
         }

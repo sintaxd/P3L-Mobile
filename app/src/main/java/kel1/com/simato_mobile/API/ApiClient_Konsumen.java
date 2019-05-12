@@ -16,6 +16,7 @@ public interface ApiClient_Konsumen {
 
     String baseURL = "http://192.168.94.52:8000";
     //String baseURL = "http://simato.jasonfw.com/";
+
     // --------------------- C R E A T E --------------------- //
 
     @POST("api/konsumen")

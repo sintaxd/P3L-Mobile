@@ -28,7 +28,7 @@ public class CustomFilter_PengadaanSparepart extends Filter {
             //CHANGE TO UPPER
             constraint=constraint.toString().toUpperCase();
             //STORE OUR FILTERED PLAYERS
-            ArrayList<Model_PengadaanSparepart> filteredMtrKns=new ArrayList<>();
+            ArrayList<Model_PengadaanSparepart> filteredPengadaanSpp =new ArrayList<>();
 
             for (int i=0;i<filterList.size();i++)
             {
@@ -36,12 +36,12 @@ public class CustomFilter_PengadaanSparepart extends Filter {
                 if(filterList.get(i).getNama_supplier().toUpperCase().contains(constraint))
                 {
                     //ADD PLAYER TO FILTERED PLAYERS
-                    filteredMtrKns.add(filterList.get(i));
+                    filteredPengadaanSpp.add(filterList.get(i));
                 }
             }
 
-            results.count=filteredMtrKns.size();
-            results.values=filteredMtrKns;
+            results.count=filteredPengadaanSpp.size();
+            results.values=filteredPengadaanSpp;
 
         }else
         {

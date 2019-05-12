@@ -13,7 +13,7 @@ android:id="@+id/row_container">
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="300dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -30,6 +30,12 @@ android:id="@+id/row_container">
                 android:text="Satuan Pengadaan" />
 
             <TextView
+                android:id="@+id/harga_beli"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Harga Beli" />
+
+            <TextView
                 android:id="@+id/sub_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,8 +43,10 @@ android:id="@+id/row_container">
         </LinearLayout>
 
         <Button
-            android:layout_width="100dp"
-            android:layout_height="48dp"
+            android:id="@+id/btn_Delete"
+            android:layout_width="70dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
             android:text="HAPUS" />
     </LinearLayout>
 

@@ -29,7 +29,7 @@ public class Adapter_PengadaanSparepart extends RecyclerView.Adapter<Adapter_Pen
     public List<Model_PengadaanSparepart> pengadaansparepartFilter;
     public List<Model_PengadaanSparepart> pengadaansparepart = new ArrayList<>();
     private Context context;
-    private Adapter_PengadaanSparepart.RecyclerViewClickListener mListener;
+    private RecyclerViewClickListener mListener;
     CustomFilter_PengadaanSparepart filter_pengadaan_sparepart;
 
     public Adapter_PengadaanSparepart(List<Model_PengadaanSparepart> pengadaansparepart, Context context, Adapter_PengadaanSparepart.RecyclerViewClickListener mListener) {
@@ -53,13 +53,21 @@ public class Adapter_PengadaanSparepart extends RecyclerView.Adapter<Adapter_Pen
         Log.d("Status Pengadaan : ",pengadaan.getStatus_pengadaan());
         Log.d("Total Harga : ",pengadaan.getTotalHarga_pengadaan().toString());
         Log.d("Tanggal Pengadaan : ",pengadaan.getTgl_pengadaan().toString());
-        Log.d("Tgl Barang Datang : ",pengadaan.getTgl_barangDatang().toString());
-        myViewHolder.nama_supplier.setText              ("  Nama Supplier           : "+ pengadaan.getNama_supplier());
-        myViewHolder.status_cetak_pengadaan.setText     ("  Status Cetak Pengadaan  : "+ pengadaan.getStatusCetak_pengadaan());
-        myViewHolder.status_pengadaan.setText           ("  Status Pengadaan        : "+ pengadaan.getStatus_pengadaan());
-        myViewHolder.total_harga_pengadaan.setText      ("  Total Harga Pengadaan   : "+ pengadaan.getTotalHarga_pengadaan().toString());
-        myViewHolder.tanggal_pengadaan.setText          ("  Tanggal Pengadaan       : "+ pengadaan.getTgl_pengadaan().toString());
-        myViewHolder.tanggal_barang_datang.setText      ("  Tanggal Barang Datang   : "+ pengadaan.getTgl_barangDatang().toString());
+//        Log.d("Tgl Barang Datang : ",pengadaan.getTgl_barangDatang().toString());
+        myViewHolder.nama_supplier.setText              ("  Nama Supplier               : "+ pengadaan.getNama_supplier());
+        myViewHolder.status_cetak_pengadaan.setText     ("  Status Cetak Pengadaan      : "+ pengadaan.getStatusCetak_pengadaan());
+        myViewHolder.status_pengadaan.setText           ("  Status Pengadaan            : "+ pengadaan.getStatus_pengadaan());
+        myViewHolder.total_harga_pengadaan.setText      ("  Total Harga Pengadaan       : "+ pengadaan.getTotalHarga_pengadaan().toString());
+        myViewHolder.tanggal_pengadaan.setText          ("  Tanggal Pengadaan           : "+ pengadaan.getTgl_pengadaan().toString());
+        if(pengadaan.getTgl_barangDatang()==null)
+        {
+            myViewHolder.tanggal_barang_datang.setText  ("  Tanggal Barang Datang       : Belum Datang");
+        }
+        else
+        {
+            myViewHolder.tanggal_barang_datang.setText   ("  Tanggal Barang Datang       : "+ pengadaan.getTgl_barangDatang().toString());
+        }
+
     }
 
     @Override

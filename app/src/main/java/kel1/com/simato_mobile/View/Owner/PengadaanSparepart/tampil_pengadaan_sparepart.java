@@ -24,12 +24,14 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import kel1.com.simato_mobile.API.ApiClient_PengadaanSparepart;
 import kel1.com.simato_mobile.API.ApiClient_Sparepart;
 import kel1.com.simato_mobile.API.ApiClient_SparepartCabang;
 import kel1.com.simato_mobile.API.ApiClient_Supplier;
 import kel1.com.simato_mobile.Adapter.Adapter_PengadaanSparepart;
 import kel1.com.simato_mobile.Adapter.Adapter_SparepartCabang;
 import kel1.com.simato_mobile.Adapter.Adapter_Supplier;
+import kel1.com.simato_mobile.ListData.LD_PengadaanSparepart;
 import kel1.com.simato_mobile.ListData.LD_Sparepart;
 import kel1.com.simato_mobile.ListData.LD_SparepartCabang;
 import kel1.com.simato_mobile.ListData.LD_Supplier;
@@ -59,11 +61,8 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public Adapter_PengadaanSparepart adapterPengadaanSparepart;
     private List<Model_PengadaanSparepart> mListPengadaanSparepart = new ArrayList<>();
-    //Adapter_PengadaanSparepart.RecyclerViewClickListener listener;
+    Adapter_PengadaanSparepart.RecyclerViewClickListener listener;
     FloatingActionButton btn_tambahPengadaanSparepart;
-    public Adapter_SparepartCabang adapterSparepartCabang;
-    private List<Model_SparepartCabang> mListSparepartCabang = new ArrayList<>();
-    Adapter_SparepartCabang.RecyclerViewClickListener listener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +75,7 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapterSparepartCabang);
+        recyclerView.setAdapter(adapterPengadaanSparepart);
 
         btn_tambahPengadaanSparepart = (FloatingActionButton) findViewById(R.id.btn_tambahPengadaanSparepart);
         btn_tambahPengadaanSparepart.setOnClickListener(new View.OnClickListener() {
@@ -104,14 +103,14 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(final String query) {
 
-                //adapterPengadaanSparepart.getFilter().filter(query);
+                adapterPengadaanSparepart.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
 
-               // adapterPengadaanSparepart.getFilter().filter(newText);
+               adapterPengadaanSparepart.getFilter().filter(newText);
                 return false;
             }
         });
@@ -132,5 +131,42 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void setRecycleViewPengadaanSparepart() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_PengadaanSparepart.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
+        ApiClient_PengadaanSparepart apiClientPengadaanSparepart =retrofit.create(ApiClient_PengadaanSparepart.class);
+
+        //sampe sini
+
+        Call<LD_PengadaanSparepart> pengadaansparepartModelCall = apiClientPengadaanSparepart.show();
+
+        pengadaansparepartModelCall.enqueue(new Callback<LD_PengadaanSparepart>() {
+            @Override
+            public void onResponse (Call<LD_PengadaanSparepart> call, Response<LD_PengadaanSparepart> response) {
+                mListPengadaanSparepart = response.body().getData();
+                Log.i(tampil_pengadaan_sparepart.class.getSimpleName(), response.body().toString());
+                adapterPengadaanSparepart = new Adapter_PengadaanSparepart(mListPengadaanSparepart,tampil_pengadaan_sparepart.this,listener);
+                recyclerView.setAdapter(adapterPengadaanSparepart);
+                adapterPengadaanSparepart.notifyDataSetChanged();
+                Toast.makeText(tampil_pengadaan_sparepart.this,"Welcome", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LD_PengadaanSparepart> call, Throwable t) {
+                Toast.makeText(tampil_pengadaan_sparepart.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setRecycleViewPengadaanSparepart();
     }
 }
