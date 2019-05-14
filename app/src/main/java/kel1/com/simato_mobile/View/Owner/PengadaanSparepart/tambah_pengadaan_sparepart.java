@@ -23,6 +23,9 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,7 +74,7 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
     List<String> spinner_namaSupplier = new ArrayList<>();
     private List<Model_DetilPengadaanSparepart> detilPengadaanSparepartList = new ArrayList<Model_DetilPengadaanSparepart>();
 
-    Integer selectedIDCabang;
+    Integer selectedIDCabang,idPengadaan;
     String selectedIDSparepartCabang, selectedHargaSparepartCabang, selectedNamaSparepartCabang, selectedIDSupplier;
     TextView setTanggal, totalHarga_fix;
     ImageView addDetilPengadaan;
@@ -116,7 +119,6 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onClickRegister();
-                startIntent();
             }
         });
         loadSpinnerNamaSupplier();
@@ -285,10 +287,11 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
         startActivity(intent);
     }
     private void onClickRegister() {
-//        if ()
-//        {
-//            Toast.makeText(this, "Semua field harus diisi!", Toast.LENGTH_SHORT).show();
-//        } else {
+        if (detilPengadaanSparepartList.isEmpty())
+        {
+            Toast.makeText(this, "Tambahkan detil pengadaan!", Toast.LENGTH_SHORT).show();
+        }
+        else {
             Gson gson = new GsonBuilder()
                     .setLenient()
                     .create();
@@ -306,18 +309,28 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Model_PengadaanSparepart> call, Response<Model_PengadaanSparepart> response) {
                     if (response.code() == 201) {
+
+//                        try {
+////                            idPengadaan = response.body().getId_pengadaan();
+//                            JSONObject jsonresponse = new JSONObject(response.body().toString());
+//                            String idPengadaan = jsonresponse.getJSONObject("data").getString("id_pengadaan");
+//                            Log.d( "ID Pengadaan: ",idPengadaan);
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                         Toast.makeText(tambah_pengadaan_sparepart.this, "Tambah Pengadaan Sparepart berhasil!", Toast.LENGTH_SHORT).show();
-                        startIntent();
                     } else {
                         Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
                     }
                     Log.d("on respon : ",String.valueOf(response.code()));
+                   // startIntent();
                 }
                 @Override
                 public void onFailure(Call<Model_PengadaanSparepart> call, Throwable t) {
                     Toast.makeText(tambah_pengadaan_sparepart.this,  t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-   //     }
+        }
     }
 }

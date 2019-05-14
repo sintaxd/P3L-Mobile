@@ -10,6 +10,26 @@ tools:context=".tampil_sparepart_stok_kurang">
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/textView_cabang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pilih Cabang"
+            android:textColor="@color/colorAccent" />
+
+        <Spinner
+            android:id="@+id/spinner_cabang"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
 
 
     <RelativeLayout
@@ -20,7 +40,7 @@ tools:context=".tampil_sparepart_stok_kurang">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_tampil_sparepart_stok_kurang"
             android:layout_width="match_parent"
-            android:layout_height="191dp"
+            android:layout_height="400dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="20dp"
             android:scrollbars="vertical" />
@@ -46,7 +66,7 @@ tools:context=".tampil_sparepart_stok_kurang">
             >
 
             <LinearLayout
-                android:id="@+id/layout_logout"
+                android:id="@+id/layout_kelola_pengadaan"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

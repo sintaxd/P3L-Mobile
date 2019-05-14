@@ -39,6 +39,11 @@ public class Adapter_SparepartCabang  extends RecyclerView.Adapter<Adapter_Spare
         this.context = context;
         this.mListener = mListener;
     }
+    public Adapter_SparepartCabang(List<Model_SparepartCabang> sparepartcabang, Context context) {
+
+        this.sparepartcabang = sparepartcabang;
+        this.context = context;
+    }
 
     @NonNull
     @Override
@@ -52,7 +57,7 @@ public class Adapter_SparepartCabang  extends RecyclerView.Adapter<Adapter_Spare
         final Model_SparepartCabang sparebang = sparepartcabang.get(i);
 
         myViewHolder.nama_cabang.setText        ("  Nama Cabang          : "+ sparebang.getNama_cabang());
-        myViewHolder.nama_sparepart.setText     ("  Nama Sparepart        : "+ sparebang.getNama_sparepart());
+        myViewHolder.nama_sparepart.setText     ("  Nama Sparepart       : "+ sparebang.getNama_sparepart());
         myViewHolder.harga_beli.setText         ("  Harga Beli                  : "+ String.valueOf(sparebang.getHargaBeli_sparepart()));
         myViewHolder.harga_jual.setText         ("  Harga Jual                 : "+ String.valueOf(sparebang.getHargaJual_sparepart()));
         myViewHolder.letak_penempatan.setText   ("  Letak Penempatan  : "+ sparebang.getLetak_sparepart());
@@ -94,7 +99,6 @@ public class Adapter_SparepartCabang  extends RecyclerView.Adapter<Adapter_Spare
             mRowContainer = itemView.findViewById(R.id.row_container);
             mListener = listener;
             mRowContainer.setOnClickListener(this);
-
         }
         @Override
         public void onClick(View view) {

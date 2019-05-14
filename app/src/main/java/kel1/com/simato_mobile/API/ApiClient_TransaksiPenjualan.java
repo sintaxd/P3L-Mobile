@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface ApiClient_TransaksiPenjualan {
 
-    String baseURL = "http://192.168.94.52:8000";
+    String baseURL = "http://192.168.94.52:8000/";
     //String baseURL = "http://simato.jasonfw.com/";
 
     // ----------------------- R E A D ----------------------- //
@@ -28,7 +28,10 @@ public interface ApiClient_TransaksiPenjualan {
     Call<ResponseBody>update_sinta(
             @Field("diskon")Double diskon,
             @Field("total_transaksi")Double total_transaksi,
-            @Field("status_transaksi")String status_transaksi,
+            @Path("id") Integer id);
+
+    @PUT(" api/transaksiPenjualan/update_status_transaksi_sinta/{id}")
+    Call<ResponseBody>update_status_transaksi_sinta(
             @Path("id") Integer id);
 
     // --------------------- U P D A T E --------------------- //

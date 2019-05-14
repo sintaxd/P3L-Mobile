@@ -26,8 +26,8 @@ import retrofit2.http.Path;
 public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
 
     private Button btnBatal, btnSimpan;
-    private TextView namacabang, kodetransaksi, totaltransaksi, tanggaltransaksi;
-    private TextInputEditText diskon,statustransaksi;
+    private TextView namacabang, kodetransaksi, totaltransaksi, tanggaltransaksi, statustransaksi;
+    private TextInputEditText diskon;
     private Integer idTransaksi;
     private Intent i;
     private Double tempdiskon,temptotal,totalfix;
@@ -39,7 +39,7 @@ public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
         namacabang= findViewById(R.id.textView_namacabangfix);
         kodetransaksi= findViewById(R.id.textView_kodetransaksifix);
         totaltransaksi= findViewById(R.id.textView_totaltransaksi);
-        statustransaksi= findViewById(R.id.text_input_statustransaksi);
+        statustransaksi= findViewById(R.id.textView_statustransaksi);
         tanggaltransaksi = findViewById(R.id.textView_tanggaltransaksifix);
         diskon = findViewById(R.id.text_input_diskon);
         btnSimpan = findViewById(R.id.button_Simpan);
@@ -93,9 +93,7 @@ public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
             tempdiskon=Double.parseDouble(diskon.getText().toString());
             ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan =retrofit.create(ApiClient_TransaksiPenjualan.class);
             Call<ResponseBody> transaksipenjualanDAOCall= apiClientTransaksiPenjualan.update_sinta(tempdiskon,
-                    totalfix,
-                    statustransaksi.getText().toString(),
-                    idTransaksi);
+                    totalfix,idTransaksi);
             transaksipenjualanDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

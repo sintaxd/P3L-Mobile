@@ -3,12 +3,13 @@ package kel1.com.simato_mobile.Model;
 import java.util.Date;
 
 public class Model_PengadaanSparepart {
-    Integer id_supplier_fk,id_sparepartCabang_fk,satuan_pengadaan,totalBarang_datang;
+    Integer id_pengadaan,id_supplier_fk,id_sparepartCabang_fk,satuan_pengadaan,totalBarang_datang;
     Date tgl_pengadaan, tgl_barangDatang;
     String status_pengadaan, statusCetak_pengadaan, nama_supplier;
     Double totalHarga_pengadaan;
 
-    public Model_PengadaanSparepart(Integer id_supplier_fk, Integer id_sparepartCabang_fk, Integer satuan_pengadaan, Integer totalBarang_datang, Date tgl_pengadaan, Date tgl_barangDatang, String status_pengadaan, String statusCetak_pengadaan, String nama_supplier, Double totalHarga_pengadaan) {
+    public Model_PengadaanSparepart(Integer id_pengadaan, Integer id_supplier_fk, Integer id_sparepartCabang_fk, Integer satuan_pengadaan, Integer totalBarang_datang, Date tgl_pengadaan, Date tgl_barangDatang, String status_pengadaan, String statusCetak_pengadaan, String nama_supplier, Double totalHarga_pengadaan) {
+        this.id_pengadaan = id_pengadaan;
         this.id_supplier_fk = id_supplier_fk;
         this.id_sparepartCabang_fk = id_sparepartCabang_fk;
         this.satuan_pengadaan = satuan_pengadaan;
@@ -19,6 +20,14 @@ public class Model_PengadaanSparepart {
         this.statusCetak_pengadaan = statusCetak_pengadaan;
         this.nama_supplier = nama_supplier;
         this.totalHarga_pengadaan = totalHarga_pengadaan;
+    }
+
+    public Integer getId_pengadaan() {
+        return id_pengadaan;
+    }
+
+    public void setId_pengadaan(Integer id_pengadaan) {
+        this.id_pengadaan = id_pengadaan;
     }
 
     public Integer getId_supplier_fk() {
