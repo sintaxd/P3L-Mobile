@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-import kel1.com.simato_mobile.MainActivity;
 import kel1.com.simato_mobile.R;
-import kel1.com.simato_mobile.View.Owner.owner_main_menu;
-import kel1.com.simato_mobile.tampil_sparepart_stok_kurang;
 
 public class konsumen_main_menu extends AppCompatActivity {
 

@@ -12,6 +12,10 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -20,15 +24,19 @@ import com.google.gson.GsonBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import kel1.com.simato_mobile.API.ApiClient_Cabang;
 import kel1.com.simato_mobile.API.ApiClient_SparepartBengkel;
 import kel1.com.simato_mobile.API.ApiClient_SparepartCabang;
 import kel1.com.simato_mobile.Adapter.Adapter_SparepartBengkel;
 import kel1.com.simato_mobile.Adapter.Adapter_SparepartCabang;
+import kel1.com.simato_mobile.ListData.LD_Cabang;
 import kel1.com.simato_mobile.ListData.LD_SparepartBengkel;
 import kel1.com.simato_mobile.ListData.LD_SparepartCabang;
+import kel1.com.simato_mobile.Model.Model_Cabang;
 import kel1.com.simato_mobile.Model.Model_SparepartBengkel;
 import kel1.com.simato_mobile.Model.Model_SparepartCabang;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tampil_sparepart_stok_kurang;
 import kel1.com.simato_mobile.View.Owner.SparepartCabang.tampil_data_sparepart_cabang;
 import kel1.com.simato_mobile.View.Owner.owner_main_menu;
 import retrofit2.Call;
@@ -43,6 +51,15 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     public Adapter_SparepartBengkel adapterSparepartBengkel;
     private List<Model_SparepartBengkel> mListSparepartBengkel = new ArrayList<>();
+    List<Model_Cabang> spinnerNamaCabangArray = new ArrayList<>();
+    private List<Model_SparepartCabang> mListSparepartCabang = new ArrayList<>();
+
+    List<String> spinner_IDCabang = new ArrayList<>();
+    List<String> spinner_namaCabang = new ArrayList<>();
+
+    Spinner spinner_cabang;
+    Integer selectedIDCabang;
+
     Adapter_SparepartBengkel.RecyclerViewClickListener listener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +73,55 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterSparepartBengkel);
+        spinner_cabang = findViewById(R.id.spinner_cabang);
+
+        loadSpinnerNamaCabang();
+        spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedIDCabang = Integer.parseInt(spinner_IDCabang.get(position)); //Mendapatkan id dari dropdown yang dipilih
+
+                setRecycleViewSparepart();
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedIDCabang=1;
+            }
+        });
+    }
+    void loadSpinnerNamaCabang(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_Cabang.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+
+        //ngeload nama cabang dari database kedalam spinner
+        ApiClient_Cabang apiclientCabang = retrofit.create(ApiClient_Cabang.class);
+        Call<LD_Cabang> callCabang = apiclientCabang.show();
+        callCabang.enqueue(new Callback<LD_Cabang>() {
+            @Override
+            public void onResponse(Call<LD_Cabang> callCabang, Response<LD_Cabang> response) {
+
+                spinnerNamaCabangArray = response.body().getData();
+                //  spinnerIDCabangArray = response.body().getData();
+                for (int i = 0; i < spinnerNamaCabangArray.size(); i++) {
+                    spinner_namaCabang.add(spinnerNamaCabangArray.get(i).getNama_cabang());
+                    spinner_IDCabang.add(spinnerNamaCabangArray.get(i).getId_cabang().toString());
+                }
+                ArrayAdapter<String> adapterNamaCabang = new ArrayAdapter<>(tampil_sparepart_bengkel.this, R.layout.spinner_cabang_layout, R.id.txtNamaCabang, spinner_namaCabang);
+                spinner_cabang.setAdapter(adapterNamaCabang);
+            }
+            @Override
+            public void onFailure(Call<LD_Cabang> call, Throwable t) {
+                Toast.makeText(tampil_sparepart_bengkel.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("onFailure: ",t.getLocalizedMessage());
+            }
+        });
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -114,7 +180,7 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
         Retrofit retrofit=builder.build();
         ApiClient_SparepartBengkel apiClientSparepartBengkel =retrofit.create(ApiClient_SparepartBengkel.class);
 
-        Call<LD_SparepartBengkel> sparepartBengkelModelCall = apiClientSparepartBengkel.show();
+        Call<LD_SparepartBengkel> sparepartBengkelModelCall = apiClientSparepartBengkel.showByCabang(selectedIDCabang);
 
         sparepartBengkelModelCall.enqueue(new Callback<LD_SparepartBengkel>() {
             @Override
@@ -133,10 +199,5 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
                 Toast.makeText(tampil_sparepart_bengkel.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setRecycleViewSparepart();
     }
 }

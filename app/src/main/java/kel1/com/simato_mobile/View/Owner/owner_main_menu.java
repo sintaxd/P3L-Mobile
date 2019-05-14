@@ -7,9 +7,7 @@ import android.view.View;
 
 import kel1.com.simato_mobile.MainActivity;
 import kel1.com.simato_mobile.R;
-import kel1.com.simato_mobile.View.CustomerService.cs_main_menu;
-import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tampil_pengadaan_sparepart;
-import kel1.com.simato_mobile.tampil_sparepart_stok_kurang;
+import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tampil_sparepart_stok_kurang;
 
 public class owner_main_menu extends AppCompatActivity {
 

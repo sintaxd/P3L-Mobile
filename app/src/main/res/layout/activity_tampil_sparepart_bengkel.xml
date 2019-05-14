@@ -1,17 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<LinearLayout
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 xmlns:android="http://schemas.android.com/apk/res/android"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
+    android:orientation="vertical"
 tools:context=".View.Konsumen.tampil_sparepart_bengkel">
 
-<RelativeLayout
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/textView_cabang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pilih Cabang"
+            android:textColor="@color/colorAccent" />
+
+        <Spinner
+            android:id="@+id/spinner_cabang"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view_tampil_sparepart_bengkel"
@@ -19,7 +39,5 @@ tools:context=".View.Konsumen.tampil_sparepart_bengkel">
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
         android:scrollbars="vertical" />
-
-</RelativeLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
+</LinearLayout>

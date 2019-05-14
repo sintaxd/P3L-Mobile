@@ -23,4 +23,10 @@
         <item> BAN </item>
         <item> KAYU </item>
     </string-array>
+    <string-array name="sort">
+        <item> By Stok Ascending </item>
+        <item> By Stok Descending </item>
+        <item> By Harga Ascending </item>
+        <item> By Harga Descending </item>
+    </string-array>
 </resources>

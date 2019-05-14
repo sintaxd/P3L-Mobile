@@ -1,4 +1,4 @@
-package kel1.com.simato_mobile;
+package kel1.com.simato_mobile.View.Owner.PengadaanSparepart;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +26,7 @@ import kel1.com.simato_mobile.ListData.LD_Cabang;
 import kel1.com.simato_mobile.ListData.LD_SparepartCabang;
 import kel1.com.simato_mobile.Model.Model_Cabang;
 import kel1.com.simato_mobile.Model.Model_SparepartCabang;
-import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tambah_pengadaan_sparepart;
-import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tampil_pengadaan_sparepart;
+import kel1.com.simato_mobile.R;
 import kel1.com.simato_mobile.View.Owner.SparepartCabang.tampil_data_sparepart_cabang;
 import retrofit2.Call;
 import retrofit2.Callback;
