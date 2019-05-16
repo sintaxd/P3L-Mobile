@@ -22,4 +22,8 @@ public class konsumen_main_menu extends AppCompatActivity {
         Intent i = new Intent(konsumen_main_menu.this, tampil_sparepart_bengkel.class);
         startActivity(i);
     }
+    public void tampil_riwayat_transaksi_konsumen(View view) {
+        Intent i = new Intent(konsumen_main_menu.this, konsumen_tampil_riwayat_transaksi.class);
+        startActivity(i);
+    }
 }

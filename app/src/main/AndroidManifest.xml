@@ -12,11 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".View.Owner.owner_main_menu">
-        </activity>
-        <activity android:name=".View.CustomerService.cs_main_menu">
-
-        </activity>
+        <activity android:name=".View.Owner.owner_main_menu"></activity>
+        <activity android:name=".View.CustomerService.cs_main_menu"></activity>
         <activity
             android:name=".View.Konsumen.konsumen_main_menu"
             android:theme="@style/KonsumenTheme">
@@ -30,8 +27,12 @@
         <activity
             android:name=".View.CustomerService.TransaksiPenjualan.tampil_transaksi_penjualan"
             android:label="Tampil Transaksi Penjualan"
-            android:theme="@style/CSViewTheme"></activity>
+            android:theme="@style/CSViewTheme" />
         <activity android:name=".recycle_adapter_transaksi_penjualan" />
+
+        <activity android:name=".View.Konsumen.konsumen_tampil_riwayat_transaksi"
+            android:label="Riwayat Transaksi Konsumen"
+            android:theme="@style/KonsumenViewTheme" />
         <activity
             android:name=".View.Konsumen.tampil_sparepart_bengkel"
             android:label="Sparepart yang Dijual"
@@ -55,7 +56,7 @@
         <activity android:name=".recycle_adapter_pengadaan_sparepart" />
         <activity android:name=".recycle_adapter_sparepart_cabang" />
         <activity android:name=".recycle_adapter_sparepart" />
-        <activity android:name=".recycle_adapter_detil_pengadaan_sparepart"></activity>
+        <activity android:name=".recycle_adapter_detil_pengadaan_sparepart" />
         <activity
             android:name=".View.CustomerService.MotorKonsumen.tampil_data_motor_konsumen"
             android:label="Kelola Motor Konsumen"
