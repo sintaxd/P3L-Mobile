@@ -78,6 +78,7 @@ tools:context=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjual
             android:hint="Jumlah Beli Sparepart"
             android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
+
     <TextView
         android:id="@+id/textView_subTotal"
         android:layout_width="match_parent"
@@ -89,7 +90,7 @@ tools:context=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjual
         android:id="@+id/textView_subTotalFix"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="200.000"
+        android:text="0"
         android:textColor="#000000"
         android:textSize="18sp" />
 <Button
