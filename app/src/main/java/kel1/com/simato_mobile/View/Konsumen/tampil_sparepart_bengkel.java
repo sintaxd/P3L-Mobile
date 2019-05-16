@@ -84,49 +84,50 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedIDCabang = Integer.parseInt(spinner_IDCabang.get(position)); //Mendapatkan id dari dropdown yang dipilih
 
-                setRecycleViewSparepart();
+                setRecycleViewSparepartByCabang();
+                spinner_sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama sort By saat dipilih
+                    @Override
+                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
+                        if(position==0)
+                        {
+                            setRecycleViewSparepartByCabang();
+                        }
+                        else if(position==1)
+                        {
+                            //stok asc
+                            setRecycleViewSparepartByCabang_SortByStokSisaAsc();
+                        }
+                        else if(position==2)
+                        {
+                            //stok desc
+                            setRecycleViewSparepartByCabang_SortByStokSisaDesc();
+
+                        }
+                        else if(position==3)
+                        {
+                            //hargaJual asc
+                            setRecycleViewSparepartByCabang_SortByHargaAsc();
+                        }
+                        else if(position==4)
+                        {
+                            //hargaJual desc
+                            setRecycleViewSparepartByCabang_SortByHargaDesc();
+                        }
+                        Log.d( "Position spinner sort :", String.valueOf(position));
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parentView) {
+                        selectedIDCabang=1;
+                    }
+                });
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 selectedIDCabang=1;
             }
         });
-        spinner_sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-                Gson gson = new GsonBuilder()
-                        .setLenient()
-                        .create();
-                Retrofit.Builder builder = new Retrofit
-                        .Builder()
-                        .baseUrl(ApiClient_SparepartBengkel.baseURL)
-                        .addConverterFactory(GsonConverterFactory.create());
-                Retrofit retrofit = builder.build();
-                if(position==0)
-                {
-                   //stok asc
-                   Log.d( "onItemSelected: ", String.valueOf(position));
-                }
-                else if(position==1)
-                {
-                    //stok desc
-                }
-                else if(position==2)
-                {
-                    //hargaJual asc
-                }
-                else if(position==3)
-                {
-                    //hargaJual desc
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                selectedIDCabang=1;
-            }
-        });
     }
     void loadSpinnerNamaCabang(){
         Gson gson = new GsonBuilder()
@@ -207,7 +208,7 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public void setRecycleViewSparepart() {
+    public void setRecycleViewSparepartByCabang() {
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -228,15 +229,138 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
                 adapterSparepartBengkel = new Adapter_SparepartBengkel(mListSparepartBengkel,tampil_sparepart_bengkel.this,listener);
                 recyclerView.setAdapter(adapterSparepartBengkel);
                 adapterSparepartBengkel.notifyDataSetChanged();
-//                Collections.sort(mListSparepartBengkel, new Comparator<Model_SparepartBengkel>() {
-//                    @Override
-//                    public int compare(Model_SparepartBengkel Sp1, Model_SparepartBengkel Sp2) {
-//                        return Sp1.getHargaJual_sparepart().compareTo(Sp2.getHargaJual_sparepart());
-//                    }
-//                });
+
                 Log.d("on respon : ",String.valueOf(response.code()));
                 Log.d("on respon msg : ",String.valueOf(response.message()));
                 Toast.makeText(tampil_sparepart_bengkel.this,"Welcome", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LD_SparepartBengkel> call, Throwable t) {
+                Toast.makeText(tampil_sparepart_bengkel.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void setRecycleViewSparepartByCabang_SortByHargaAsc() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_SparepartBengkel.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
+        ApiClient_SparepartBengkel apiClientSparepartBengkel =retrofit.create(ApiClient_SparepartBengkel.class);
+
+        Call<LD_SparepartBengkel> sparepartBengkelModelCall = apiClientSparepartBengkel.sortByHargaAsc(selectedIDCabang);
+
+        sparepartBengkelModelCall.enqueue(new Callback<LD_SparepartBengkel>() {
+            @Override
+            public void onResponse (Call<LD_SparepartBengkel> call, Response<LD_SparepartBengkel> response) {
+                mListSparepartBengkel = response.body().getData();
+                Log.i(tampil_data_sparepart_cabang.class.getSimpleName(), response.body().toString());
+                adapterSparepartBengkel = new Adapter_SparepartBengkel(mListSparepartBengkel,tampil_sparepart_bengkel.this,listener);
+                recyclerView.setAdapter(adapterSparepartBengkel);
+                adapterSparepartBengkel.notifyDataSetChanged();
+
+                Log.d("on respon : ",String.valueOf(response.code()));
+                Log.d("on respon msg : ",String.valueOf(response.message()));
+                Toast.makeText(tampil_sparepart_bengkel.this,"Sorted By Harga (asc)", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LD_SparepartBengkel> call, Throwable t) {
+                Toast.makeText(tampil_sparepart_bengkel.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void setRecycleViewSparepartByCabang_SortByHargaDesc() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_SparepartBengkel.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
+        ApiClient_SparepartBengkel apiClientSparepartBengkel =retrofit.create(ApiClient_SparepartBengkel.class);
+
+        Call<LD_SparepartBengkel> sparepartBengkelModelCall = apiClientSparepartBengkel.sortByHargaDesc(selectedIDCabang);
+
+        sparepartBengkelModelCall.enqueue(new Callback<LD_SparepartBengkel>() {
+            @Override
+            public void onResponse (Call<LD_SparepartBengkel> call, Response<LD_SparepartBengkel> response) {
+                mListSparepartBengkel = response.body().getData();
+                Log.i(tampil_data_sparepart_cabang.class.getSimpleName(), response.body().toString());
+                adapterSparepartBengkel = new Adapter_SparepartBengkel(mListSparepartBengkel,tampil_sparepart_bengkel.this,listener);
+                recyclerView.setAdapter(adapterSparepartBengkel);
+                adapterSparepartBengkel.notifyDataSetChanged();
+
+                Log.d("on respon : ",String.valueOf(response.code()));
+                Log.d("on respon msg : ",String.valueOf(response.message()));
+                Toast.makeText(tampil_sparepart_bengkel.this,"Sorted By Harga (desc)", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LD_SparepartBengkel> call, Throwable t) {
+                Toast.makeText(tampil_sparepart_bengkel.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void setRecycleViewSparepartByCabang_SortByStokSisaAsc() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_SparepartBengkel.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
+        ApiClient_SparepartBengkel apiClientSparepartBengkel =retrofit.create(ApiClient_SparepartBengkel.class);
+
+        Call<LD_SparepartBengkel> sparepartBengkelModelCall = apiClientSparepartBengkel.sortByStokSisaAsc(selectedIDCabang);
+
+        sparepartBengkelModelCall.enqueue(new Callback<LD_SparepartBengkel>() {
+            @Override
+            public void onResponse (Call<LD_SparepartBengkel> call, Response<LD_SparepartBengkel> response) {
+                mListSparepartBengkel = response.body().getData();
+                Log.i(tampil_data_sparepart_cabang.class.getSimpleName(), response.body().toString());
+                adapterSparepartBengkel = new Adapter_SparepartBengkel(mListSparepartBengkel,tampil_sparepart_bengkel.this,listener);
+                recyclerView.setAdapter(adapterSparepartBengkel);
+                adapterSparepartBengkel.notifyDataSetChanged();
+
+                Log.d("on respon : ",String.valueOf(response.code()));
+                Log.d("on respon msg : ",String.valueOf(response.message()));
+                Toast.makeText(tampil_sparepart_bengkel.this,"Sorted By Stok (asc)", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LD_SparepartBengkel> call, Throwable t) {
+                Toast.makeText(tampil_sparepart_bengkel.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void setRecycleViewSparepartByCabang_SortByStokSisaDesc() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_SparepartBengkel.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
+        ApiClient_SparepartBengkel apiClientSparepartBengkel =retrofit.create(ApiClient_SparepartBengkel.class);
+
+        Call<LD_SparepartBengkel> sparepartBengkelModelCall = apiClientSparepartBengkel.sortByStokSisaDesc(selectedIDCabang);
+
+        sparepartBengkelModelCall.enqueue(new Callback<LD_SparepartBengkel>() {
+            @Override
+            public void onResponse (Call<LD_SparepartBengkel> call, Response<LD_SparepartBengkel> response) {
+                mListSparepartBengkel = response.body().getData();
+                Log.i(tampil_data_sparepart_cabang.class.getSimpleName(), response.body().toString());
+                adapterSparepartBengkel = new Adapter_SparepartBengkel(mListSparepartBengkel,tampil_sparepart_bengkel.this,listener);
+                recyclerView.setAdapter(adapterSparepartBengkel);
+                adapterSparepartBengkel.notifyDataSetChanged();
+
+                Log.d("on respon : ",String.valueOf(response.code()));
+                Log.d("on respon msg : ",String.valueOf(response.message()));
+                Toast.makeText(tampil_sparepart_bengkel.this,"Sorted By Stok (desc)", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<LD_SparepartBengkel> call, Throwable t) {

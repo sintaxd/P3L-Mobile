@@ -14,12 +14,31 @@ public interface ApiClient_SparepartBengkel {
 
     // ----------------------- R E A D ----------------------- //
 
-    @GET("api/sparepartCabang")
-    Call<LD_SparepartBengkel> show();
-
+    // Show By Cabang
     @GET("api/sparepartCabang/showByCabang/{id}")
     Call<LD_SparepartBengkel> showByCabang(
             @Path("id") Integer id);
+
+   // Show By Stok Sisa Asc
+    @GET("api/sparepartCabang/sortByStokSisaAsc/{id}")
+    Call<LD_SparepartBengkel> sortByStokSisaAsc(
+            @Path("id") Integer id);
+
+    // Show By Stok Sisa Desc
+    @GET("api/sparepartCabang/sortByStokSisaDesc/{id}")
+    Call<LD_SparepartBengkel> sortByStokSisaDesc(
+            @Path("id") Integer id);
+
+    // Show By Harga Jual Sisa Asc
+    @GET("api/sparepartCabang/sortByHargaAsc/{id}")
+    Call<LD_SparepartBengkel> sortByHargaAsc(
+            @Path("id") Integer id);
+
+    // Show By Harga Jual Desc
+    @GET("api/sparepartCabang/sortByHargaDesc/{id}")
+    Call<LD_SparepartBengkel> sortByHargaDesc(
+            @Path("id") Integer id);
+
 
     // ----------------------- R E A D ----------------------- //
 
