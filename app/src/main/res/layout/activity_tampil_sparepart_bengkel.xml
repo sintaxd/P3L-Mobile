@@ -9,25 +9,54 @@ android:layout_height="match_parent"
 tools:context=".View.Konsumen.tampil_sparepart_bengkel">
 
     <LinearLayout
-        android:layout_width="200dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView_cabang"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pilih Cabang"
-            android:textColor="@color/colorAccent" />
-
-        <Spinner
-            android:id="@+id/spinner_cabang"
+        <LinearLayout
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:spinnerMode="dropdown" />
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_cabang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih Cabang"
+                android:textColor="@color/colorAccent" />
+
+            <Spinner
+                android:id="@+id/spinner_cabang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sort By"
+                android:textColor="@color/colorAccent" />
+
+            <Spinner
+                android:id="@+id/spinner_sortBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:entries="@array/sort"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
     </LinearLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"

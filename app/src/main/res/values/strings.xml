@@ -24,9 +24,9 @@
         <item> KAYU </item>
     </string-array>
     <string-array name="sort">
-        <item> By Stok Ascending </item>
-        <item> By Stok Descending </item>
-        <item> By Harga Ascending </item>
-        <item> By Harga Descending </item>
+        <item> Stok (ascending) </item>
+        <item> Stok (descending) </item>
+        <item> Harga (ascending) </item>
+        <item> Harga (descending) </item>
     </string-array>
 </resources>

@@ -22,6 +22,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import kel1.com.simato_mobile.API.ApiClient_Cabang;
@@ -57,8 +59,8 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
     List<String> spinner_IDCabang = new ArrayList<>();
     List<String> spinner_namaCabang = new ArrayList<>();
 
-    Spinner spinner_cabang;
-    Integer selectedIDCabang;
+    Spinner spinner_cabang, spinner_sortBy;
+    Integer selectedIDCabang, selectedSort;
 
     Adapter_SparepartBengkel.RecyclerViewClickListener listener;
     @Override
@@ -74,6 +76,7 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterSparepartBengkel);
         spinner_cabang = findViewById(R.id.spinner_cabang);
+        spinner_sortBy = findViewById(R.id.spinner_sortBy);
 
         loadSpinnerNamaCabang();
         spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
@@ -83,6 +86,41 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
 
                 setRecycleViewSparepart();
 
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                selectedIDCabang=1;
+            }
+        });
+        spinner_sortBy.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                Gson gson = new GsonBuilder()
+                        .setLenient()
+                        .create();
+                Retrofit.Builder builder = new Retrofit
+                        .Builder()
+                        .baseUrl(ApiClient_SparepartBengkel.baseURL)
+                        .addConverterFactory(GsonConverterFactory.create());
+                Retrofit retrofit = builder.build();
+                if(position==0)
+                {
+                   //stok asc
+                   Log.d( "onItemSelected: ", String.valueOf(position));
+                }
+                else if(position==1)
+                {
+                    //stok desc
+                }
+                else if(position==2)
+                {
+                    //hargaJual asc
+                }
+                else if(position==3)
+                {
+                    //hargaJual desc
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -190,6 +228,12 @@ public class tampil_sparepart_bengkel extends AppCompatActivity {
                 adapterSparepartBengkel = new Adapter_SparepartBengkel(mListSparepartBengkel,tampil_sparepart_bengkel.this,listener);
                 recyclerView.setAdapter(adapterSparepartBengkel);
                 adapterSparepartBengkel.notifyDataSetChanged();
+//                Collections.sort(mListSparepartBengkel, new Comparator<Model_SparepartBengkel>() {
+//                    @Override
+//                    public int compare(Model_SparepartBengkel Sp1, Model_SparepartBengkel Sp2) {
+//                        return Sp1.getHargaJual_sparepart().compareTo(Sp2.getHargaJual_sparepart());
+//                    }
+//                });
                 Log.d("on respon : ",String.valueOf(response.code()));
                 Log.d("on respon msg : ",String.valueOf(response.message()));
                 Toast.makeText(tampil_sparepart_bengkel.this,"Welcome", Toast.LENGTH_SHORT).show();

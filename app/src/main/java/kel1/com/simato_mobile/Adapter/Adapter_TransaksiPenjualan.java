@@ -67,11 +67,11 @@ public class Adapter_TransaksiPenjualan extends RecyclerView.Adapter<Adapter_Tra
         myViewHolder.diskon.setText             ("  Diskon : "+ tp.getDiskon());
         myViewHolder.total_transaksi.setText    ("  Total Transaksi : "+ tp.getTotal_transaksi());
         myViewHolder.status_transaksi.setText   ("  Status Transaksi : "+ tp.getStatus_transaksi());
-        if(tp.getStatus_transaksi().equals("Belum Selesai"))
+        if(tp.getStatus_transaksi().equals("Belum Lunas"))
         {
             Picasso.get().load(R.drawable.icon_belum_selesai).fit().into(myViewHolder.imgStatus);
         }
-        else if(tp.getStatus_transaksi().equals("Sudah Selesai"))
+        else if(tp.getStatus_transaksi().equals("Sudah Lunas"))
         {
             Picasso.get().load(R.drawable.icon_selesai).fit().into(myViewHolder.imgStatus);
         }
@@ -79,7 +79,7 @@ public class Adapter_TransaksiPenjualan extends RecyclerView.Adapter<Adapter_Tra
         myViewHolder.imgStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tp.getStatus_transaksi().equals("Belum Selesai")) {
+                if (tp.getStatus_transaksi().equals("Belum Lunas")) {
                     // Build an AlertDialog
                     AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
@@ -106,7 +106,7 @@ public class Adapter_TransaksiPenjualan extends RecyclerView.Adapter<Adapter_Tra
                                 @Override
                                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                     if (response.code() == 201) {
-                                        tp.setStatus_transaksi("Sudah Selesai");
+                                        tp.setStatus_transaksi("Sudah Lunas");
                                         myViewHolder.status_transaksi.setText("  Status Transaksi : " + tp.getStatus_transaksi());
                                         Toast.makeText(context, "Success Update", Toast.LENGTH_SHORT).show();
                                     } else {
