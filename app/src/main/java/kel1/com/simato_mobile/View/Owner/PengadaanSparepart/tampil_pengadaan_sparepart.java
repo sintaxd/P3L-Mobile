@@ -85,6 +85,19 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        listener = new Adapter_PengadaanSparepart.RecyclerViewClickListener(){
+            @Override
+            public void onRowClick(View view, final int position) {
+                Intent intent = new Intent(getApplicationContext(), edit_pengadaan_sparepart.class);
+                intent.putExtra("id_supplier", mListPengadaanSparepart.get(position).getId_supplier_fk());
+                intent.putExtra("id_cabang", mListPengadaanSparepart.get(position).getId_cabang_fk());
+                intent.putExtra("id_sparepartCabang_fk", mListPengadaanSparepart.get(position).getId_sparepartCabang_fk());
+                intent.putExtra("tgl_pengadaan", mListPengadaanSparepart.get(position).getTgl_pengadaan());
+                intent.putExtra("total_harga", mListPengadaanSparepart.get(position).getTotalHarga_pengadaan());
+
+                startActivity(intent);
+            }
+        };
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,7 +173,8 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<LD_PengadaanSparepart> call, Throwable t) {
-                Toast.makeText(tampil_pengadaan_sparepart.this, "Network Connection Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(tampil_pengadaan_sparepart.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("kegagalan: ",t.getMessage());
             }
         });
     }

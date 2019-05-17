@@ -15,7 +15,11 @@ import android.widget.TextView;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import kel1.com.simato_mobile.API.CustomFilter_Motor;
@@ -52,13 +56,26 @@ public class Adapter_PengadaanSparepart extends RecyclerView.Adapter<Adapter_Pen
         Log.d("Status Cetak : ",pengadaan.getStatusCetak_pengadaan());
         Log.d("Status Pengadaan : ",pengadaan.getStatus_pengadaan());
         Log.d("Total Harga : ",pengadaan.getTotalHarga_pengadaan().toString());
-        Log.d("Tanggal Pengadaan : ",pengadaan.getTgl_pengadaan().toString());
+ //       Log.d("Tanggal Pengadaan : ",pengadaan.getTgl_pengadaan().toString());
 //        Log.d("Tgl Barang Datang : ",pengadaan.getTgl_barangDatang().toString());
+        DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+        String inputDateStr=pengadaan.getTgl_pengadaan();
+        Date date = null;
+        try
+        {
+            date = inputFormat.parse(inputDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        String outputDateStr = outputFormat.format(date);
+        myViewHolder.tanggal_pengadaan.setText          ("  Tanggal Pengadaan           : "+ outputDateStr);
+
         myViewHolder.nama_supplier.setText              ("  Nama Supplier               : "+ pengadaan.getNama_supplier());
         myViewHolder.status_cetak_pengadaan.setText     ("  Status Cetak Pengadaan      : "+ pengadaan.getStatusCetak_pengadaan());
         myViewHolder.status_pengadaan.setText           ("  Status Pengadaan            : "+ pengadaan.getStatus_pengadaan());
         myViewHolder.total_harga_pengadaan.setText      ("  Total Harga Pengadaan       : "+ pengadaan.getTotalHarga_pengadaan().toString());
-        myViewHolder.tanggal_pengadaan.setText          ("  Tanggal Pengadaan           : "+ pengadaan.getTgl_pengadaan().toString());
+
         if(pengadaan.getTgl_barangDatang()==null)
         {
             myViewHolder.tanggal_barang_datang.setText  ("  Tanggal Barang Datang       : Belum Datang");

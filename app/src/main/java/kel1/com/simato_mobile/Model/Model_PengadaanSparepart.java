@@ -3,14 +3,15 @@ package kel1.com.simato_mobile.Model;
 import java.util.Date;
 
 public class Model_PengadaanSparepart {
-    Integer id_pengadaan,id_supplier_fk,id_sparepartCabang_fk,satuan_pengadaan,totalBarang_datang;
-    Date tgl_pengadaan, tgl_barangDatang;
+    Integer id_pengadaan,id_supplier_fk,id_cabang_fk,id_sparepartCabang_fk,satuan_pengadaan,totalBarang_datang;
+    String tgl_pengadaan, tgl_barangDatang;
     String status_pengadaan, statusCetak_pengadaan, nama_supplier;
     Double totalHarga_pengadaan;
 
-    public Model_PengadaanSparepart(Integer id_pengadaan, Integer id_supplier_fk, Integer id_sparepartCabang_fk, Integer satuan_pengadaan, Integer totalBarang_datang, Date tgl_pengadaan, Date tgl_barangDatang, String status_pengadaan, String statusCetak_pengadaan, String nama_supplier, Double totalHarga_pengadaan) {
+    public Model_PengadaanSparepart(Integer id_pengadaan, Integer id_supplier_fk, Integer id_cabang_fk, Integer id_sparepartCabang_fk, Integer satuan_pengadaan, Integer totalBarang_datang, String tgl_pengadaan, String tgl_barangDatang, String status_pengadaan, String statusCetak_pengadaan, String nama_supplier, Double totalHarga_pengadaan) {
         this.id_pengadaan = id_pengadaan;
         this.id_supplier_fk = id_supplier_fk;
+        this.id_cabang_fk = id_cabang_fk;
         this.id_sparepartCabang_fk = id_sparepartCabang_fk;
         this.satuan_pengadaan = satuan_pengadaan;
         this.totalBarang_datang = totalBarang_datang;
@@ -38,6 +39,14 @@ public class Model_PengadaanSparepart {
         this.id_supplier_fk = id_supplier_fk;
     }
 
+    public Integer getId_cabang_fk() {
+        return id_cabang_fk;
+    }
+
+    public void setId_cabang_fk(Integer id_cabang_fk) {
+        this.id_cabang_fk = id_cabang_fk;
+    }
+
     public Integer getId_sparepartCabang_fk() {
         return id_sparepartCabang_fk;
     }
@@ -62,19 +71,19 @@ public class Model_PengadaanSparepart {
         this.totalBarang_datang = totalBarang_datang;
     }
 
-    public Date getTgl_pengadaan() {
+    public String getTgl_pengadaan() {
         return tgl_pengadaan;
     }
 
-    public void setTgl_pengadaan(Date tgl_pengadaan) {
+    public void setTgl_pengadaan(String tgl_pengadaan) {
         this.tgl_pengadaan = tgl_pengadaan;
     }
 
-    public Date getTgl_barangDatang() {
+    public String getTgl_barangDatang() {
         return tgl_barangDatang;
     }
 
-    public void setTgl_barangDatang(Date tgl_barangDatang) {
+    public void setTgl_barangDatang(String tgl_barangDatang) {
         this.tgl_barangDatang = tgl_barangDatang;
     }
 

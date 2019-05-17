@@ -135,7 +135,7 @@ public class edit_data_motor_konsumen extends AppCompatActivity {
                     if(spinnerKonsumenArray.get(i).getId_konsumen().equals(tempIDMotor))
                     {
                         nama=spinnerKonsumenArray.get(i).getNama_konsumen();
-                        Log.d("Selected  Motor : ",nama);
+                        Log.d("Selected  Konsumen : ",nama);
                     }
                 }
                 spinner_konsumen.setAdapter(adapterNamaKonsumen);

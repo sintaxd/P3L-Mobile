@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import kel1.com.simato_mobile.Model.Model_Konsumen;
 import kel1.com.simato_mobile.Model.Model_Sparepart;
 import kel1.com.simato_mobile.Model.Model_SparepartCabang;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tambah_pengadaan_sparepart;
 import kel1.com.simato_mobile.View.Owner.SparepartCabang.tambah_data_sparepart_cabang;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,6 +55,8 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
     String selectedIDSparepartCabang;
     Integer tempID,selectedIDCabang;
     TextView setTanggal;
+    ImageView addDetilTransaksiSparepart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,14 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         String date_now = new SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault()).format(new Date());
         //set it as current date.
         setTanggal.setText(date_now);
-
+        addDetilTransaksiSparepart = findViewById(R.id.addDetilTransaksiSparepart);
+        addDetilTransaksiSparepart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //addDetilPengadaanFunction();
+                Toast.makeText(tambah_transaksi_penjualan_sparepart.this, "miaaw", Toast.LENGTH_SHORT).show();
+            }
+        });
         spinner_cabang = findViewById(R.id.spinner_cabang);
         spinner_sparepartcabang = findViewById(R.id.spinner_sparepart_cabang);
 
