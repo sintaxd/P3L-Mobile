@@ -7,37 +7,51 @@ android:background="@color/colorCS"
 android:orientation="vertical"
 android:id="@+id/row_container">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/nama_sparepart"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nama Sparepart" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/harga_satuan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Harga Satuan" />
-
-    <TextView
-        android:id="@+id/satuan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Satuan" />
-
-    <TextView
-        android:id="@+id/sub_total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sub Total" />
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-</LinearLayout>
+        <TextView
+                android:id="@+id/nama_sparepart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Sparepart" />
+
+            <TextView
+                android:id="@+id/harga_satuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Harga Satuan" />
+
+            <TextView
+                android:id="@+id/satuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Satuan" />
+
+            <TextView
+                android:id="@+id/sub_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sub Total" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_Delete"
+            android:layout_width="70dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:text="HAPUS" />
+    </LinearLayout>
 
 
 </RelativeLayout>

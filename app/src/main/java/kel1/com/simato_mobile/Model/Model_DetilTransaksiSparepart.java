@@ -2,18 +2,34 @@ package kel1.com.simato_mobile.Model;
 
 public class Model_DetilTransaksiSparepart {
 Integer id_detilTransaksiSparepart, id_transaksi_fk, id_sparepartCabang_fk, id_konsumen_fk, jumlahBeli_sparepart;
-Double subTotal_sparepart;
+Double subTotal_sparepart, harga_satuan;
 String nama_sparepart, nama_konsumen;
 
-    public Model_DetilTransaksiSparepart(Integer id_detilTransaksiSparepart, Integer id_transaksi_fk, Integer id_sparepartCabang_fk, Integer id_konsumen_fk, Integer jumlahBeli_sparepart, Double subTotal_sparepart, String nama_sparepart, String nama_konsumen) {
+    public Model_DetilTransaksiSparepart(Integer id_detilTransaksiSparepart, Integer id_transaksi_fk, Integer id_sparepartCabang_fk, Integer id_konsumen_fk, Integer jumlahBeli_sparepart, Double subTotal_sparepart, Double harga_satuan, String nama_sparepart, String nama_konsumen) {
         this.id_detilTransaksiSparepart = id_detilTransaksiSparepart;
         this.id_transaksi_fk = id_transaksi_fk;
         this.id_sparepartCabang_fk = id_sparepartCabang_fk;
         this.id_konsumen_fk = id_konsumen_fk;
         this.jumlahBeli_sparepart = jumlahBeli_sparepart;
         this.subTotal_sparepart = subTotal_sparepart;
+        this.harga_satuan = harga_satuan;
         this.nama_sparepart = nama_sparepart;
         this.nama_konsumen = nama_konsumen;
+    }
+
+    public Model_DetilTransaksiSparepart(Integer jumlahBeli_sparepart, Double subTotal_sparepart, Double harga_satuan, String nama_sparepart) {
+        this.jumlahBeli_sparepart = jumlahBeli_sparepart;
+        this.subTotal_sparepart = subTotal_sparepart;
+        this.harga_satuan = harga_satuan;
+        this.nama_sparepart = nama_sparepart;
+    }
+
+    public Double getHarga_satuan() {
+        return harga_satuan;
+    }
+
+    public void setHarga_satuan(Double harga_satuan) {
+        this.harga_satuan = harga_satuan;
     }
 
     public Integer getId_detilTransaksiSparepart() {

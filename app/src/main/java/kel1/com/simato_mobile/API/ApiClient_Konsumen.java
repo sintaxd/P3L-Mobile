@@ -13,8 +13,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiClient_Konsumen {
-
-    String baseURL = "http://192.168.0.100:8000";
+    String baseURL = "http://192.168.1.63:8000/";
     //String baseURL = "http://simato.jasonfw.com/";
 
     // --------------------- C R E A T E --------------------- //
@@ -32,6 +31,10 @@ public interface ApiClient_Konsumen {
 
     @GET("api/konsumen")
     Call<LD_Konsumen> show();
+
+    @GET("api/konsumen/showByName/{nama_konsumen}")
+    Call<ResponseBody> showByName(
+            @Path("nama_konsumen") String nama_konsumen);
 
     // ----------------------- R E A D ----------------------- //
 

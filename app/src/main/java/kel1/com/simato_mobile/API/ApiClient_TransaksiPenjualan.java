@@ -6,13 +6,24 @@ import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface ApiClient_TransaksiPenjualan {
 
-    String baseURL = "http://192.168.0.100:8000";
+    String baseURL = "http://192.168.1.63:8000/";
     //String baseURL = "http://simato.jasonfw.com/";
+
+    // --------------------- C R E A T E --------------------- //
+
+    @POST("api/transaksiPenjualanSparepart")
+    @FormUrlEncoded
+    Call<ResponseBody> create(
+            @Field("id_cabang_fk")Integer id_supplier_fk,
+            @Field("total_transaksi")Double total_transaksi);
+
+    // --------------------- C R E A T E --------------------- //
 
     // ----------------------- R E A D ----------------------- //
 
