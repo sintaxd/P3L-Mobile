@@ -157,19 +157,34 @@
         android:text="0"
         android:textColor="#000000"
         android:textSize="20sp" />
-    <Button
-        android:id="@+id/button_Simpan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="SIMPAN"
-        android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/button_Batal"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="BATAL"
-        android:textSize="12sp" />
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_Simpan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SIMPAN"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/button_Batal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BATAL"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/button_Hapus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HAPUS"
+            android:textSize="12sp" />
+    </LinearLayout>
+
 
 </LinearLayout>

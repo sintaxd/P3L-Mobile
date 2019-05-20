@@ -89,6 +89,7 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
             @Override
             public void onRowClick(View view, final int position) {
                 Intent intent = new Intent(getApplicationContext(), edit_pengadaan_sparepart.class);
+                intent.putExtra("id_pengadaan", mListPengadaanSparepart.get(position).getId_pengadaan());
                 intent.putExtra("id_supplier", mListPengadaanSparepart.get(position).getId_supplier_fk());
                 intent.putExtra("id_cabang", mListPengadaanSparepart.get(position).getId_cabang_fk());
                 intent.putExtra("id_sparepartCabang_fk", mListPengadaanSparepart.get(position).getId_sparepartCabang_fk());
@@ -157,7 +158,6 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
         Retrofit retrofit=builder.build();
         ApiClient_PengadaanSparepart apiClientPengadaanSparepart =retrofit.create(ApiClient_PengadaanSparepart.class);
 
-        //sampe sini
 
         Call<LD_PengadaanSparepart> pengadaansparepartModelCall = apiClientPengadaanSparepart.show();
 

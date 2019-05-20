@@ -39,6 +39,12 @@ public class Adapter_DetilPengadaanSparepart extends RecyclerView.Adapter<Adapte
 //        this.context = context;
 //        this.mListener = mListener;
 //    }
+
+    public Adapter_DetilPengadaanSparepart(List<Model_DetilPengadaanSparepart> detil, Context context) {
+        this.detil = detil;
+        this.context = context;
+    }
+
     public Adapter_DetilPengadaanSparepart(List<Model_DetilPengadaanSparepart> detil){
         this.detil=detil;
         this.detilFilter=detil;

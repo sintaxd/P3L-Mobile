@@ -124,6 +124,14 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
                 onClickAddPengadaan();
             }
         });
+
+        btnBatal = findViewById(R.id.button_Batal);
+        btnBatal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startIntent();
+            }
+        });
         loadSpinnerNamaSupplier();
         spinner_supplier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama supplier saat dipilih
             @Override
@@ -352,14 +360,11 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
                                             Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
-
                                     @Override
                                     public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                                     }
                                 });
-
-
                             }
                         }
                         catch (JSONException e) {
