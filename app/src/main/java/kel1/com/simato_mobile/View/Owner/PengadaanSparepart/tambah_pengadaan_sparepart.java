@@ -317,7 +317,8 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
         Log.d( "ID Supp: ",selectedIDSupplier );
         Log.d( "ID Cbg : ",selectedIDCabang.toString() );
         Log.d( "GrandTotal: ",GrandTotal.toString() );
-            Call<ResponseBody> pengadaansparepartDAOCall = apiClientPengadaanSparepart.create(Integer.parseInt(selectedIDSupplier),
+
+        Call<ResponseBody> pengadaansparepartDAOCall = apiClientPengadaanSparepart.create(Integer.parseInt(selectedIDSupplier),
                     selectedIDCabang,
                     GrandTotal);
         pengadaansparepartDAOCall.enqueue(new Callback<ResponseBody>() {

@@ -39,11 +39,12 @@ public interface ApiClient_PengadaanSparepart {
 
     // --------------------- U P D A T E --------------------- //
 
-    @PUT("api/pengadaanSparepart/{id}")
+    @PUT("api/pengadaanSparepart/{id_pengadaan}")
     @FormUrlEncoded
     Call<ResponseBody>update_mobile(
             @Field("id_supplier_fk")Integer id_supplier_fk,
             @Field("id_cabang_fk")Integer id_cabang_fk,
+            @Field("totalHarga_pengadaan")Double totalHarga_pengadaan,
             @Path("id_pengadaan") Integer id_pengadaan);
 
     // --------------------- U P D A T E --------------------- //
