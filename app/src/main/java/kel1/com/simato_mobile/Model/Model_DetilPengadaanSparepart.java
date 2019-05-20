@@ -16,11 +16,12 @@ public class Model_DetilPengadaanSparepart {
         this.nama_sparepart = nama_sparepart;
     }
 
-    public Model_DetilPengadaanSparepart(Integer satuan_pengadaan, Double sub_total_sparepart, Double hargaBeli_sparepart, String nama_sparepart) {
+    public Model_DetilPengadaanSparepart(Integer satuan_pengadaan, Double sub_total_sparepart, Double hargaBeli_sparepart, String nama_sparepart, Integer id_sparepartCabang_fk) {
         this.satuan_pengadaan = satuan_pengadaan;
         this.sub_total_sparepart = sub_total_sparepart;
         this.hargaBeli_sparepart = hargaBeli_sparepart;
         this.nama_sparepart = nama_sparepart;
+        this.id_sparepartCabang_fk=id_sparepartCabang_fk;
     }
 
     public Double getHargaBeli_sparepart() {

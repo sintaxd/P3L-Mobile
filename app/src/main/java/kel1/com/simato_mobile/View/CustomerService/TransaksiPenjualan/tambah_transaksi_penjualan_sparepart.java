@@ -215,16 +215,21 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
     }
 
     public void addTransaksiSparepart(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit.Builder builder=new Retrofit.
-                Builder().baseUrl(ApiClient_TransaksiPenjualan.baseURL).
-                addConverterFactory(GsonConverterFactory.create(gson));
-        Retrofit retrofit=builder.build();
-        ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan = retrofit.create(ApiClient_TransaksiPenjualan.class);
-
-
+        if (detilTransaksiSparepartList.isEmpty())
+        {
+            Toast.makeText(this, "Tambahkan detil pengadaan!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+            Retrofit.Builder builder = new Retrofit.
+                    Builder().baseUrl(ApiClient_TransaksiPenjualan.baseURL).
+                    addConverterFactory(GsonConverterFactory.create(gson));
+            Retrofit retrofit = builder.build();
+            ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan = retrofit.create(ApiClient_TransaksiPenjualan.class);
+        }
     }
     void loadSpinnerCabang()
     {
