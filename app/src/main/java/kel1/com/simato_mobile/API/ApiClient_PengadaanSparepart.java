@@ -47,11 +47,16 @@ public interface ApiClient_PengadaanSparepart {
             @Field("totalHarga_pengadaan")Double totalHarga_pengadaan,
             @Path("id_pengadaan") Integer id_pengadaan);
 
-    // --------------------- U P D A T E --------------------- //
 
+    @PUT("api/pengadaanSparepart/verifikasi_pengadaan/{id_pengadaan}")
+    Call<ResponseBody>verifikasi_pengadaan(
+            @Path("id_pengadaan") Integer id_pengadaan);
+
+    // --------------------- U P D A T E --------------------- //
     // --------------------- D E L E T E --------------------- //
 
     @DELETE("api/pengadaanSparepart/{id}")
+
     Call<ResponseBody>delete(@Path("id") Integer id);
 
     // --------------------- D E L E T E --------------------- //

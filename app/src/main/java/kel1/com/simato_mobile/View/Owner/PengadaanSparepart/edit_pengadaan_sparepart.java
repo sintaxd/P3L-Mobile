@@ -1,7 +1,9 @@
 package kel1.com.simato_mobile.View.Owner.PengadaanSparepart;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.design.widget.TextInputEditText;
@@ -27,7 +29,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import kel1.com.simato_mobile.API.ApiClient_Cabang;
@@ -74,7 +80,6 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
 
     private List<Model_DetilPengadaanSparepart> detilPengadaanSparepartList = new ArrayList<Model_DetilPengadaanSparepart>();
     public Adapter_DetilPengadaanSparepart adapterDetilPengadaan;
-
     Integer id_cabang_fk, id_sparepartCabang_fk, id_supplier;
     TextView setTanggal, totalHarga_fix;
     ImageView addDetilPengadaan;
@@ -85,7 +90,7 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
     private Adapter_DetilPengadaanSparepart adapter;
     private RecyclerView.LayoutManager layout;
     Double GrandTotal=0.0, tempTotal;
-    String temp_date;
+    String temp_date, status_pengadaan, status_cetak;
     Integer selectedIDCabang,idPengadaan;
     String selectedIDSparepartCabang, selectedHargaSparepartCabang, selectedNamaSparepartCabang, selectedIDSupplier;
     Adapter_DetilPengadaanSparepart.RecyclerViewClickListener listener;
@@ -106,10 +111,22 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
         Log.d( "onCreate: ",i.getStringExtra("tgl_pengadaan"));
         idPengadaan=i.getIntExtra("id_pengadaan",-1);
         Log.d( "ID Pengadaan: ",idPengadaan.toString());
+        status_cetak=i.getStringExtra("status_cetak");
+        status_pengadaan=i.getStringExtra("status_pengadaan");
 
-        temp_date=i.getStringExtra("tgl_pengadaan");
+        final DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        final DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+        final String temp_date=i.getStringExtra("tgl_pengadaan");
+        Date date = null;
+        try
+        {
+            date = inputFormat.parse(temp_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        final String outputDateStr = outputFormat.format(date);
         setTanggal = findViewById(R.id.textView_tanggalFix);
-        setTanggal.setText(temp_date);
+        setTanggal.setText(outputDateStr);
 
         rview = findViewById(R.id.recycler_view_detil_pengadaan);
         layout = new LinearLayoutManager(getApplicationContext());
@@ -120,7 +137,6 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addDetilPengadaanFunction();
-                Toast.makeText(edit_pengadaan_sparepart.this, "miaaw", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -145,7 +161,6 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                DeletePengadaanSparepart();
-               startIntent();
             }
         });
         loadSpinnerNamaSupplier();
@@ -346,115 +361,168 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
         });
     }
     private void EditPengadaanSparepart(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit.Builder builder = new Retrofit
-                .Builder()
-                .baseUrl(ApiClient_PengadaanSparepart.baseURL)
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit=builder.build();
-        ApiClient_PengadaanSparepart apiClientPengadaanSparepart = retrofit.create(ApiClient_PengadaanSparepart.class);
 
-        Log.d( "ID Supp: ",selectedIDSupplier );
-        Log.d( "ID Cbg : ",selectedIDCabang.toString() );
-        Log.d( "GrandTotal: ",GrandTotal.toString() );
+        if(status_pengadaan.equalsIgnoreCase("Sudah Selesai") || status_cetak.equalsIgnoreCase("Sudah Cetak"))
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
 
-        Call<ResponseBody> pengadaansparepartDAOCall = apiClientPengadaanSparepart.update_mobile(Integer.parseInt(selectedIDSupplier),
-                selectedIDCabang,
-                GrandTotal,
-                idPengadaan);
-        pengadaansparepartDAOCall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
-                    try {
-                        JSONObject jsonresponse = new JSONObject(response.body().string());
-                        String idPengadaan = jsonresponse.getJSONObject("data").getString("id_pengadaan");
-                        Log.d( "ID Pengadaan: ",idPengadaan);
+            // Setting Dialog Title
+            alertDialog.setTitle("Edit Pengadaan Sparepart");
 
-                        //memasukkan data dari list local ke tabel detilPengadaan
-                        for(int x=0;x<detilPengadaanSparepartList.size();x++) {
-                            Gson gson = new GsonBuilder()
-                                    .setLenient()
-                                    .create();
-                            Retrofit.Builder builder=new Retrofit.
-                                    Builder().baseUrl(ApiClient_DetilPengadaanSparepart.baseURL).
-                                    addConverterFactory(GsonConverterFactory.create(gson));
-                            Retrofit retrofit=builder.build();
-                            ApiClient_DetilPengadaanSparepart apiClientDetilPengadaanSparepart = retrofit.create(ApiClient_DetilPengadaanSparepart.class);
+            // Setting Dialog Message
+            alertDialog.setMessage("Pengadaan tidak bisa diedit!");
 
-                            Log.d( "ID Spp Cbg: ",detilPengadaanSparepartList.get(x).getId_sparepartCabang_fk().toString());
-                            Log.d( "Satuan Pengadaan : ",detilPengadaanSparepartList.get(x).getSatuan_pengadaan().toString() );
-                            Log.d( "Get Sub Total: ",detilPengadaanSparepartList.get(x).getSub_total_sparepart().toString() );
+            // Setting Icon to Dialog
+            alertDialog.setIcon(R.drawable.logo_atma_auto);
 
-                            Call<ResponseBody> detilpengadaansparepartDAOCall = apiClientDetilPengadaanSparepart.createDetilPengadaan(
-                                    Integer.parseInt(idPengadaan),
-                                    detilPengadaanSparepartList.get(x).getId_sparepartCabang_fk(),
-                                    detilPengadaanSparepartList.get(x).getSatuan_pengadaan(),
-                                    detilPengadaanSparepartList.get(x).getSub_total_sparepart());
-
-                            detilpengadaansparepartDAOCall.enqueue(new Callback<ResponseBody>() {
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    if (response.code() == 201) {
-                                        Toast.makeText(edit_pengadaan_sparepart.this, "Edit Pengadaan Sparepart berhasil!", Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
-                                        Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-                                }
-                            });
-                        }
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
+            // Setting OK Button
+            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog closed
                 }
-                Log.d("on respon : ",String.valueOf(response.code()));
-                startIntent();
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(edit_pengadaan_sparepart.this,  t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
+
+            // Showing Alert Message
+            alertDialog.show();
+        }
+        else
+        {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+            Retrofit.Builder builder = new Retrofit
+                    .Builder()
+                    .baseUrl(ApiClient_PengadaanSparepart.baseURL)
+                    .addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit=builder.build();
+            ApiClient_PengadaanSparepart apiClientPengadaanSparepart = retrofit.create(ApiClient_PengadaanSparepart.class);
+
+            Log.d( "ID Supp: ",selectedIDSupplier );
+            Log.d( "ID Cbg : ",selectedIDCabang.toString() );
+            Log.d( "GrandTotal: ",GrandTotal.toString() );
+
+            Call<ResponseBody> pengadaansparepartDAOCall = apiClientPengadaanSparepart.update_mobile(Integer.parseInt(selectedIDSupplier),
+                    selectedIDCabang,
+                    GrandTotal,
+                    idPengadaan);
+            pengadaansparepartDAOCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == 201) {
+                        try {
+                            JSONObject jsonresponse = new JSONObject(response.body().string());
+                            String idPengadaan = jsonresponse.getJSONObject("data").getString("id_pengadaan");
+                            Log.d( "ID Pengadaan: ",idPengadaan);
+
+                            //memasukkan data dari list local ke tabel detilPengadaan
+                            for(int x=0;x<detilPengadaanSparepartList.size();x++) {
+                                Gson gson = new GsonBuilder()
+                                        .setLenient()
+                                        .create();
+                                Retrofit.Builder builder=new Retrofit.
+                                        Builder().baseUrl(ApiClient_DetilPengadaanSparepart.baseURL).
+                                        addConverterFactory(GsonConverterFactory.create(gson));
+                                Retrofit retrofit=builder.build();
+                                ApiClient_DetilPengadaanSparepart apiClientDetilPengadaanSparepart = retrofit.create(ApiClient_DetilPengadaanSparepart.class);
+
+                                Log.d( "ID Spp Cbg: ",detilPengadaanSparepartList.get(x).getId_sparepartCabang_fk().toString());
+                                Log.d( "Satuan Pengadaan : ",detilPengadaanSparepartList.get(x).getSatuan_pengadaan().toString() );
+                                Log.d( "Get Sub Total: ",detilPengadaanSparepartList.get(x).getSub_total_sparepart().toString() );
+
+                                Call<ResponseBody> detilpengadaansparepartDAOCall = apiClientDetilPengadaanSparepart.createDetilPengadaan(
+                                        Integer.parseInt(idPengadaan),
+                                        detilPengadaanSparepartList.get(x).getId_sparepartCabang_fk(),
+                                        detilPengadaanSparepartList.get(x).getSatuan_pengadaan(),
+                                        detilPengadaanSparepartList.get(x).getSub_total_sparepart());
+
+                                detilpengadaansparepartDAOCall.enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                        if (response.code() == 201) {
+                                            Toast.makeText(edit_pengadaan_sparepart.this, "Edit Pengadaan Sparepart berhasil!", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                    }
+                                });
+                            }
+                        }
+                        catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
+                    }
+                    Log.d("on respon : ",String.valueOf(response.code()));
+                }
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(edit_pengadaan_sparepart.this,  t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
     }
 
     private void DeletePengadaanSparepart(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit.Builder builder = new Retrofit
-                .Builder()
-                .baseUrl(ApiClient_PengadaanSparepart.baseURL)
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit=builder.build();
-        ApiClient_PengadaanSparepart apiClientPengadaanSparepart = retrofit.create(ApiClient_PengadaanSparepart.class);
-        Call<ResponseBody> pengadaansparepartDAOCall = apiClientPengadaanSparepart.delete(idPengadaan);
-        pengadaansparepartDAOCall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if (response.code() == 201) {
-                    Toast.makeText(getApplicationContext(), "Success Delete", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+        if(status_pengadaan.equalsIgnoreCase("Sudah Selesai") || status_cetak.equalsIgnoreCase("Sudah Cetak"))
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+            // Setting Dialog Title
+            alertDialog.setTitle("Delete Pengadaan Sparepart");
+
+            // Setting Dialog Message
+            alertDialog.setMessage("Pengadaan tidak bisa dihapus!");
+
+            // Setting Icon to Dialog
+            alertDialog.setIcon(R.drawable.logo_atma_auto);
+
+            // Setting OK Button
+            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog closed
                 }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            });
+
+            // Showing Alert Message
+            alertDialog.show();
+        }
+        else {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+            Retrofit.Builder builder = new Retrofit
+                    .Builder()
+                    .baseUrl(ApiClient_PengadaanSparepart.baseURL)
+                    .addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit = builder.build();
+            ApiClient_PengadaanSparepart apiClientPengadaanSparepart = retrofit.create(ApiClient_PengadaanSparepart.class);
+            Call<ResponseBody> pengadaansparepartDAOCall = apiClientPengadaanSparepart.delete(idPengadaan);
+            pengadaansparepartDAOCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == 201) {
+                        Toast.makeText(getApplicationContext(), "Success Delete", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
     private void startIntent() {
         Intent intent = new Intent(getApplicationContext(), tampil_pengadaan_sparepart.class);
