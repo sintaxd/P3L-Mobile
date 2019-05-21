@@ -20,6 +20,7 @@ public interface ApiClient_TransaksiPenjualan {
     @POST("api/transaksiPenjualanSparepart")
     @FormUrlEncoded
     Call<ResponseBody> create(
+            @Field ("tipe_transaksi") String tipe_transaksi,
             @Field("id_cabang_fk")Integer id_supplier_fk,
             @Field("total_transaksi")Double total_transaksi);
 
