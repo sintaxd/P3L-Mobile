@@ -17,7 +17,9 @@ String nama_sparepart, nama_konsumen;
         this.nama_konsumen = nama_konsumen;
     }
 
-    public Model_DetilTransaksiSparepart(Integer jumlahBeli_sparepart, Double subTotal_sparepart, Double harga_satuan, String nama_sparepart) {
+    public Model_DetilTransaksiSparepart(Integer id_sparepartCabang_fk, Integer id_konsumen_fk,Integer jumlahBeli_sparepart, Double subTotal_sparepart, Double harga_satuan, String nama_sparepart) {
+        this.id_sparepartCabang_fk = id_sparepartCabang_fk;
+        this.id_konsumen_fk = id_konsumen_fk;
         this.jumlahBeli_sparepart = jumlahBeli_sparepart;
         this.subTotal_sparepart = subTotal_sparepart;
         this.harga_satuan = harga_satuan;

@@ -19,5 +19,15 @@ public interface ApiClient_DetilTransaksi {
             @Field("id_jasaService_fk") Integer id_jasaService_fk,
             @Field("id_motorKonsumen_fk")Integer id_motorKonsumen_fk,
             @Field("subTotal_service")Double subTotal_service);
+
+    @POST("api/createDetilTransaksiSparepart")
+    @FormUrlEncoded
+    Call<ResponseBody> createDetilTransaksiSparepart(
+            @Field("id_transaksi_fk") Integer id_transaksi_fk,
+            @Field("id_sparepartCabang_fk") Integer id_sparepartCabang_fk,
+            @Field("id_konsumen_fk")Integer id_konsumen_fk,
+            @Field("jumlahBeli_sparepart")Integer jumlahBeli_sparepart,
+            @Field("subTotal_sparepart")Double subTotal_sparepart);
+
     // --------------------- C R E A T E --------------------- //
 }
