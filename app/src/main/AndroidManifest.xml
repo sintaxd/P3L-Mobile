@@ -11,10 +11,11 @@
         android:roundIcon="@drawable/logo_atma_auto"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".recycle_adapter_detil_transaksi_service"></activity>
+        <activity android:name=".edit_transaksi_penjualan"></activity>
+        <activity android:name=".recycle_adapter_detil_transaksi_service" />
         <activity android:name=".recycle_adapter_detil_transaksi_penjualan_sparepart" />
         <activity android:name=".recycle_adapter_tampil_riwayat_transaksi_konsumen" />
-        <activity android:name=".View.Owner.owner_main_menu"></activity>
+        <activity android:name=".View.Owner.owner_main_menu" />
         <activity android:name=".View.CustomerService.cs_main_menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

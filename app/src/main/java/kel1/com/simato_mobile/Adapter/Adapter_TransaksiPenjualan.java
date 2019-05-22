@@ -18,7 +18,11 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import kel1.com.simato_mobile.API.ApiClient_TransaksiPenjualan;
@@ -61,9 +65,20 @@ public class Adapter_TransaksiPenjualan extends RecyclerView.Adapter<Adapter_Tra
         Log.d("Total Transaksi : ",tp.getTotal_transaksi().toString());
         Log.d("Status Transaksi : ",tp.getStatus_transaksi());
 
+        final DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        final DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+        final String inputDateStr=tp.getTgl_transaksi();
+        Date date = null;
+        try
+        {
+            date = inputFormat.parse(inputDateStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        final String outputDateStr = outputFormat.format(date);
+        myViewHolder.tanggal_transaksi.setText  ("  Tanggal Transaksi : "+outputDateStr);
         myViewHolder.nama_cabang.setText        ("  Nama Cabang : "+ tp.getNama_cabang());
         myViewHolder.kode_transaksi.setText     ("  Kode Transaksi : "+ tp.getKode_transaksi());
-        myViewHolder.tanggal_transaksi.setText  ("  Tanggal Transaksi : "+ tp.getTgl_transaksi());
         myViewHolder.diskon.setText             ("  Diskon : "+ tp.getDiskon());
         myViewHolder.total_transaksi.setText    ("  Total Transaksi : "+ tp.getTotal_transaksi());
         myViewHolder.status_transaksi.setText   ("  Status Transaksi : "+ tp.getStatus_transaksi());

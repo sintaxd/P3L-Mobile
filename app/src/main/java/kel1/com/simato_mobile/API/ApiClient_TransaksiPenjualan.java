@@ -3,6 +3,7 @@ package kel1.com.simato_mobile.API;
 import kel1.com.simato_mobile.ListData.LD_TransaksiPenjualan;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -47,4 +48,13 @@ public interface ApiClient_TransaksiPenjualan {
             @Path("id") Integer id);
 
     // --------------------- U P D A T E --------------------- //
+
+    // --------------------- D E L E T E --------------------- //
+
+    @DELETE("api/deleteTransaksiPenjualan/{id}")
+
+    Call<ResponseBody>delete(
+            @Path("id") Integer id);
+
+    // --------------------- D E L E T E --------------------- //
 }

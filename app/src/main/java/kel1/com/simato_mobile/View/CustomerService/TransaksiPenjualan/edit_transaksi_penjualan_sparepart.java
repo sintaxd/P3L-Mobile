@@ -1,5 +1,7 @@
 package kel1.com.simato_mobile.View.CustomerService.TransaksiPenjualan;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import kel1.com.simato_mobile.API.ApiClient_Motor;
+import kel1.com.simato_mobile.API.ApiClient_PengadaanSparepart;
 import kel1.com.simato_mobile.API.ApiClient_TransaksiPenjualan;
 import kel1.com.simato_mobile.R;
 import kel1.com.simato_mobile.View.CustomerService.Motor.edit_data_motor;
@@ -25,7 +31,7 @@ import retrofit2.http.Path;
 
 public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
 
-    private Button btnBatal, btnSimpan;
+    private Button btnBatal, btnSimpan, btnDelete;
     private TextView namacabang, kodetransaksi, totaltransaksi, tanggaltransaksi, statustransaksi;
     private TextInputEditText diskon;
     private Integer idTransaksi;
@@ -54,8 +60,16 @@ public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
         btnBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(edit_transaksi_penjualan_sparepart.this, tampil_transaksi_penjualan.class);
-                startActivity(i);
+                startIntent();
+            }
+        });
+
+        btnDelete = findViewById(R.id.button_Hapus);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteTransaksiPenjualan();
+                startIntent();
             }
         });
         i = getIntent();
@@ -68,11 +82,6 @@ public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
         totaltransaksi.setText(temptotal.toString());
         statustransaksi.setText(i.getStringExtra("status_transaksi"));
         tanggaltransaksi.setText(i.getStringExtra("tanggal_transaksi"));
-    }
-    public void startIntent()
-    {
-        Intent intent= new Intent(getApplicationContext(), tampil_transaksi_penjualan.class);
-        startActivity(intent);
     }
     private void UpdateTransaksiPenjualan()
     {
@@ -112,4 +121,61 @@ public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
 
         }
     }
+    private void DeleteTransaksiPenjualan(){
+        if(statustransaksi.getText().toString().equalsIgnoreCase("Sudah Lunas"))
+        {
+            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+
+            // Setting Dialog Title
+            alertDialog.setTitle("Delete Transaksi Penjualan");
+
+            // Setting Dialog Message
+            alertDialog.setMessage("Transaksi tidak bisa dihapus!");
+
+            // Setting Icon to Dialog
+            alertDialog.setIcon(R.drawable.logo_atma_auto);
+
+            // Setting OK Button
+            alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to execute after dialog closed
+                }
+            });
+
+            // Showing Alert Message
+            alertDialog.show();
+        }
+        else {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+            Retrofit.Builder builder = new Retrofit
+                    .Builder()
+                    .baseUrl(ApiClient_TransaksiPenjualan.baseURL)
+                    .addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit = builder.build();
+            ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan = retrofit.create(ApiClient_TransaksiPenjualan.class);
+            Call<ResponseBody> transaksipenjualanDAOCall = apiClientTransaksiPenjualan.delete(idTransaksi);
+            transaksipenjualanDAOCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.code() == 201) {
+                        Toast.makeText(getApplicationContext(), "Success Delete", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+    private void startIntent() {
+        Intent intent = new Intent(getApplicationContext(), tampil_transaksi_penjualan.class);
+        startActivity(intent);
+    }
+
 }
