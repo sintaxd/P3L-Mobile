@@ -36,6 +36,12 @@ android:id="@+id/row_container">
         android:layout_height="wrap_content"
         android:text="Tipe Motor" />
 
+    <TextView
+        android:id="@+id/status_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status Service" />
+
 </LinearLayout>
 
 

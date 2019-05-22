@@ -85,7 +85,7 @@ public class edit_data_sparepart extends AppCompatActivity {
         nama_sparepart=i.getStringExtra("nama_sparepart");
         merk_sparepart=i.getStringExtra("merk_sparepart");
         tipe_sparepart= i.getStringExtra("tipe_sparepart");
-        Picasso.get().load("http://192.168.94.52:8000/images/"+picture).fit().into(gambar_sparepart);
+        Picasso.get().load("http://192.168.0.184:8000/images/"+picture).fit().into(gambar_sparepart);
 
         btnBatal = findViewById(R.id.button_Batal);
         btnBatal.setOnClickListener(new View.OnClickListener() {

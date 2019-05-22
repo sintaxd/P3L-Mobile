@@ -58,7 +58,7 @@ public class Adapter_SparepartBengkel extends RecyclerView.Adapter<Adapter_Spare
         myViewHolder.stok_sparepart.setText ("   Stok Sparepart : "+spare.getstokSisa_sparepart());
 
         img=spare.getGambar_sparepart();
-        Picasso.get().load("http://192.168.94.52:8000/images/"+img).fit().into(myViewHolder.gambar_sparepart);
+        Picasso.get().load("http://192.168.0.184:8000/images/"+img).fit().into(myViewHolder.gambar_sparepart);
     }
 
 

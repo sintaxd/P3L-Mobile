@@ -60,7 +60,7 @@ public class Adapter_Sparepart extends RecyclerView.Adapter<Adapter_Sparepart.My
         myViewHolder.merk_sparepart.setText("   Merk Sparepart : "+ spare.getMerk_sparepart());
         myViewHolder.tipe_sparepart.setText("   Tipe Sparepart : "+ spare.getTipe_sparepart());
         img=spare.getGambar_sparepart();
-        Picasso.get().load("http://192.168.94.52:8000/images/"+img).fit().into(myViewHolder.gambar_sparepart);
+        Picasso.get().load("http://192.168.0.184:8000/images/"+img).fit().into(myViewHolder.gambar_sparepart);
     }
 
 

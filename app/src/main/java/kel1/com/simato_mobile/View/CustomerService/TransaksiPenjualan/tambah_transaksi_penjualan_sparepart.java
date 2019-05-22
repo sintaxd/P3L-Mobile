@@ -103,7 +103,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickAddTransaksi();
+                onClickAddTransaksiSparepart();
             }
         });
         btnBatal = findViewById(R.id.button_Batal);
@@ -224,23 +224,6 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         input_satuan.getText().clear();
     }
 
-    public void addTransaksiSparepart(){
-        if (detilTransaksiSparepartList.isEmpty())
-        {
-            Toast.makeText(this, "Tambahkan detil pengadaan!", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-            Retrofit.Builder builder = new Retrofit.
-                    Builder().baseUrl(ApiClient_TransaksiPenjualan.baseURL).
-                    addConverterFactory(GsonConverterFactory.create(gson));
-            Retrofit retrofit = builder.build();
-            ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan = retrofit.create(ApiClient_TransaksiPenjualan.class);
-        }
-    }
     void loadSpinnerCabang()
     {
         Gson gson = new GsonBuilder()
@@ -326,7 +309,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), tampil_transaksi_penjualan.class);
         startActivity(intent);
     }
-    private void onClickAddTransaksi() {
+    private void onClickAddTransaksiSparepart() {
         if (detilTransaksiSparepartList.isEmpty())
         {
             Toast.makeText(this, "Tambahkan detil sparepart!", Toast.LENGTH_SHORT).show();
@@ -345,7 +328,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
             Log.d( "ID Cbg : ",selectedIDCabang.toString() );
             Log.d( "GrandTotal: ",GrandTotal.toString() );
 
-            Call<ResponseBody> transaksisparepartDAOCall = apiClientTransaksiPenjualan.create("SP", selectedIDCabang, GrandTotal);
+            Call<ResponseBody> transaksisparepartDAOCall = apiClientTransaksiPenjualan.create("SP", selectedIDCabang, GrandTotal, null,3);
             transaksisparepartDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

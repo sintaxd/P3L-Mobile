@@ -369,7 +369,7 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
             Log.d( "ID Cbg : ",selectedIDCabang.toString() );
             Log.d( "GrandTotal: ",GrandTotal.toString() );
 
-            Call<ResponseBody> transaksiserviceDAOCall = apiClientTransaksiPenjualan.create("SS", selectedIDCabang, GrandTotal);
+            Call<ResponseBody> transaksiserviceDAOCall = apiClientTransaksiPenjualan.create("SS", selectedIDCabang, GrandTotal,selectedIDMontir,3);
             transaksiserviceDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -377,7 +377,7 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
                         try {
                             JSONObject jsonresponse = new JSONObject(response.body().string());
                             String idTransaksi = jsonresponse.getJSONObject("data").getString("id_transaksi");
-                            Log.d( "ID Pengadaan: ",idTransaksi);
+                            Log.d( "ID Transaksi: ",idTransaksi);
 
                             //memasukkan data dari list local ke tabel detilTransaksiService
                             for(int x=0;x<detilTransaksiServicetList.size();x++) {
@@ -389,7 +389,6 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
                                         addConverterFactory(GsonConverterFactory.create(gson));
                                 Retrofit retrofit=builder.build();
                                 ApiClient_DetilTransaksi apiClientDetilTransaksi = retrofit.create(ApiClient_DetilTransaksi.class);
-
                                 Log.d( "ID Jasa Service: ",detilTransaksiServicetList.get(x).getId_jasaService_fk().toString());
                                 Log.d( "ID Motor Konsumen : ",detilTransaksiServicetList.get(x).getId_motorKonsumen_fk().toString() );
                                 Log.d( "Get Sub Total: ",detilTransaksiServicetList.get(x).getSubTotal_service().toString() );

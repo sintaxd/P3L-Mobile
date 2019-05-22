@@ -36,7 +36,7 @@ public class tambah_data_sparepart extends AppCompatActivity {
 
     private Button btnBatal,btnSimpan;
     private FloatingActionButton mFabChoosePic;
-    private ImageView gambar_sparepart;
+    private ImageView image_gambar_sparepart;
     private Bitmap bitmap, ImageBitmap;
     int Image_Request_Code = 1;
 
@@ -49,7 +49,7 @@ public class tambah_data_sparepart extends AppCompatActivity {
         merk_spp = findViewById(R.id.text_input_merkSparepart);
         tipe_spp = findViewById(R.id.text_input_tipeSparepart);
         kode_spp = findViewById(R.id.text_input_kodeSparepart);
-        gambar_sparepart = findViewById(R.id.imageView_gambarSparepart);
+        image_gambar_sparepart = findViewById(R.id.imageView_gambarSparepart);
 
         btnSimpan = findViewById(R.id.button_Simpan);
         btnSimpan.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class tambah_data_sparepart extends AppCompatActivity {
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), filePath);
                 ImageBitmap=bitmap;
-                gambar_sparepart.setImageBitmap(bitmap);
+                image_gambar_sparepart.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -126,7 +126,8 @@ public class tambah_data_sparepart extends AppCompatActivity {
                 byte[] data = baos.toByteArray();
 
                 RequestBody requestFile = RequestBody.create(MediaType.parse("image/jpeg"), data);
-                MultipartBody.Part body = MultipartBody.Part.createFormData("gambar_sparepart", "image.jpg", requestFile);
+
+                MultipartBody.Part gambar_sparepart = MultipartBody.Part.createFormData("image_gambar_sparepart", "image.jpg", requestFile);
 
                 RequestBody kode_sparepart = RequestBody.create(MediaType.parse("multipart/form-data"), kode_spp.getText().toString());
                 RequestBody nama_sparepart = RequestBody.create(MediaType.parse("multipart/form-data"), nama_spp.getText().toString());
@@ -138,7 +139,7 @@ public class tambah_data_sparepart extends AppCompatActivity {
                 Log.d("Merk Sparepart : ",merk_spp.getText().toString());
                 Log.d("Tipe Sparepart : ",tipe_spp.getText().toString());
 
-                Call<ResponseBody> sparepartDAOCall = apiClient.create(body, kode_sparepart, nama_sparepart, merk_sparepart, tipe_sparepart);
+                Call<ResponseBody> sparepartDAOCall = apiClient.create(gambar_sparepart, kode_sparepart, nama_sparepart, merk_sparepart, tipe_sparepart);
             sparepartDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
