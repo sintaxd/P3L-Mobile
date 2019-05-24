@@ -98,11 +98,11 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
     String selectedNamaJasaService;
     Button btnBatal, btnSimpan;
     Double GrandTotal=0.0, selectedHargaJasaService;
-    RecyclerView rview;
-    private Adapter_DetilTransaksiService adapter;
-    private Adapter_DetilTransaksiSparepart adapter2;
+    RecyclerView rview_service, rview_sparepart;
+    private Adapter_DetilTransaksiService adapter_service;
+    private Adapter_DetilTransaksiSparepart adapter_sparepart;
 
-    private RecyclerView.LayoutManager layout;
+    private RecyclerView.LayoutManager layout_service, layout_sparepart;
 
     TextView setTanggal, totalHarga_fix, namaKonsumen_fix;
     ImageView addDetilTransaksiService;
@@ -137,9 +137,13 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
         nama_konsumen = findViewById(R.id.text_input_namaKonsumen);
         namaKonsumen_fix = findViewById(R.id.textView_namaKonsumen);
 
-        rview = findViewById(R.id.recycler_view_detil_transaksi_service);
-        layout = new LinearLayoutManager(getApplicationContext());
-        rview.setLayoutManager(layout);
+        rview_service = findViewById(R.id.recycler_view_detil_transaksi_service);
+        layout_service = new LinearLayoutManager(getApplicationContext());
+        rview_service.setLayoutManager(layout_service);
+
+        rview_sparepart = findViewById(R.id.recycler_view_detil_transaksi_sparepart);
+        layout_sparepart = new LinearLayoutManager(getApplicationContext());
+        rview_sparepart.setLayoutManager(layout_sparepart);
 
         imgSearch = findViewById(R.id.img_Search);
         imgSearch.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +156,7 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickAddTransaksi();
+                onClickAddTransaksiServiceSparepart();
             }
         });
 
@@ -216,17 +220,7 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
             public void onNothingSelected(AdapterView<?> parentView) {
             }
         });
-        loadSpinnerPlatMotor();
-        spinner_plat_konsumen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown plat konsumen saat dipilih
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                selectedIDMotorKonsumen = Integer.parseInt(spinner_IDMotorKonsumen.get(position)); //Mendapatkan id dari dropdown yang dipilih
-                Log.d("ID Motor Konsumen: ",selectedIDMotorKonsumen.toString());
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
+
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("updateTotal"));
     }
@@ -252,7 +246,19 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
                         String temp_nama = jsonresponse.getJSONObject("data").getString("nama_konsumen");
                         tempIDKonsumen = Integer.parseInt(jsonresponse.getJSONObject("data").getString("id_konsumen"));
                         Log.d("Nama: ",temp_nama);
+                        Log.d("ID Konsumen: ",tempIDKonsumen.toString());
                         namaKonsumen_fix.setText(temp_nama);
+                        loadSpinnerPlatMotor();
+                        spinner_plat_konsumen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown plat konsumen saat dipilih
+                            @Override
+                            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                                selectedIDMotorKonsumen = Integer.parseInt(spinner_IDMotorKonsumen.get(position)); //Mendapatkan id dari dropdown yang dipilih
+                                Log.d("ID Motor Konsumen: ",selectedIDMotorKonsumen.toString());
+                            }
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parentView) {
+                            }
+                        });
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -295,8 +301,8 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
                 Double.parseDouble(selectedHargaSparepartCabang),
                 selectedNamaSparepartCabang));
 
-        adapter2 = new Adapter_DetilTransaksiSparepart(detilTransaksiSparepartList);
-        rview.setAdapter(adapter2);
+        adapter_sparepart = new Adapter_DetilTransaksiSparepart(detilTransaksiSparepartList);
+        rview_sparepart.setAdapter(adapter_sparepart);
         GrandTotal=GrandTotal+sub_total_sparepart;
         totalHarga_fix.setText(GrandTotal.toString());
         input_satuan.getText().clear();
@@ -305,8 +311,9 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
         Double sub_total_service;
         sub_total_service=selectedHargaJasaService;
         detilTransaksiServicetList.add(new Model_DetilTransaksiService(sub_total_service, selectedIDMotorKonsumen,selectedIDJasaService, selectedNamaJasaService,selectedHargaJasaService));
-        adapter = new Adapter_DetilTransaksiService(detilTransaksiServicetList);
-        rview.setAdapter(adapter);
+        Log.d("addDetil: ",detilTransaksiServicetList.toString());
+        adapter_service = new Adapter_DetilTransaksiService(detilTransaksiServicetList);
+        rview_service.setAdapter(adapter_service);
         GrandTotal=GrandTotal+sub_total_service;
         totalHarga_fix.setText(GrandTotal.toString());
     }
@@ -423,12 +430,14 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
 
         //ngeload plat motor konsumen dari database kedalam spinner
         ApiClient_MotorKonsumen apiclientMotorKonsumen = retrofit.create(ApiClient_MotorKonsumen.class);
-        Call<LD_MotorKonsumen> callMotorKonsumen = apiclientMotorKonsumen.show();
+        Log.d("ID Konsumen plat: ",tempIDKonsumen.toString());
+        Call<LD_MotorKonsumen> callMotorKonsumen = apiclientMotorKonsumen.showById(tempIDKonsumen);
         callMotorKonsumen.enqueue(new Callback<LD_MotorKonsumen>() {
             @Override
             public void onResponse(Call<LD_MotorKonsumen> callMotorKonsumen, Response<LD_MotorKonsumen> response) {
 
                 spinnerNamaMotorKonsumenArray = response.body().getData();
+                spinner_platMotorKonsumen.clear();
                 for (int i = 0; i < spinnerNamaMotorKonsumenArray.size(); i++) {
                     spinner_platMotorKonsumen.add(spinnerNamaMotorKonsumenArray.get(i).getPlat_motorKonsumen());
                     spinner_IDMotorKonsumen.add(spinnerNamaMotorKonsumenArray.get(i).getId_motorKonsumen().toString());
@@ -495,12 +504,17 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
         Intent intent = new Intent(getApplicationContext(), tampil_transaksi_penjualan.class);
         startActivity(intent);
     }
-    private void onClickAddTransaksi() {
+    private void onClickAddTransaksiServiceSparepart() {
         if (detilTransaksiServicetList.isEmpty())
         {
             Toast.makeText(this, "Tambahkan detil jasa service!", Toast.LENGTH_SHORT).show();
         }
-        else {
+        else if (detilTransaksiSparepartList.isEmpty())
+        {
+            Toast.makeText(this, "Tambahkan detil sparepart!", Toast.LENGTH_SHORT).show();
+        }
+        else
+            {
             Gson gson = new GsonBuilder()
                     .setLenient()
                     .create();
@@ -514,29 +528,29 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
             Log.d( "ID Cbg : ",selectedIDCabang.toString() );
             Log.d( "GrandTotal: ",GrandTotal.toString() );
 
-            Call<ResponseBody> transaksiserviceDAOCall = apiClientTransaksiPenjualan.create("SS", selectedIDCabang, GrandTotal,selectedIDMontir,3);
-            transaksiserviceDAOCall.enqueue(new Callback<ResponseBody>() {
+            Call<ResponseBody> transaksiservicesparepartDAOCall = apiClientTransaksiPenjualan.create("SV", selectedIDCabang, GrandTotal,selectedIDMontir,3);
+                transaksiservicesparepartDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.code() == 201) {
                         try {
                             JSONObject jsonresponse = new JSONObject(response.body().string());
                             String idTransaksi = jsonresponse.getJSONObject("data").getString("id_transaksi");
-                            Log.d( "ID Transaksi: ",idTransaksi);
+                            Log.d("ID Transaksi: ", idTransaksi);
 
                             //memasukkan data dari list local ke tabel detilTransaksiService
-                            for(int x=0;x<detilTransaksiServicetList.size();x++) {
+                            for (int x = 0; x < detilTransaksiServicetList.size(); x++) {
                                 Gson gson = new GsonBuilder()
                                         .setLenient()
                                         .create();
-                                Retrofit.Builder builder=new Retrofit.
+                                Retrofit.Builder builder = new Retrofit.
                                         Builder().baseUrl(ApiClient_DetilTransaksi.baseURL).
                                         addConverterFactory(GsonConverterFactory.create(gson));
-                                Retrofit retrofit=builder.build();
+                                Retrofit retrofit = builder.build();
                                 ApiClient_DetilTransaksi apiClientDetilTransaksi = retrofit.create(ApiClient_DetilTransaksi.class);
-                                Log.d( "ID Jasa Service: ",detilTransaksiServicetList.get(x).getId_jasaService_fk().toString());
-                                Log.d( "ID Motor Konsumen : ",detilTransaksiServicetList.get(x).getId_motorKonsumen_fk().toString() );
-                                Log.d( "Get Sub Total: ",detilTransaksiServicetList.get(x).getSubTotal_service().toString() );
+                                Log.d("ID Jasa Service: ", detilTransaksiServicetList.get(x).getId_jasaService_fk().toString());
+                                Log.d("ID Motor Konsumen : ", detilTransaksiServicetList.get(x).getId_motorKonsumen_fk().toString());
+                                Log.d("Get Sub Total: ", detilTransaksiServicetList.get(x).getSubTotal_service().toString());
 
                                 Call<ResponseBody> detilpengadaansparepartDAOCall = apiClientDetilTransaksi.createDetilTransaksiService(
                                         Integer.parseInt(idTransaksi),
@@ -549,104 +563,46 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
                                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                         if (response.code() == 201) {
                                             Toast.makeText(tambah_transaksi_penjualan_service_sparepart.this, "Tambah Transaksi Penjualan Service Sparepart berhasil!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
-                                            Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                    @Override
-                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                        Toast.makeText(getApplicationContext(),t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }
-                        catch (JSONException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-
-                    } else {
-                        Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
-                    }
-                    Log.d("on respon : ",String.valueOf(response.code()));
-                    startIntent();
-                }
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    Toast.makeText(tambah_transaksi_penjualan_service_sparepart.this,  t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-    private void onClickAddTransaksiSparepart() {
-        if (detilTransaksiSparepartList.isEmpty())
-        {
-            Toast.makeText(this, "Tambahkan detil sparepart!", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .create();
-            Retrofit.Builder builder = new Retrofit
-                    .Builder()
-                    .baseUrl(ApiClient_TransaksiPenjualan.baseURL)
-                    .addConverterFactory(GsonConverterFactory.create(gson));
-            Retrofit retrofit = builder.build();
-            ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan = retrofit.create(ApiClient_TransaksiPenjualan.class);
-
-            Log.d( "ID Cbg : ",selectedIDCabang.toString() );
-            Log.d( "GrandTotal: ",GrandTotal.toString() );
-
-            Call<ResponseBody> transaksisparepartDAOCall = apiClientTransaksiPenjualan.create("SP", selectedIDCabang, GrandTotal, null,3);
-            transaksisparepartDAOCall.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                    if (response.code() == 201) {
-                        try {
-                            JSONObject jsonresponse = new JSONObject(response.body().string());
-                            String idTransaksi = jsonresponse.getJSONObject("data").getString("id_transaksi");
-                            Log.d( "ID Pengadaan: ",idTransaksi);
-
-                            //memasukkan data dari list local ke tabel detilTransaksiSparepart
-                            for(int x=0;x<detilTransaksiSparepartList.size();x++) {
-                                Gson gson = new GsonBuilder()
-                                        .setLenient()
-                                        .create();
-                                Retrofit.Builder builder=new Retrofit.
-                                        Builder().baseUrl(ApiClient_DetilTransaksi.baseURL).
-                                        addConverterFactory(GsonConverterFactory.create(gson));
-                                Retrofit retrofit=builder.build();
-                                ApiClient_DetilTransaksi apiClientDetilTransaksi = retrofit.create(ApiClient_DetilTransaksi.class);
-
-                                Log.d( "ID Sparepart Cabang: ",detilTransaksiSparepartList.get(x).getId_sparepartCabang_fk().toString());
-                                Log.d( "ID Konsumen : ",detilTransaksiSparepartList.get(x).getId_konsumen_fk().toString());
-                                Log.d( "Jumlah Beli Spp : ",detilTransaksiSparepartList.get(x).getJumlahBeli_sparepart().toString());
-                                Log.d( "Get Sub Total: ",detilTransaksiSparepartList.get(x).getSubTotal_sparepart().toString() );
-
-                                Call<ResponseBody> detiltransaksisparepartDAOCall = apiClientDetilTransaksi.createDetilTransaksiSparepart(
-                                        Integer.parseInt(idTransaksi),
-                                        detilTransaksiSparepartList.get(x).getId_sparepartCabang_fk(),
-                                        detilTransaksiSparepartList.get(x).getId_konsumen_fk(),
-                                        detilTransaksiSparepartList.get(x).getJumlahBeli_sparepart(),
-                                        detilTransaksiSparepartList.get(x).getSubTotal_sparepart());
-
-                                detiltransaksisparepartDAOCall.enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                        if (response.code() == 201) {
-                                            Toast.makeText(tambah_transaksi_penjualan_service_sparepart.this, "Tambah Transaksi Penjualan Sparepart berhasil!", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else {
-                                            Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                     @Override
                                     public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                        Toast.makeText(getApplicationContext(),t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                                //memasukkan data dari list local ke tabel detilTransaksiSparepart
+                                for (int y = 0; y < detilTransaksiSparepartList.size(); y++) {
+                                    ApiClient_DetilTransaksi apiClientDetilTransaksiSparepart = retrofit.create(ApiClient_DetilTransaksi.class);
+
+                                    Log.d("ID Sparepart Cabang: ", detilTransaksiSparepartList.get(x).getId_sparepartCabang_fk().toString());
+                                    Log.d("ID Konsumen : ", detilTransaksiSparepartList.get(x).getId_konsumen_fk().toString());
+                                    Log.d("Jumlah Beli Spp : ", detilTransaksiSparepartList.get(x).getJumlahBeli_sparepart().toString());
+                                    Log.d("Get Sub Total: ", detilTransaksiSparepartList.get(x).getSubTotal_sparepart().toString());
+
+                                    Call<ResponseBody> detiltransaksisparepartDAOCall = apiClientDetilTransaksi.createDetilTransaksiSparepart(
+                                            Integer.parseInt(idTransaksi),
+                                            detilTransaksiSparepartList.get(x).getId_sparepartCabang_fk(),
+                                            detilTransaksiSparepartList.get(x).getId_konsumen_fk(),
+                                            detilTransaksiSparepartList.get(x).getJumlahBeli_sparepart(),
+                                            detilTransaksiSparepartList.get(x).getSubTotal_sparepart());
+
+                                    detiltransaksisparepartDAOCall.enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                            if (response.code() == 201) {
+                                                Toast.makeText(tambah_transaksi_penjualan_service_sparepart.this, "Tambah Transaksi Penjualan Sparepart berhasil!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getApplicationContext(), response.message(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                            Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             }
                         }
                         catch (JSONException e) {

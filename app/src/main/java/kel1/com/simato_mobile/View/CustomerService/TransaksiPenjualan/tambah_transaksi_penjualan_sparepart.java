@@ -1,7 +1,9 @@
 package kel1.com.simato_mobile.View.CustomerService.TransaksiPenjualan;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.design.widget.TextInputEditText;
@@ -49,6 +51,7 @@ import kel1.com.simato_mobile.Model.Model_Konsumen;
 import kel1.com.simato_mobile.Model.Model_Sparepart;
 import kel1.com.simato_mobile.Model.Model_SparepartCabang;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.CustomerService.Konsumen.tampil_data_konsumen;
 import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tambah_pengadaan_sparepart;
 import kel1.com.simato_mobile.View.Owner.SparepartCabang.tambah_data_sparepart_cabang;
 import okhttp3.ResponseBody;
@@ -167,25 +170,37 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.code() == 201) {
+                    try {
+                        JSONObject jsonresponse = new JSONObject(response.body().string());
+                        Log.d("onResponse: ",response.body().toString());
+                        String temp_nama = jsonresponse.getJSONObject("data").getString("nama_konsumen");
+                        tempIDKonsumen = Integer.parseInt(jsonresponse.getJSONObject("data").getString("id_konsumen"));
+                        Log.d("Nama: ",temp_nama);
+//                        AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
+//                        alertDialog.setTitle("Tambah Transaksi Penjualan Sparepart");
+//                        alertDialog.setMessage("Data Konsumen Ditemukan !");
+//                        alertDialog.setIcon(R.drawable.logo_atma_auto);
+//                        alertDialog.setButton("OK", new DialogInterface.OnClickListener() {
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                // Write your code here to execute after dialog closed
+//                            }
+//                        });
+//                        alertDialog.show();
+                        namaKonsumen_fix.setText(temp_nama);
 
-                        try {
-                            JSONObject jsonresponse = new JSONObject(response.body().string());
-                            Log.d("onResponse: ",response.body().toString());
-                            String temp_nama = jsonresponse.getJSONObject("data").getString("nama_konsumen");
-                            tempIDKonsumen = Integer.parseInt(jsonresponse.getJSONObject("data").getString("id_konsumen"));
-                            Log.d("Nama: ",temp_nama);
-                            namaKonsumen_fix.setText(temp_nama);
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        catch (IOException i)
-                        {
-                            i.printStackTrace();
-                        }
-                    Toast.makeText(tambah_transaksi_penjualan_sparepart.this, "Data Konsumen ditemukan", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(),response.message(), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    catch (IOException i)
+                    {
+                        i.printStackTrace();
+                    }
+                }
+                else if(tempIDKonsumen==null)
+                {
+                    Toast.makeText(getApplicationContext(),"Data konsumen tidak ditemukan, anda akan diarahkan ke Pengelolaan Konsumen", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), tampil_data_konsumen.class);
+                    startActivity(intent);
                 }
                 Log.d("on respon : ",String.valueOf(response.code()));
             }
@@ -284,7 +299,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
                 }
                 ArrayAdapter<String> adapterNamaSparepartCabang = new ArrayAdapter<>(tambah_transaksi_penjualan_sparepart.this, R.layout.spinner_sparepart_layout, R.id.txtNamaSparepart, spinner_namaSparepartCabang);
                 spinner_sparepartcabang.setAdapter(adapterNamaSparepartCabang);
-                Toast.makeText(tambah_transaksi_penjualan_sparepart.this, response.message(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(tambah_transaksi_penjualan_sparepart.this,"Data berhasil di load!", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<LD_SparepartCabang> call, Throwable t) {

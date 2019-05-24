@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 
 public interface ApiClient_MotorKonsumen {
 
-    String baseURL = "http://192.168.0.184:8000";
+    String baseURL = "http://10.66.99.213:8000";
     //String baseURL = "http://simato.jasonfw.com/";
     // --------------------- C R E A T E --------------------- //
 
@@ -32,6 +32,11 @@ public interface ApiClient_MotorKonsumen {
 
     @GET("api/motorKonsumen")
     Call<LD_MotorKonsumen> show();
+
+    @GET("api/motorKonsumen/{id_konsumen_fk}")
+    Call<LD_MotorKonsumen> showById(
+            @Path("id_konsumen_fk")Integer id_konsumen_fk);
+
 
     // ----------------------- R E A D ----------------------- //
 

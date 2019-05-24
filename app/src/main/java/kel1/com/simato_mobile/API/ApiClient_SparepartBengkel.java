@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 public interface ApiClient_SparepartBengkel {
 
-    String baseURL = "http://192.168.0.184:8000";
+    String baseURL = "http://10.66.99.213:8000";
     //String baseURL = "http://simato.jasonfw.com/";
 
     // ----------------------- R E A D ----------------------- //

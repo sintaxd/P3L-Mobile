@@ -143,20 +143,6 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
                 Toast.makeText(tambah_transaksi_penjualan_service.this, "miaaw", Toast.LENGTH_SHORT).show();
             }
         });
-
-        loadSpinnerNamaJasaService();
-        spinner_nama_jasa_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama jasa service saat dipilih
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                selectedIDJasaService = Integer.parseInt(spinner_IDJasaService.get(position)); //Mendapatkan id dari dropdown yang dipilih
-                selectedHargaJasaService = Double.parseDouble(spinner_hargaJasaService.get(position));
-                selectedNamaJasaService=spinner_namaJasaService.get(position);
-                Log.d("ID Jasa Service: ",selectedIDJasaService.toString());
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-            }
-        });
         loadSpinnerNamaCabang();
         spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
             @Override
@@ -185,6 +171,19 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedIDMotorKonsumen = Integer.parseInt(spinner_IDMotorKonsumen.get(position)); //Mendapatkan id dari dropdown yang dipilih
                 Log.d("ID Motor Konsumen: ",selectedIDMotorKonsumen.toString());
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+        });
+        loadSpinnerNamaJasaService();
+        spinner_nama_jasa_service.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama jasa service saat dipilih
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                selectedIDJasaService = Integer.parseInt(spinner_IDJasaService.get(position)); //Mendapatkan id dari dropdown yang dipilih
+                selectedHargaJasaService = Double.parseDouble(spinner_hargaJasaService.get(position));
+                selectedNamaJasaService=spinner_namaJasaService.get(position);
+                Log.d("ID Jasa Service: ",selectedIDJasaService.toString());
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
