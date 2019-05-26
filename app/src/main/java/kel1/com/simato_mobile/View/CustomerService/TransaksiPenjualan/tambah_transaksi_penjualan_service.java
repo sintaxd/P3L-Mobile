@@ -113,14 +113,12 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
         //set it as current date.
         setTanggal.setText(date_now);
         totalHarga_fix = findViewById(R.id.textView_totalHargaFix);
-        //spinner_cabang = findViewById(R.id.spinner_cabang);
+
         spinner_nama_jasa_service = findViewById(R.id.spinner_nama_jasa_service);
         spinner_montir = findViewById(R.id.spinner_montir);
         spinner_plat_konsumen = findViewById(R.id.spinner_plat_konsumen);
 
         namaCabang_fix = findViewById(R.id.textView_namaCabangFix);
-        namaCabang_fix.setText(sessionManager.getIdCabang());
-
 
         rview = findViewById(R.id.recycler_view_detil_transaksi_service);
         layout = new LinearLayoutManager(getApplicationContext());
@@ -147,7 +145,6 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addDetilTransaksiServiceFunction();
-                Toast.makeText(tambah_transaksi_penjualan_service.this, "miaaw", Toast.LENGTH_SHORT).show();
             }
         });
         loadNamaCabang();
@@ -273,38 +270,6 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
             @Override
             public void onFailure(Call<LD_Pegawai> call, Throwable t) {
                 Toast.makeText(tambah_transaksi_penjualan_service.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    void loadSpinnerNamaCabang(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit.Builder builder = new Retrofit
-                .Builder()
-                .baseUrl(ApiClient_Cabang.baseURL)
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-
-        //ngeload nama cabang dari database kedalam spinner
-        ApiClient_Cabang apiclientCabang = retrofit.create(ApiClient_Cabang.class);
-        Call<LD_Cabang> callCabang = apiclientCabang.show();
-        callCabang.enqueue(new Callback<LD_Cabang>() {
-            @Override
-            public void onResponse(Call<LD_Cabang> callCabang, Response<LD_Cabang> response) {
-
-                spinnerNamaCabangArray = response.body().getData();
-                for (int i = 0; i < spinnerNamaCabangArray.size(); i++) {
-                    spinner_namaCabang.add(spinnerNamaCabangArray.get(i).getNama_cabang());
-                    spinner_IDCabang.add(spinnerNamaCabangArray.get(i).getId_cabang().toString());
-                }
-                ArrayAdapter<String> adapterNamaCabang = new ArrayAdapter<>(tambah_transaksi_penjualan_service.this, R.layout.spinner_cabang_layout, R.id.txtNamaCabang, spinner_namaCabang);
-                spinner_cabang.setAdapter(adapterNamaCabang);
-            }
-            @Override
-            public void onFailure(Call<LD_Cabang> call, Throwable t) {
-                Toast.makeText(tambah_transaksi_penjualan_service.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("onFailure: ",t.getLocalizedMessage());
             }
         });
     }

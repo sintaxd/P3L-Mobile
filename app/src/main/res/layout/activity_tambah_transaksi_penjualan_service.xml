@@ -58,10 +58,6 @@ tools:context=".View.CustomerService.TransaksiPenjualan.tambah_transaksi_penjual
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="18sp" />
-            <!--<Spinner-->
-                <!--android:id="@+id/spinner_cabang"-->
-                <!--android:layout_width="170dp"-->
-                <!--android:layout_height="wrap_content" />-->
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
