@@ -240,22 +240,29 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         }
     };
     public void addDetilTransaksiSparepartFunction(){
-        Double sub_total_sparepart;
-        sub_total_sparepart=Double.parseDouble(input_satuan.getText().toString())*Double.parseDouble(selectedHargaSparepartCabang);
+        if(input_satuan.getText().toString().isEmpty())
+        {
+            Toast.makeText(tambah_transaksi_penjualan_sparepart.this,"Masukan jumlah satuan!", Toast.LENGTH_SHORT).show();
+        }
+        else
+            {
+            Double sub_total_sparepart;
+            sub_total_sparepart = Double.parseDouble(input_satuan.getText().toString()) * Double.parseDouble(selectedHargaSparepartCabang);
 
-        detilTransaksiSparepartList.add(new Model_DetilTransaksiSparepart(
-                Integer.parseInt(selectedIDSparepartCabang),
-                Integer.parseInt(selectedIDKonsumen),
-                Integer.parseInt(input_satuan.getText().toString()),
-                sub_total_sparepart,
-                Double.parseDouble(selectedHargaSparepartCabang),
-                selectedNamaSparepartCabang));
+            detilTransaksiSparepartList.add(new Model_DetilTransaksiSparepart(
+                    Integer.parseInt(selectedIDSparepartCabang),
+                    Integer.parseInt(selectedIDKonsumen),
+                    Integer.parseInt(input_satuan.getText().toString()),
+                    sub_total_sparepart,
+                    Double.parseDouble(selectedHargaSparepartCabang),
+                    selectedNamaSparepartCabang));
 
-        adapter = new Adapter_DetilTransaksiSparepart(detilTransaksiSparepartList);
-        rview.setAdapter(adapter);
-        GrandTotal=GrandTotal+sub_total_sparepart;
-        totalHarga_fix.setText(GrandTotal.toString());
-        input_satuan.getText().clear();
+            adapter = new Adapter_DetilTransaksiSparepart(detilTransaksiSparepartList);
+            rview.setAdapter(adapter);
+            GrandTotal = GrandTotal + sub_total_sparepart;
+            totalHarga_fix.setText(GrandTotal.toString());
+            input_satuan.getText().clear();
+        }
     }
     void loadSpinnerNamaSparepartCabang()
     {

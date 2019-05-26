@@ -14,6 +14,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import kel1.com.simato_mobile.API.ApiClient_Motor;
 import kel1.com.simato_mobile.API.ApiClient_PengadaanSparepart;
 import kel1.com.simato_mobile.API.ApiClient_TransaksiPenjualan;
@@ -81,7 +87,20 @@ public class edit_transaksi_penjualan_sparepart extends AppCompatActivity {
         idTransaksi=i.getIntExtra("id_transaksi",-1);
         totaltransaksi.setText(temptotal.toString());
         statustransaksi.setText(i.getStringExtra("status_transaksi"));
-        tanggaltransaksi.setText(i.getStringExtra("tanggal_transaksi"));
+
+        final DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        final DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
+        final String temp_date=i.getStringExtra("tanggal_transaksi");
+        Date date = null;
+        try
+        {
+            date = inputFormat.parse(temp_date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        final String outputDateStr = outputFormat.format(date);
+        tanggaltransaksi.setText(outputDateStr);
+
     }
     private void UpdateTransaksiPenjualan()
     {
