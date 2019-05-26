@@ -23,7 +23,11 @@
 
         </activity>
         <activity android:name=".View.CustomerService.cs_main_menu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".View.Konsumen.konsumen_main_menu"
@@ -59,11 +63,7 @@
             android:label="Sparepart Dengan Stok Kurang"
             android:theme="@style/OwnerTheme" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".recycle_adapter_konsumen" />
         <activity android:name=".recycle_adapter_motor" />

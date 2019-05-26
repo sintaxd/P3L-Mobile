@@ -6,7 +6,7 @@ import retrofit2.http.GET;
 
 public interface ApiClient_JasaService {
 
-    String baseURL = "http://192.168.0.100:8000";
+    String baseURL = "http://192.168.94.40:8000";
     //String baseURL = "http://simato.jasonfw.com/";
     // ----------------------- R E A D ----------------------- //
 

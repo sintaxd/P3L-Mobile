@@ -71,7 +71,7 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
 
     TextView setTanggal, totalHarga_fix, namaCabang_fix;
     ImageView addDetilTransaksiService;
-    Spinner spinner_nama_jasa_service, spinner_cabang, spinner_montir, spinner_plat_konsumen;
+    Spinner spinner_nama_jasa_service, spinner_montir, spinner_plat_konsumen;
 
     List<Model_JasaService> spinnerJasaServiceArray = new ArrayList<>();
     List<Model_Cabang> spinnerNamaCabangArray = new ArrayList<>();
@@ -82,9 +82,6 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
     List<String> spinner_namaJasaService = new ArrayList<>();
     List<String> spinner_hargaJasaService = new ArrayList<>();
 
-    List<String> spinner_IDCabang = new ArrayList<>();
-    List<String> spinner_namaCabang = new ArrayList<>();
-
     List<String> spinner_IDPegawai = new ArrayList<>();
     List<String> spinner_namaPegawai = new ArrayList<>();
 
@@ -92,7 +89,7 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
     List<String> spinner_platMotorKonsumen = new ArrayList<>();
     private List<Model_DetilTransaksiService> detilTransaksiServicetList = new ArrayList<Model_DetilTransaksiService>();
 
-    Integer tempIDJasaService, selectedIDMontir, selectedIDJasaService, selectedIDMotorKonsumen;
+    Integer selectedIDMontir, selectedIDJasaService, selectedIDMotorKonsumen;
     String selectedNamaJasaService;
     Button btnBatal, btnSimpan;
     Double GrandTotal=0.0, selectedHargaJasaService;

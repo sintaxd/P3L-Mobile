@@ -51,6 +51,7 @@ import kel1.com.simato_mobile.Model.Model_Konsumen;
 import kel1.com.simato_mobile.Model.Model_Sparepart;
 import kel1.com.simato_mobile.Model.Model_SparepartCabang;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.SessionManager.SessionManager;
 import kel1.com.simato_mobile.View.CustomerService.Konsumen.tampil_data_konsumen;
 import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tambah_pengadaan_sparepart;
 import kel1.com.simato_mobile.View.Owner.SparepartCabang.tambah_data_sparepart_cabang;
@@ -63,7 +64,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
 
-    Spinner spinner_cabang, spinner_sparepartcabang;
+    Spinner spinner_sparepartcabang;
 
     //ini untuk load data
     List<Model_Cabang> spinnerNamaCabangArray = new ArrayList<>();
@@ -73,14 +74,11 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
     List<String> spinner_IDSparepartCabang = new ArrayList<>();
     List<String> spinner_hargaSparepart = new ArrayList<>();
 
-    List<String> spinner_IDCabang = new ArrayList<>();
-    List<String> spinner_namaCabang = new ArrayList<>();
-
     private List<Model_DetilTransaksiSparepart> detilTransaksiSparepartList = new ArrayList<Model_DetilTransaksiSparepart>();
 
-    Integer tempID,selectedIDCabang, tempIDKonsumen;
-    String selectedIDSparepartCabang,  selectedHargaSparepartCabang, selectedNamaSparepartCabang;
-    TextView setTanggal, totalHarga_fix, namaKonsumen_fix;
+    Integer tempID,selectedIDCabang;
+    String selectedIDSparepartCabang,  selectedHargaSparepartCabang, selectedNamaSparepartCabang, selectedIDKonsumen;
+    TextView setTanggal, totalHarga_fix, namaKonsumen_fix, namaCabang_fix;
     ImageView addDetilTransaksiSparepart, imgSearch;
     Button btnSimpan, btnBatal;
     private TextInputEditText input_satuan;
@@ -90,11 +88,13 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
     Double GrandTotal=0.0;
     String date_now, temp_nama;
     TextInputEditText nama_konsumen;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_transaksi_penjualan_sparepart);
-        spinner_cabang = findViewById(R.id.spinner_cabang);
+        sessionManager = new SessionManager(getApplicationContext());
+        selectedIDCabang = Integer.parseInt(sessionManager.getIdCabang());
         spinner_sparepartcabang = findViewById(R.id.spinner_sparepart_cabang);
         input_satuan = findViewById(R.id.text_input_satuan);
         totalHarga_fix = findViewById(R.id.textView_totalHargaFix);
@@ -120,6 +120,9 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         date_now = new SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault()).format(new Date());
         //set it as current date.
         setTanggal.setText(date_now);
+        namaCabang_fix = findViewById(R.id.textView_namaCabang_fix);
+        loadNamaCabang();
+        loadSpinnerNamaSparepartCabang();
         rview = findViewById(R.id.recycler_view_detil_transaksi_sparepart);
         layout = new LinearLayoutManager(getApplicationContext());
         rview.setLayoutManager(layout);
@@ -128,30 +131,46 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addDetilTransaksiSparepartFunction();
-                Toast.makeText(tambah_transaksi_penjualan_sparepart.this, "miaaw", Toast.LENGTH_SHORT).show();
             }
         });
-
-        loadSpinnerCabang();
-        spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                selectedIDCabang = Integer.parseInt(spinner_IDCabang.get(position)); //Mendapatkan id dari dropdown yang dipilih
-                loadSpinnerNamaSparepartCabang();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                selectedIDCabang=1;
-                loadSpinnerNamaSparepartCabang();
-            }
-        });
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-                new IntentFilter("updateTotal"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("updateTotal"));
 
         imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addKonsumenFunction();
+            }
+        });
+    }
+    void loadNamaCabang(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_Cabang.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+
+        //ngeload nama cabang dari database
+        ApiClient_Cabang apiclientCabang = retrofit.create(ApiClient_Cabang.class);
+        Call<LD_Cabang> callCabang = apiclientCabang.show();
+        callCabang.enqueue(new Callback<LD_Cabang>() {
+            @Override
+            public void onResponse(Call<LD_Cabang> callCabang, Response<LD_Cabang> response) {
+
+                spinnerNamaCabangArray = response.body().getData();
+                for (int i = 0; i < spinnerNamaCabangArray.size(); i++) {
+                    if(spinnerNamaCabangArray.get(i).getId_cabang()==Integer.parseInt(sessionManager.getIdCabang()))
+                    {
+                        namaCabang_fix.setText(spinnerNamaCabangArray.get(i).getNama_cabang());
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<LD_Cabang> call, Throwable t) {
+                Toast.makeText(tambah_transaksi_penjualan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("onFailure: ",t.getLocalizedMessage());
             }
         });
     }
@@ -174,7 +193,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
                         JSONObject jsonresponse = new JSONObject(response.body().string());
                         Log.d("onResponse: ",response.body().toString());
                         String temp_nama = jsonresponse.getJSONObject("data").getString("nama_konsumen");
-                        tempIDKonsumen = Integer.parseInt(jsonresponse.getJSONObject("data").getString("id_konsumen"));
+                        selectedIDKonsumen = jsonresponse.getJSONObject("data").getString("id_konsumen");
                         Log.d("Nama: ",temp_nama);
 //                        AlertDialog alertDialog = new AlertDialog.Builder(getApplicationContext()).create();
 //                        alertDialog.setTitle("Tambah Transaksi Penjualan Sparepart");
@@ -196,7 +215,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
                         i.printStackTrace();
                     }
                 }
-                else if(tempIDKonsumen==null)
+                else if(selectedIDKonsumen==null)
                 {
                     Toast.makeText(getApplicationContext(),"Data konsumen tidak ditemukan, anda akan diarahkan ke Pengelolaan Konsumen", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(getApplicationContext(), tampil_data_konsumen.class);
@@ -226,7 +245,7 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
 
         detilTransaksiSparepartList.add(new Model_DetilTransaksiSparepart(
                 Integer.parseInt(selectedIDSparepartCabang),
-                tempIDKonsumen,
+                Integer.parseInt(selectedIDKonsumen),
                 Integer.parseInt(input_satuan.getText().toString()),
                 sub_total_sparepart,
                 Double.parseDouble(selectedHargaSparepartCabang),
@@ -237,41 +256,6 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         GrandTotal=GrandTotal+sub_total_sparepart;
         totalHarga_fix.setText(GrandTotal.toString());
         input_satuan.getText().clear();
-    }
-
-    void loadSpinnerCabang()
-    {
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-        Retrofit.Builder builder = new Retrofit
-                .Builder()
-                .baseUrl(ApiClient_Cabang.baseURL)
-                .addConverterFactory(GsonConverterFactory.create());
-        Retrofit retrofit = builder.build();
-
-        //ngeload nama cabang dari database kedalam spinner
-        ApiClient_Cabang apiclientCabang = retrofit.create(ApiClient_Cabang.class);
-        Call<LD_Cabang> callCabang = apiclientCabang.show();
-        callCabang.enqueue(new Callback<LD_Cabang>() {
-            @Override
-            public void onResponse(Call<LD_Cabang> callCabang, Response<LD_Cabang> response) {
-
-                spinnerNamaCabangArray = response.body().getData();
-              //  spinnerIDCabangArray = response.body().getData();
-                for (int i = 0; i < spinnerNamaCabangArray.size(); i++) {
-                    spinner_namaCabang.add(spinnerNamaCabangArray.get(i).getNama_cabang());
-                    spinner_IDCabang.add(spinnerNamaCabangArray.get(i).getId_cabang().toString());
-                }
-                ArrayAdapter<String> adapterNamaCabang = new ArrayAdapter<>(tambah_transaksi_penjualan_sparepart.this, R.layout.spinner_cabang_layout, R.id.txtNamaCabang, spinner_namaCabang);
-                spinner_cabang.setAdapter(adapterNamaCabang);
-            }
-            @Override
-            public void onFailure(Call<LD_Cabang> call, Throwable t) {
-                Toast.makeText(tambah_transaksi_penjualan_sparepart.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                Log.d("onFailure: ",t.getLocalizedMessage());
-            }
-        });
     }
     void loadSpinnerNamaSparepartCabang()
     {
@@ -329,7 +313,12 @@ public class tambah_transaksi_penjualan_sparepart extends AppCompatActivity {
         {
             Toast.makeText(this, "Tambahkan detil sparepart!", Toast.LENGTH_SHORT).show();
         }
-        else {
+        else if(namaKonsumen_fix.getText().toString().equalsIgnoreCase("-"))
+        {
+            Toast.makeText(this, "Masukan nama konsumen!", Toast.LENGTH_SHORT).show();
+        }
+        else
+            {
             Gson gson = new GsonBuilder()
                     .setLenient()
                     .create();
