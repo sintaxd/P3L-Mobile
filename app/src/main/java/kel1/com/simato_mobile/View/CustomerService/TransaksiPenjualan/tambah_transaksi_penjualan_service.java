@@ -56,6 +56,7 @@ import kel1.com.simato_mobile.Model.Model_JasaService;
 import kel1.com.simato_mobile.Model.Model_MotorKonsumen;
 import kel1.com.simato_mobile.Model.Model_Pegawai;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.SessionManager.SessionManager;
 import kel1.com.simato_mobile.View.CustomerService.MotorKonsumen.tambah_data_motor_konsumen;
 import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tambah_pengadaan_sparepart;
 import kel1.com.simato_mobile.View.Owner.PengadaanSparepart.tampil_pengadaan_sparepart;
@@ -68,7 +69,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tambah_transaksi_penjualan_service extends AppCompatActivity {
 
-    TextView setTanggal, totalHarga_fix;
+    TextView setTanggal, totalHarga_fix, namaCabang_fix;
     ImageView addDetilTransaksiService;
     Spinner spinner_nama_jasa_service, spinner_cabang, spinner_montir, spinner_plat_konsumen;
 
@@ -91,29 +92,35 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
     List<String> spinner_platMotorKonsumen = new ArrayList<>();
     private List<Model_DetilTransaksiService> detilTransaksiServicetList = new ArrayList<Model_DetilTransaksiService>();
 
-    Integer tempIDJasaService, selectedIDCabang, selectedIDMontir, selectedIDJasaService, selectedIDMotorKonsumen;
+    Integer tempIDJasaService, selectedIDMontir, selectedIDJasaService, selectedIDMotorKonsumen;
     String selectedNamaJasaService;
     Button btnBatal, btnSimpan;
     Double GrandTotal=0.0, selectedHargaJasaService;
     RecyclerView rview;
     private Adapter_DetilTransaksiService adapter;
     private RecyclerView.LayoutManager layout;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tambah_transaksi_penjualan_service);
 
+        sessionManager = new SessionManager(getApplicationContext());
         setTanggal = findViewById(R.id.textView_tanggalFix);
         //create a date string.
         String date_now = new SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault()).format(new Date());
         //set it as current date.
         setTanggal.setText(date_now);
         totalHarga_fix = findViewById(R.id.textView_totalHargaFix);
-        spinner_cabang = findViewById(R.id.spinner_cabang);
+        //spinner_cabang = findViewById(R.id.spinner_cabang);
         spinner_nama_jasa_service = findViewById(R.id.spinner_nama_jasa_service);
         spinner_montir = findViewById(R.id.spinner_montir);
         spinner_plat_konsumen = findViewById(R.id.spinner_plat_konsumen);
+
+        namaCabang_fix = findViewById(R.id.textView_namaCabangFix);
+        namaCabang_fix.setText(sessionManager.getIdCabang());
+
 
         rview = findViewById(R.id.recycler_view_detil_transaksi_service);
         layout = new LinearLayoutManager(getApplicationContext());
@@ -143,23 +150,12 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
                 Toast.makeText(tambah_transaksi_penjualan_service.this, "miaaw", Toast.LENGTH_SHORT).show();
             }
         });
-        loadSpinnerNamaCabang();
-        spinner_cabang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama cabang saat dipilih
+        loadNamaCabang();
+        loadSpinnerNamaMontir();
+        spinner_montir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama montir saat dipilih
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                selectedIDCabang = Integer.parseInt(spinner_IDCabang.get(position)); //Mendapatkan id dari dropdown yang dipilih
-                Log.d("ID Cabang: ",selectedIDCabang.toString());
-                loadSpinnerNamaMontir();
-                spinner_montir.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama montir saat dipilih
-                    @Override
-                    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                        selectedIDMontir = Integer.parseInt(spinner_IDPegawai.get(position)); //Mendapatkan id dari dropdown yang dipilih
-                        Log.d("ID Cabang: ",selectedIDCabang.toString());
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parentView) {
-                    }
-                });
+                selectedIDMontir = Integer.parseInt(spinner_IDPegawai.get(position)); //Mendapatkan id dari dropdown yang dipilih
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -262,10 +258,10 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
             public void onResponse(Call<LD_Pegawai> callNamaJasaService, Response<LD_Pegawai> response) {
 
                 spinnerNamaPegawaiArray = response.body().getData();
+                spinner_namaPegawai.clear();
+                spinner_IDPegawai.clear();
                 for (int i = 0; i < spinnerNamaPegawaiArray.size(); i++) {
-                    if(spinnerNamaPegawaiArray.get(i).getId_role_fk()==4 && spinnerNamaPegawaiArray.get(i).getId_cabang_fk()==selectedIDCabang) {
-                        spinner_namaPegawai.clear();
-                        spinner_IDPegawai.clear();
+                    if(spinnerNamaPegawaiArray.get(i).getId_role_fk()==4 && spinnerNamaPegawaiArray.get(i).getId_cabang_fk()==Integer.parseInt(sessionManager.getIdCabang())) {
                         spinner_namaPegawai.add(spinnerNamaPegawaiArray.get(i).getNama_pegawai());
                         spinner_IDPegawai.add(spinnerNamaPegawaiArray.get(i).getId_pegawai().toString());
                     }
@@ -304,6 +300,38 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
                 }
                 ArrayAdapter<String> adapterNamaCabang = new ArrayAdapter<>(tambah_transaksi_penjualan_service.this, R.layout.spinner_cabang_layout, R.id.txtNamaCabang, spinner_namaCabang);
                 spinner_cabang.setAdapter(adapterNamaCabang);
+            }
+            @Override
+            public void onFailure(Call<LD_Cabang> call, Throwable t) {
+                Toast.makeText(tambah_transaksi_penjualan_service.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("onFailure: ",t.getLocalizedMessage());
+            }
+        });
+    }
+    void loadNamaCabang(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_Cabang.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+
+        //ngeload nama cabang dari database
+        ApiClient_Cabang apiclientCabang = retrofit.create(ApiClient_Cabang.class);
+        Call<LD_Cabang> callCabang = apiclientCabang.show();
+        callCabang.enqueue(new Callback<LD_Cabang>() {
+            @Override
+            public void onResponse(Call<LD_Cabang> callCabang, Response<LD_Cabang> response) {
+
+                spinnerNamaCabangArray = response.body().getData();
+                for (int i = 0; i < spinnerNamaCabangArray.size(); i++) {
+                    if(spinnerNamaCabangArray.get(i).getId_cabang()==Integer.parseInt(sessionManager.getIdCabang()))
+                    {
+                        namaCabang_fix.setText(spinnerNamaCabangArray.get(i).getNama_cabang());
+                    }
+                }
             }
             @Override
             public void onFailure(Call<LD_Cabang> call, Throwable t) {
@@ -365,10 +393,14 @@ public class tambah_transaksi_penjualan_service extends AppCompatActivity {
             Retrofit retrofit = builder.build();
             ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan = retrofit.create(ApiClient_TransaksiPenjualan.class);
 
-            Log.d( "ID Cbg : ",selectedIDCabang.toString() );
+            Log.d( "ID Cbg : ",sessionManager.getIdCabang() );
             Log.d( "GrandTotal: ",GrandTotal.toString() );
 
-            Call<ResponseBody> transaksiserviceDAOCall = apiClientTransaksiPenjualan.create("SS", selectedIDCabang, GrandTotal,selectedIDMontir,3);
+            Integer id_cabang = Integer.parseInt(sessionManager.getIdCabang());
+            Integer id_cs = Integer.parseInt(sessionManager.getKeyId());
+
+
+            Call<ResponseBody> transaksiserviceDAOCall = apiClientTransaksiPenjualan.create("SS",id_cabang,GrandTotal,selectedIDMontir,id_cs);
             transaksiserviceDAOCall.enqueue(new Callback<ResponseBody>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -135,6 +135,8 @@ public class MainActivity extends AppCompatActivity {
                                     String id_pegawai = jsonRes.getJSONObject("data").getString("id_pegawai");
                                     String username = jsonRes.getJSONObject("data").getString("username_pegawai");
                                     String password = jsonRes.getJSONObject("data").getString("password_pegawai");
+
+                                    Log.d("ID Cabang: ",id_cabang);
                                    session.createLoginSessions(id_role,username,id_pegawai,id_cabang);
                                     if(id_role.equalsIgnoreCase("1"))
                                     {
