@@ -21,6 +21,7 @@ import java.io.IOException;
 import kel1.com.simato_mobile.API.ApiClient_Login;
 import kel1.com.simato_mobile.API.ApiClient_Supplier;
 import kel1.com.simato_mobile.Model.Model_Supplier;
+import kel1.com.simato_mobile.SessionManager.SessionManager;
 import kel1.com.simato_mobile.View.CustomerService.Konsumen.tambah_data_konsumen;
 import kel1.com.simato_mobile.View.CustomerService.Konsumen.tampil_data_konsumen;
 import kel1.com.simato_mobile.View.CustomerService.cs_main_menu;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextInputLayout textInputUsername, textInputPassword;
     private TextInputEditText input_username, input_password;
+    SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,24 @@ public class MainActivity extends AppCompatActivity {
 
         input_username = findViewById(R.id.input_username);
         input_password = findViewById(R.id.input_password);
+
+        btnLogin=findViewById(R.id.buttonLogin);
+
+        session = new SessionManager(getApplicationContext());
+
+        if(session.isLoggedIn())
+        {
+            if(session.getIdRole().equalsIgnoreCase("1"))
+            {
+                Intent i = new Intent(MainActivity.this, owner_main_menu.class);
+                startActivity(i);
+            }
+            else if (session.getIdRole().equalsIgnoreCase("2"))
+            {
+                Intent i = new Intent(MainActivity.this, cs_main_menu.class);
+                startActivity(i);
+            }
+        }
     }
 
     private boolean validateUsername() {
@@ -86,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else
         {
-            btnLogin=findViewById(R.id.buttonLogin);
             btnLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -95,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                             .create();
                     Retrofit.Builder builder = new Retrofit
                             .Builder()
-                            .baseUrl(ApiClient_Supplier.baseURL)
+                            .baseUrl(ApiClient_Login.baseURL)
                             .addConverterFactory(GsonConverterFactory.create(gson));
                     Retrofit retrofit = builder.build();
                     ApiClient_Login apiClientLogin = retrofit.create(ApiClient_Login.class);
@@ -106,19 +125,23 @@ public class MainActivity extends AppCompatActivity {
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if(response.code()==201)
                             {
-                                Log.d("Rsponse : ",response.message());
+                                Log.d("Berhasil : ",response.message());
                                 Toast.makeText(MainActivity.this, "Login berhasil!", Toast.LENGTH_SHORT).show();
                                 JSONObject jsonRes = null;
                                 try {
                                     jsonRes = new JSONObject(response.body().string());
-                                    Integer id_role = jsonRes.getJSONObject("data").getInt("id_role_fk");
-                                    if(id_role==1)
+                                    String id_role = jsonRes.getJSONObject("data").getString("id_role_fk");
+                                    String id_cabang = jsonRes.getJSONObject("data").getString("id_cabang_fk");
+                                    String id_pegawai = jsonRes.getJSONObject("data").getString("id_pegawai");
+                                    String username = jsonRes.getJSONObject("data").getString("username_pegawai");
+                                    String password = jsonRes.getJSONObject("data").getString("password_pegawai");
+                                   session.createLoginSessions(id_role,username,id_pegawai,id_cabang);
+                                    if(id_role.equalsIgnoreCase("1"))
                                     {
                                         Intent i = new Intent(MainActivity.this, owner_main_menu.class);
                                         startActivity(i);
                                     }
-                                    else if (id_role==2)
-                                    {
+                                    else if (id_role.equalsIgnoreCase("2")) {
                                         Intent i = new Intent(MainActivity.this, cs_main_menu.class);
                                         startActivity(i);
                                     }
@@ -138,12 +161,19 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
                             Toast.makeText(MainActivity.this,  t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Log.d("Response failure : ",t.getLocalizedMessage());
                         }
                     });
-//                    Intent i = new Intent(MainActivity.this, owner_main_menu.class);
-//                    startActivity(i);
                 }
             });
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent a = new Intent(Intent.ACTION_MAIN);
+        a.addCategory(Intent.CATEGORY_HOME);
+        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(a);
     }
 }

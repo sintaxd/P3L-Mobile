@@ -574,7 +574,6 @@ public class tambah_transaksi_penjualan_service_sparepart extends AppCompatActiv
                                 });
                                 //memasukkan data dari list local ke tabel detilTransaksiSparepart
                                 for (int y = 0; y < detilTransaksiSparepartList.size(); y++) {
-                                    ApiClient_DetilTransaksi apiClientDetilTransaksiSparepart = retrofit.create(ApiClient_DetilTransaksi.class);
 
                                     Log.d("ID Sparepart Cabang: ", detilTransaksiSparepartList.get(x).getId_sparepartCabang_fk().toString());
                                     Log.d("ID Konsumen : ", detilTransaksiSparepartList.get(x).getId_konsumen_fk().toString());

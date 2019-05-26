@@ -5,8 +5,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ApiClient_Pegawai {
-
-    String baseURL = "http://10.66.99.213:8000";
+    String baseURL = "http://192.168.0.100:8000";
     //String baseURL = "http://simato.jasonfw.com/";
 
     // ----------------------- R E A D ----------------------- //
