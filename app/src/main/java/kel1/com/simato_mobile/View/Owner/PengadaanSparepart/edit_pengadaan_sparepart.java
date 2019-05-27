@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ import kel1.com.simato_mobile.Model.Model_DetilPengadaanSparepart;
 import kel1.com.simato_mobile.Model.Model_SparepartCabang;
 import kel1.com.simato_mobile.Model.Model_Supplier;
 import kel1.com.simato_mobile.R;
+import kel1.com.simato_mobile.View.Owner.HistorySparepart.tampil_history_sparepart_masuk;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -62,7 +64,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class edit_pengadaan_sparepart extends AppCompatActivity {
 
     Spinner spinner_supplier, spinner_sparepartcabang,spinner_cabang;
-
+    String editable;
+    LinearLayout addDetilSparepart;
     //ini untuk load data
     List<Model_Cabang> spinnerNamaCabangArray = new ArrayList<>();
     List<Model_Supplier> spinnerSupplierArray =  new ArrayList<>();
@@ -81,7 +84,7 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
     private List<Model_DetilPengadaanSparepart> detilPengadaanSparepartList = new ArrayList<Model_DetilPengadaanSparepart>();
     public Adapter_DetilPengadaanSparepart adapterDetilPengadaan;
     Integer id_cabang_fk, id_sparepartCabang_fk, id_supplier;
-    TextView setTanggal, totalHarga_fix;
+    TextView setTanggal, totalHarga_fix, setJudul;
     ImageView addDetilPengadaan;
     Button btnSimpan, btnBatal, btnDelete;
     private Intent i;
@@ -103,6 +106,8 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
         spinner_sparepartcabang = findViewById(R.id.spinner_sparepartcabang);
         spinner_cabang = findViewById(R.id.spinner_cabang);
         input_satuanPengadaan = findViewById(R.id.text_input_satuanSparepart);
+        setJudul = findViewById(R.id.textView_Judul);
+        addDetilSparepart = findViewById(R.id.addDetilSparepart);
 
         i = getIntent();
         totalHarga_fix = findViewById(R.id.textView_totalHargaFix);
@@ -113,6 +118,7 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
         Log.d( "ID Pengadaan: ",idPengadaan.toString());
         status_cetak=i.getStringExtra("status_cetak");
         status_pengadaan=i.getStringExtra("status_pengadaan");
+        editable = i.getStringExtra("editable");
 
         final DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
         final DateFormat outputFormat = new SimpleDateFormat("dd MMM yyyy");
@@ -160,9 +166,10 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               DeletePengadaanSparepart();
+                DeletePengadaanSparepart();
             }
         });
+
         loadSpinnerNamaSupplier();
         spinner_supplier.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama supplier saat dipilih
             @Override
@@ -212,7 +219,7 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
                 selectedNamaSparepartCabang,
                 Integer.parseInt(selectedIDSparepartCabang)));
 
-        adapter = new Adapter_DetilPengadaanSparepart(detilPengadaanSparepartList);
+        adapter = new Adapter_DetilPengadaanSparepart(detilPengadaanSparepartList, 1);
         rview.setAdapter(adapter);
         GrandTotal=GrandTotal+sub_total_sparepart;
         totalHarga_fix.setText(GrandTotal.toString());
@@ -347,7 +354,28 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
 
                 detilPengadaanSparepartList = response.body().getData();
                 Log.i(tampil_pengadaan_sparepart.class.getSimpleName(), response.body().toString());
-                adapter = new Adapter_DetilPengadaanSparepart(detilPengadaanSparepartList);
+                if(editable.equalsIgnoreCase("no"))
+                {
+                    //PERUBAHAN SINTA TERBARU
+                    adapter = new Adapter_DetilPengadaanSparepart(detilPengadaanSparepartList,0);
+                    setJudul.setText("Detil Pengadaan Sparepart");
+                    spinner_cabang.setEnabled(false);
+                    spinner_supplier.setEnabled(false);
+                    addDetilSparepart.setVisibility(View.GONE);
+                    btnDelete.setVisibility(View.GONE);
+                    btnSimpan.setVisibility(View.GONE);
+                    btnBatal.setText("KEMBALI");
+                    btnBatal.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startIntentHistori();
+                        }
+                    });
+                }
+                else if(editable.equalsIgnoreCase("yes"))
+                {
+                    adapter = new Adapter_DetilPengadaanSparepart(detilPengadaanSparepartList,1);
+                }
                 rview.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
@@ -526,6 +554,11 @@ public class edit_pengadaan_sparepart extends AppCompatActivity {
     }
     private void startIntent() {
         Intent intent = new Intent(getApplicationContext(), tampil_pengadaan_sparepart.class);
+        startActivity(intent);
+    }
+
+    private void startIntentHistori() {
+        Intent intent = new Intent(getApplicationContext(), tampil_history_sparepart_masuk.class);
         startActivity(intent);
     }
 

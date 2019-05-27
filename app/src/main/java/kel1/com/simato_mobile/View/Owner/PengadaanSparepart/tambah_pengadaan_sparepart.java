@@ -179,7 +179,7 @@ public class tambah_pengadaan_sparepart extends AppCompatActivity {
                 selectedNamaSparepartCabang,
                 Integer.parseInt(selectedIDSparepartCabang)));
 
-        adapter = new Adapter_DetilPengadaanSparepart(detilPengadaanSparepartList);
+        adapter = new Adapter_DetilPengadaanSparepart(detilPengadaanSparepartList,1);
         rview.setAdapter(adapter);
         GrandTotal=GrandTotal+sub_total_sparepart;
         totalHarga_fix.setText(GrandTotal.toString());

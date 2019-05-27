@@ -97,6 +97,7 @@ public class tampil_pengadaan_sparepart extends AppCompatActivity {
                 intent.putExtra("total_harga", mListPengadaanSparepart.get(position).getTotalHarga_pengadaan());
                 intent.putExtra("status_cetak", mListPengadaanSparepart.get(position).getStatusCetak_pengadaan());
                 intent.putExtra("status_pengadaan", mListPengadaanSparepart.get(position).getStatus_pengadaan());
+                intent.putExtra("editable","yes");
 
                 startActivity(intent);
             }

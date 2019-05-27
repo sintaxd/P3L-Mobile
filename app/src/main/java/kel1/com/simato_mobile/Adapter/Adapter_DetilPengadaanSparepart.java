@@ -29,25 +29,18 @@ import kel1.com.simato_mobile.View.Owner.Supplier.edit_data_supplier;
 public class Adapter_DetilPengadaanSparepart extends RecyclerView.Adapter<Adapter_DetilPengadaanSparepart.MyViewHolder> implements Filterable {
     public List<Model_DetilPengadaanSparepart> detilFilter;
     public List<Model_DetilPengadaanSparepart> detil = new ArrayList<>();
+    public int value=1;
     private Context context;
-//    private RecyclerViewClickListener mListener;
-//    CustomFilter_DetilPengadaanSparepart filter_detil;
-
-//    public Adapter_DetilPengadaanSparepart(List<Model_DetilPengadaanSparepart> detil, Context context, Adapter_DetilPengadaanSparepart.RecyclerViewClickListener mListener) {
-//        this.detilFilter = detil;
-//        this.detil = detil;
-//        this.context = context;
-//        this.mListener = mListener;
-//    }
 
     public Adapter_DetilPengadaanSparepart(List<Model_DetilPengadaanSparepart> detil, Context context) {
         this.detil = detil;
         this.context = context;
     }
 
-    public Adapter_DetilPengadaanSparepart(List<Model_DetilPengadaanSparepart> detil){
+    public Adapter_DetilPengadaanSparepart(List<Model_DetilPengadaanSparepart> detil, int value){
         this.detil=detil;
         this.detilFilter=detil;
+        this.value=value;
     }
     @NonNull
     @Override
@@ -65,18 +58,25 @@ public class Adapter_DetilPengadaanSparepart extends RecyclerView.Adapter<Adapte
         myViewHolder.harga_beli.setText         ("   Harga Satuan :"+ detilPengadaan.getHargaBeli_sparepart());
         myViewHolder.sub_total.setText          ("   Subtotal :"+ detilPengadaan.getSub_total_sparepart());
 
+        if(value==1)
+        {
+            myViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    detilFilter.remove(i);
+                    notifyItemRemoved(i);
+                    notifyItemRangeChanged(i,getItemCount());
+                    Intent intent = new Intent("updateTotal");
+                    intent.putExtra("sub_total",detilPengadaan.getSub_total_sparepart().toString());
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+                }
+            });
+        }
+        else if(value==0)
+        {
+            myViewHolder.btnDelete.setVisibility(View.GONE);
+        }
 
-        myViewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                detilFilter.remove(i);
-                notifyItemRemoved(i);
-                notifyItemRangeChanged(i,getItemCount());
-                Intent intent = new Intent("updateTotal");
-                intent.putExtra("sub_total",detilPengadaan.getSub_total_sparepart().toString());
-                LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
-            }
-        });
     }
 
     @Override

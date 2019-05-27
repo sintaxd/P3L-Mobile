@@ -5,7 +5,6 @@ import android.widget.Filter;
 import java.util.ArrayList;
 
 import kel1.com.simato_mobile.Adapter.Adapter_PengadaanSparepart;
-import kel1.com.simato_mobile.Model.Model_MotorKonsumen;
 import kel1.com.simato_mobile.Model.Model_PengadaanSparepart;
 
 public class CustomFilter_PengadaanSparepart extends Filter {
@@ -18,6 +17,7 @@ public class CustomFilter_PengadaanSparepart extends Filter {
         this.adapterPengadaanSparepart = adapterPengadaanSparepart;
         this.filterList=filterList;
     }
+
     //FILTERING OCCURS
     @Override
     protected Filter.FilterResults performFiltering(CharSequence constraint) {

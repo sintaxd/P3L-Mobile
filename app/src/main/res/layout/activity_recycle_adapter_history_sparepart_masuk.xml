@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:background="#F5FCFF"
+    android:orientation="vertical"
+    android:id="@+id/row_container">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/shadowyborder">
+
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nama_supplier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Supplier" />
+
+            <TextView
+                android:id="@+id/status_pengadaan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status Pengadaan" />
+
+            <TextView
+                android:id="@+id/total_harga_pengadaan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Harga Pengadaan" />
+
+            <TextView
+                android:id="@+id/tanggal_pengadaan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Pengadaan" />
+
+            <TextView
+                android:id="@+id/tanggal_barang_datang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Barang Datang" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView_status_pengadaan"
+                android:layout_width="180px"
+                android:layout_height="180px"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>
