@@ -14,8 +14,10 @@ import retrofit2.http.Path;
 
 public interface ApiClient_Konsumen {
 
-    String baseURL = "http://10.53.6.112:8000";
+    String baseURL = "http://192.168.100.123:8000";
     //String baseURL = "http://simato.jasonfw.com/";
+
+
     // --------------------- C R E A T E --------------------- //
 
     @POST("api/konsumen")

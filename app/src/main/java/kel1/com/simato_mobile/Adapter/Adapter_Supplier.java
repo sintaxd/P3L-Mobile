@@ -44,12 +44,11 @@ public class Adapter_Supplier extends RecyclerView.Adapter<Adapter_Supplier.MyVi
     @Override
     public void onBindViewHolder(@NonNull Adapter_Supplier.MyViewHolder myViewHolder, int i) {
         final Model_Supplier sup = supplier.get(i);
-        myViewHolder.nama_supplier.setText  ("  Nama Supplier     : "+ sup.getNama_supplier());
-        myViewHolder.alamat_supplier.setText("  Alamat Supplier   : "+ sup.getAlamat_supplier());
-        myViewHolder.noTelp_supplier.setText("  No Telp Supplier  : "+ sup.getNoTelp_supplier());
-        myViewHolder.nama_sales.setText     ("  Nama Sales          : "+ sup.getNama_sales());
-        myViewHolder.noTelp_sales.setText   ("  No Telp Sales       : "+ sup.getNoTelp_sales());
-
+        myViewHolder.nama_supplier.setText  ("Nama Supplier     : "+ sup.getNama_supplier());
+        myViewHolder.alamat_supplier.setText("Alamat Supplier   : "+ sup.getAlamat_supplier());
+        myViewHolder.noTelp_supplier.setText("No Telp Supplier  : "+ sup.getNoTelp_supplier());
+        myViewHolder.nama_sales.setText     ("Nama Sales          : "+ sup.getNama_sales());
+        myViewHolder.noTelp_sales.setText   ("No Telp Sales       : "+ sup.getNoTelp_sales());
     }
 
     @Override
