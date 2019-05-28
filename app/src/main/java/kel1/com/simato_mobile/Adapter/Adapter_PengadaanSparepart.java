@@ -20,6 +20,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -145,16 +149,26 @@ public class Adapter_PengadaanSparepart extends RecyclerView.Adapter<Adapter_Pen
                                     if (response.code() == 201) {
                                         pengadaan.setStatus_pengadaan("Sudah Selesai");
                                         myViewHolder.status_pengadaan.setText("  Status Pengadaan : " + pengadaan.getStatus_pengadaan());
-                                        String inputDateStr3=pengadaan.getTgl_barangDatang();
-                                        Date date3 = null;
-                                        try
-                                        {
-                                            date3 = inputFormat.parse(inputDateStr3);
-                                        } catch (ParseException e) {
+
+                                        JSONObject jsonresponse = null;
+                                        try {
+                                            jsonresponse = new JSONObject(response.body().string());
+                                            String  inputDateStr3 = jsonresponse.getJSONObject("data").getString("tgl_barangDatang");
+                                            Log.d("Tgl Barang Datang : ", inputDateStr3);
+                                            Date date3 = null;
+                                            try
+                                            {
+                                                date3 = inputFormat.parse(inputDateStr3);
+                                            } catch (ParseException e) {
+                                                e.printStackTrace();
+                                            }
+                                            String outputDateStr3 = outputFormat.format(date3);
+                                            pengadaan.setTgl_barangDatang(outputDateStr3);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        } catch (IOException e) {
                                             e.printStackTrace();
                                         }
-                                        String outputDateStr3 = outputFormat.format(date3);
-                                        pengadaan.setTgl_barangDatang(outputDateStr3);
                                         myViewHolder.tanggal_barang_datang.setText   ("  Tanggal Barang Datang : "+ pengadaan.getTgl_barangDatang());
                                         Toast.makeText(context, "Success Update", Toast.LENGTH_SHORT).show();
                                     } else {

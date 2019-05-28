@@ -61,15 +61,17 @@ public class tampil_history_sparepart_masuk extends AppCompatActivity {
             @Override
             public void onRowClick(View view, final int position) {
                 Intent intent = new Intent(getApplicationContext(), edit_pengadaan_sparepart.class);
-                intent.putExtra("id_pengadaan", mListPengadaanSparepart.get(position).getId_pengadaan());
-                intent.putExtra("id_supplier", mListPengadaanSparepart.get(position).getId_supplier_fk());
-                intent.putExtra("id_cabang", mListPengadaanSparepart.get(position).getId_cabang_fk());
-                intent.putExtra("id_sparepartCabang_fk", mListPengadaanSparepart.get(position).getId_sparepartCabang_fk());
-                intent.putExtra("tgl_pengadaan", mListPengadaanSparepart.get(position).getTgl_pengadaan());
-                intent.putExtra("total_harga", mListPengadaanSparepart.get(position).getTotalHarga_pengadaan());
-                intent.putExtra("status_cetak", mListPengadaanSparepart.get(position).getStatusCetak_pengadaan());
-                intent.putExtra("status_pengadaan", mListPengadaanSparepart.get(position).getStatus_pengadaan());
+                intent.putExtra("id_pengadaan", mListPengadaanSparepartSelesai.get(position).getId_pengadaan());
+                intent.putExtra("id_supplier", mListPengadaanSparepartSelesai.get(position).getId_supplier_fk());
+                intent.putExtra("id_cabang", mListPengadaanSparepartSelesai.get(position).getId_cabang_fk());
+                intent.putExtra("id_sparepartCabang_fk", mListPengadaanSparepartSelesai.get(position).getId_sparepartCabang_fk());
+                intent.putExtra("tgl_pengadaan", mListPengadaanSparepartSelesai.get(position).getTgl_pengadaan());
+                intent.putExtra("total_harga", mListPengadaanSparepartSelesai.get(position).getTotalHarga_pengadaan());
+                intent.putExtra("status_cetak", mListPengadaanSparepartSelesai.get(position).getStatusCetak_pengadaan());
+                intent.putExtra("status_pengadaan", mListPengadaanSparepartSelesai.get(position).getStatus_pengadaan());
                 intent.putExtra("editable","no");
+
+                Log.d( "Parsed ID Pengadaan : ",mListPengadaanSparepartSelesai.get(position).getId_pengadaan().toString());
 
                 startActivity(intent);
             }
