@@ -149,7 +149,7 @@ public class Adapter_TransaksiPenjualan extends RecyclerView.Adapter<Adapter_Tra
                     // Display the alert dialog on interface
                     dialog.show();
                 }
-                else if(tp.getStatus_transaksi().equals("Sudah Selesai"))
+                else if(tp.getStatus_transaksi().equals("Sudah Lunas"))
                 {
                     AlertDialog alertDialog = new AlertDialog.Builder(context).create();
 
@@ -157,7 +157,7 @@ public class Adapter_TransaksiPenjualan extends RecyclerView.Adapter<Adapter_Tra
                     alertDialog.setTitle("Transaksi "+ tp.getKode_transaksi());
 
                     // Setting Dialog Message
-                    alertDialog.setMessage("Status Transaksi Sudah Selesai");
+                    alertDialog.setMessage("Status Transaksi Sudah Lunas");
 
                     // Setting Icon to Dialog
                     alertDialog.setIcon(R.drawable.logo_atma_auto);

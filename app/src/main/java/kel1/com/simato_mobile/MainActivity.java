@@ -67,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this, cs_main_menu.class);
                 startActivity(i);
             }
+            else if (session.getIdRole().equalsIgnoreCase("3"))
+            {
+                Toast.makeText(this, "Kasir tidak memiliki akses device mobile!", Toast.LENGTH_SHORT).show();
+            }
+            else if (session.getIdRole().equalsIgnoreCase("4"))
+            {
+                Toast.makeText(this, "Montir tidak memiliki akses device mobile!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -147,6 +155,14 @@ public class MainActivity extends AppCompatActivity {
                                         Intent i = new Intent(MainActivity.this, cs_main_menu.class);
                                         startActivity(i);
                                     }
+                                    else if (id_role.equalsIgnoreCase("3"))
+                                    {
+                                        Toast.makeText(MainActivity.this, "Kasir tidak memiliki akses device mobile!", Toast.LENGTH_LONG).show();
+                                    }
+                                    else if (id_role.equalsIgnoreCase("4"))
+                                    {
+                                        Toast.makeText(MainActivity.this, "Montir tidak memiliki akses device mobile!", Toast.LENGTH_LONG).show();
+                                    }
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -155,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }
                             else{
+                                Toast.makeText(MainActivity.this, "Username atau Password salah!", Toast.LENGTH_SHORT).show();
                                 Log.d("Rsponse gagal : ",response.message());
                             }
 

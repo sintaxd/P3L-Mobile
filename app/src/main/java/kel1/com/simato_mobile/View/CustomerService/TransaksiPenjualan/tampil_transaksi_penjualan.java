@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -34,7 +36,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class tampil_transaksi_penjualan extends AppCompatActivity {
-
+    Spinner spinner_status_transaksi;
+    Integer status;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     public Adapter_TransaksiPenjualan adapterTransaksiPenjualan;
@@ -42,6 +45,7 @@ public class tampil_transaksi_penjualan extends AppCompatActivity {
     Adapter_TransaksiPenjualan.RecyclerViewClickListener listener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tampil_transaksi_penjualan);
 
@@ -51,6 +55,36 @@ public class tampil_transaksi_penjualan extends AppCompatActivity {
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapterTransaksiPenjualan);
+
+        spinner_status_transaksi = findViewById(R.id.spinner_status_transaksi);
+        spinner_status_transaksi.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { //Listener dropdown nama sort By saat dipilih
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                if(position==0)
+                {
+                    setRecycleViewTransaksiPenjualan();
+                }
+                else if(position==1)
+                {
+                    //status transaksi belum lunas
+                    status=0;
+                    setRecycleViewTransaksiPenjualan_ByStatusTransaksi();
+                }
+                else if(position==2)
+                {
+                    //status transaksi sudah lunas
+                    status=1;
+                    setRecycleViewTransaksiPenjualan_ByStatusTransaksi();
+                }
+                Log.d( "Status :", String.valueOf(status));
+                Log.d( "Position spinner sort :", String.valueOf(position));
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView){
+
+            }
+        });
 
         listener = new Adapter_TransaksiPenjualan.RecyclerViewClickListener() {
             @Override
@@ -125,6 +159,37 @@ public class tampil_transaksi_penjualan extends AppCompatActivity {
         transaksiPenjualanModelCall.enqueue(new Callback<LD_TransaksiPenjualan>() {
             @Override
             public void onResponse (Call<LD_TransaksiPenjualan> call, Response<LD_TransaksiPenjualan> response) {
+                mListTransaksiPenjualan.clear();
+                mListTransaksiPenjualan= response.body().getData();
+                Log.i(tampil_transaksi_penjualan.class.getSimpleName(), response.body().toString());
+                adapterTransaksiPenjualan = new Adapter_TransaksiPenjualan(mListTransaksiPenjualan,tampil_transaksi_penjualan.this,listener);
+                recyclerView.setAdapter(adapterTransaksiPenjualan);
+                adapterTransaksiPenjualan.notifyDataSetChanged();
+                Toast.makeText(tampil_transaksi_penjualan.this,"Welcome", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<LD_TransaksiPenjualan> call, Throwable t) {
+                Toast.makeText(tampil_transaksi_penjualan.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void setRecycleViewTransaksiPenjualan_ByStatusTransaksi() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        Retrofit.Builder builder = new Retrofit
+                .Builder()
+                .baseUrl(ApiClient_TransaksiPenjualan.baseURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit=builder.build();
+        ApiClient_TransaksiPenjualan apiClientTransaksiPenjualan =retrofit.create(ApiClient_TransaksiPenjualan.class);
+
+        Call<LD_TransaksiPenjualan> transaksiPenjualanModelCall = apiClientTransaksiPenjualan.showByStatusTransaksi(status);
+
+        transaksiPenjualanModelCall.enqueue(new Callback<LD_TransaksiPenjualan>() {
+            @Override
+            public void onResponse (Call<LD_TransaksiPenjualan> call, Response<LD_TransaksiPenjualan> response) {
+                mListTransaksiPenjualan.clear();
                 mListTransaksiPenjualan= response.body().getData();
                 Log.i(tampil_transaksi_penjualan.class.getSimpleName(), response.body().toString());
                 adapterTransaksiPenjualan = new Adapter_TransaksiPenjualan(mListTransaksiPenjualan,tampil_transaksi_penjualan.this,listener);

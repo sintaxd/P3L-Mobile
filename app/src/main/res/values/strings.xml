@@ -30,4 +30,9 @@
         <item> Harga (ascending) </item>
         <item> Harga (descending) </item>
     </string-array>
+    <string-array name="sortByStatusTransaksi">
+        <item> Semua </item>
+        <item> Belum Lunas </item>
+        <item> Sudah Lunas </item>
+    </string-array>
 </resources>

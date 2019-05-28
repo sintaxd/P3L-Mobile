@@ -13,9 +13,8 @@ import retrofit2.http.Path;
 
 public interface ApiClient_TransaksiPenjualan {
 
-    String baseURL = "http://192.168.100.123:8000";
+    String baseURL = "http://192.168.94.74:8000";
     //String baseURL = "http://simato.jasonfw.com/";
-
 
     // --------------------- C R E A T E --------------------- //
 
@@ -34,6 +33,12 @@ public interface ApiClient_TransaksiPenjualan {
 
     @GET("api/transaksiPenjualan")
     Call<LD_TransaksiPenjualan> show();
+
+    @GET("api/transaksiPenjualan/showByStatusTransaksi/{status_transaksi}")
+    Call<LD_TransaksiPenjualan> showByStatusTransaksi(
+            @Path("status_transaksi") Integer status_transaksi
+    );
+
 
     // ----------------------- R E A D ----------------------- //
 
